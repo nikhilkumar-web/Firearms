@@ -7,88 +7,67 @@ import GalleryPreview from '@/components/home/GalleryPreview';
 import RangesSection from '@/components/home/RangesSection';
 import YouTubeSection from '@/components/home/YouTubeSection';
 import ConsultationForm from '@/components/forms/ConsultationForm';
-import { ShieldCheck, Target, Award, Phone } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div>
-      {/* Hero Section */}
+    <div className="bg-[#000000] text-white">
+      {/* 1. Hero Section & Feature Bar */}
       <Hero />
 
-      {/* About Overview */}
+      {/* 2. About The American Firearms Network */}
       <AboutOverview />
 
-      {/* 10 Services & 1-on-1 vs Group Breakdown */}
+      {/* 3. Our Services (Private Sessions & Group Sessions) */}
       <ServicesOverview />
 
-      {/* Lead Instructors (Todd Grama & Paul Gayle) */}
+      {/* 4. Meet The Instructors (Todd Grama & Paul Gayle) */}
       <InstructorsSection />
 
-      {/* Testimonials */}
+      {/* 5. What Our Customers Say (Testimonials) */}
       <TestimonialsSection />
 
-      {/* Gallery Preview */}
+      {/* 6. Our Gallery */}
       <GalleryPreview />
 
-      {/* Consultation & Scheduling Form Section */}
-      <section className="py-20 lg:py-28 bg-[#07090e] relative border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Value Prop */}
-            <div className="lg:col-span-5 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#d99b26]/10 border border-[#d99b26]/20 text-[#f5b942] text-xs font-bold uppercase tracking-widest">
-                Florida Training Registration
-              </div>
-              <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
-                IT&apos;S NOT A HOBBY. <br />
-                IT&apos;S A <span className="gold-gradient-text">LIFESAVING SKILL.</span>
+      {/* 7. Exact Section 10 & 11: It's Not a Hobby + Strategic Advantage Form */}
+      <section className="py-20 bg-[#050505] text-white border-t border-white/10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            {/* Left Col: Section 10 */}
+            <div className="lg:col-span-6 space-y-6">
+              <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-wide text-white leading-tight">
+                IT’S NOT A HOBBY. <br />
+                <span className="text-[#BC8914]">IT’S A LIFESAVING SKILL.</span>
               </h2>
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-                Owning a firearm is only the first step; mastering it is your responsibility. At the American Firearms Network, we strip away the &quot;range day&quot; fluff and focus on mission-critical proficiency. Whether you are a first-time owner or a seasoned enthusiast, our professional instruction—led by Todd Grama and Paul Gayle—is designed to build the confidence and speed required to protect what matters most.
+
+              <p className="text-sm sm:text-base text-[#D6DBDD] leading-relaxed">
+                Owning a firearm is only the first step; mastering it is your responsibility. At the <strong className="text-white">American Firearms Network</strong>, we strip away the “range day” fluff and focus on mission-critical proficiency. Whether you are a first-time owner or a seasoned enthusiast, our professional instruction—led by <strong className="text-white">Todd Grama</strong>—is designed to build the confidence and speed required to protect what matters most.
               </p>
 
-              <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3 text-xs text-slate-300">
-                <div className="flex items-center gap-2 font-bold text-white uppercase tracking-wider text-[11px] text-[#f5b942]">
-                  <ShieldCheck className="w-4 h-4" />
-                  What Happens Next?
-                </div>
-                <p>
-                  1. Submit your preferred time and lesson format (1-on-1 or Group).
-                </p>
-                <p>
-                  2. A lead instructor calls you directly to assess your skill level and schedule range time at your preferred facility.
-                </p>
-                <p>
-                  3. Arrive with complete confidence and safety gear provided if needed.
-                </p>
-              </div>
-
-              <div className="pt-2">
-                <div className="text-xs text-slate-400">Prefer an immediate conversation?</div>
-                <div className="mt-2 flex flex-wrap gap-4 text-xs font-semibold text-white">
-                  <a href="tel:347-853-2249" className="hover:text-[#f5b942] flex items-center gap-1.5 underline">
-                    <Phone className="w-3.5 h-3.5 text-[#d99b26]" /> Call Todd: 347-853-2249
-                  </a>
-                  <a href="tel:561-225-8615" className="hover:text-[#f5b942] flex items-center gap-1.5 underline">
-                    <Phone className="w-3.5 h-3.5 text-[#d99b26]" /> Call Paul: 561-225-8615
-                  </a>
-                </div>
+              <div>
+                <Link
+                  href="/contact-us"
+                  className="inline-block px-8 py-4 rounded bg-[#BC8914] hover:bg-[#B1800F] text-black font-extrabold uppercase text-xs tracking-widest transition-transform hover:scale-105 shadow-xl"
+                >
+                  START YOUR TRAINING
+                </Link>
               </div>
             </div>
 
-            {/* Right Interactive Form */}
-            <div className="lg:col-span-7">
+            {/* Right Col: Section 11 Form */}
+            <div className="lg:col-span-6">
               <ConsultationForm />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Partner Training Ranges */}
-      <RangesSection />
-
-      {/* YouTube Community */}
+      {/* 8. YouTube Section */}
       <YouTubeSection />
+
+      {/* 9. Florida Partner Training Ranges */}
+      <RangesSection />
     </div>
   );
 }

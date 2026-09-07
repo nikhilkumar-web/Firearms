@@ -1,92 +1,124 @@
 import Image from 'next/image';
-import Link from 'next/link';
-import { instructors } from '@/data/instructors';
-import { Award, Phone, CheckCircle2 } from 'lucide-react';
 
 export default function InstructorsSection() {
   return (
-    <section className="py-20 lg:py-28 bg-[#080a0e] relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#d99b26]/10 border border-[#d99b26]/20 text-[#f5b942] text-xs font-bold uppercase tracking-widest mb-3">
-            Instructional Leadership
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            MEET OUR <span className="gold-gradient-text">LEAD INSTRUCTORS</span>
+    <section className="py-20 bg-[#000000] text-white border-t border-white/10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Exact Section Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-wide text-white">
+            Meet The Instructors
           </h2>
-          <p className="mt-4 text-slate-400 text-sm sm:text-base leading-relaxed">
-            Our instructors don&apos;t just teach techniques—they set and enforce high standards in defensive firearms training, range safety operations, and real-world combatives.
-          </p>
         </div>
 
-        {/* 2 Master Instructors Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          {instructors.map((inst) => (
-            <div
-              key={inst.id}
-              className="tactical-glass-card rounded-2xl p-8 border border-white/10 flex flex-col justify-between relative overflow-hidden"
-            >
-              <div className="space-y-6">
-                {/* Header Profile */}
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
-                  <div className="relative w-20 h-20 rounded-2xl overflow-hidden border-2 border-[#d99b26]/40 shrink-0 shadow-lg">
-                    <Image
-                      src={inst.image}
-                      alt={inst.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold uppercase tracking-wider text-[#d99b26]">
-                      {inst.title}
-                    </div>
-                    <h3 className="text-2xl font-bold text-white mt-0.5">{inst.name}</h3>
-                    <div className="text-xs text-slate-400 mt-1">{inst.specialty}</div>
-                  </div>
-                </div>
+        {/* 2 Instructors */}
+        <div className="space-y-16">
+          {/* Instructor 1: Todd Grama */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start bg-[#0a0a0a] border border-white/10 rounded-2xl p-8 sm:p-10">
+            <div className="lg:col-span-4 relative h-80 w-full rounded-xl overflow-hidden border border-white/10 shadow-lg">
+              <Image
+                src="/images/about/tactical-ecosystem.jpg"
+                alt="Todd Grama"
+                fill
+                className="object-cover"
+              />
+            </div>
 
-                {/* Bio text */}
-                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-                  {inst.bio}
-                </p>
-
-                {/* Credentials List */}
-                <div className="bg-[#080b11] rounded-xl p-5 border border-white/5 space-y-2.5">
-                  <div className="text-xs font-bold uppercase tracking-wider text-slate-300 mb-2 flex items-center gap-1.5">
-                    <Award className="w-4 h-4 text-[#d99b26]" />
-                    <span>Verified Professional Credentials</span>
-                  </div>
-                  <div className="space-y-2 max-h-56 overflow-y-auto pr-1">
-                    {inst.credentials.map((cred, idx) => (
-                      <div key={idx} className="flex items-start gap-2 text-xs text-slate-300">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#d99b26] shrink-0 mt-0.5" />
-                        <span className="leading-tight">{cred}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+            <div className="lg:col-span-8 space-y-4">
+              <div>
+                <h2 className="text-3xl font-extrabold text-white uppercase tracking-wide">
+                  TODD GRAMA
+                </h2>
+                <h2 className="text-lg font-bold text-[#BC8914] uppercase tracking-wider mt-0.5">
+                  Co-Founder &amp; Lead Instructor
+                </h2>
               </div>
 
-              {/* Action Buttons */}
-              <div className="mt-8 pt-6 border-t border-white/5 flex flex-wrap items-center justify-between gap-3">
-                <a
-                  href={`tel:${inst.phone}`}
-                  className="px-5 py-2.5 rounded-lg bg-white/5 hover:bg-[#d99b26]/20 border border-white/10 hover:border-[#d99b26] text-white font-semibold text-xs transition-colors flex items-center gap-2"
-                >
-                  <Phone className="w-3.5 h-3.5 text-[#d99b26]" />
-                  <span>Call {inst.name.split(' ')[0]}: {inst.phone}</span>
-                </a>
-                <Link
-                  href="/contact-us"
-                  className="px-5 py-2.5 rounded-lg bg-[#d99b26] hover:bg-[#f5b942] text-black font-bold text-xs uppercase tracking-wider transition-colors"
-                >
-                  Book With {inst.name.split(' ')[0]}
-                </Link>
+              <div className="space-y-3 text-sm text-[#D6DBDD] leading-relaxed">
+                <p>
+                  Todd Grama is a co-founder of the American Firearms Network and a senior firearms instructor known for setting and enforcing high standards in defensive training and range operations. His work is focused on developing responsible, capable firearm users who understand that proficiency is built through discipline, structure, and accountability.
+                </p>
+                <p>
+                  Todd’s instruction is methodical and performance-oriented. He emphasizes sound fundamentals, efficient mechanics, and clear decision-making—skills that remain reliable under stress. Students train under a system that prioritizes safety, legal awareness, and repeatable execution, ensuring progress is measurable and skills are transferable beyond the range.
+                </p>
+                <p>
+                  With a career built on the dual pillars of tactical armed security and sophisticated range management, Todd brings a composed, authoritative presence to every course. He is respected for his attention to detail, clear communication, and ability to elevate students at every level without compromising standards. His leadership helps define the instructional consistency and professionalism that characterize AFN training.
+                </p>
+              </div>
+
+              {/* Exact Credentials List from Live Site */}
+              <div className="pt-2">
+                <h1 className="text-base font-bold text-white uppercase tracking-wider mb-2">
+                  Professional Credentials
+                </h1>
+                <ul className="list-disc pl-5 space-y-1 text-xs sm:text-sm text-slate-300">
+                  <li>NRA Certified Firearms Instructor</li>
+                  <li>Certified in Pistol</li>
+                  <li>Certified in Rifle</li>
+                  <li>Certified in Shotgun</li>
+                  <li>Certified in Inside the Home</li>
+                  <li>Certified in Outside the Home</li>
+                  <li>Range Master Certified Instructor</li>
+                  <li>USCCA Firearms Instructor</li>
+                  <li>USCCA Range Safety Officer</li>
+                  <li>Code 4 Armed Church Security Certified</li>
+                  <li>Licensed Florida Armed Security Officer</li>
+                  <li>Instructor on the YouTube Channel &quot;The American Firearms Network&quot;</li>
+                </ul>
               </div>
             </div>
-          ))}
+          </div>
+
+          {/* Instructor 2: Paul Gayle */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start bg-[#0a0a0a] border border-white/10 rounded-2xl p-8 sm:p-10">
+            <div className="lg:col-span-4 relative h-80 w-full rounded-xl overflow-hidden border border-white/10 shadow-lg">
+              <Image
+                src="/images/about/tactical-diagnostics.webp"
+                alt="Paul Gayle"
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            <div className="lg:col-span-8 space-y-4">
+              <div>
+                <h2 className="text-3xl font-extrabold text-white uppercase tracking-wide">
+                  PAUL GAYLE
+                </h2>
+                <h2 className="text-lg font-bold text-[#BC8914] uppercase tracking-wider mt-0.5">
+                  Co-Founder &amp; Lead Instructor
+                </h2>
+              </div>
+
+              <div className="space-y-3 text-sm text-[#D6DBDD] leading-relaxed">
+                <p>
+                  Paul Gayle is a co-founder of the American Firearms Network and a senior firearms and combatives instructor with extensive experience in defensive training and physical skill development. His instruction prepares students for the practical realities of high-stress situations where control, movement, and judgment are critical.
+                </p>
+                <p>
+                  Paul’s training integrates firearms proficiency with disciplined movement and weapon management. He focuses on helping students maintain effectiveness when conditions are dynamic—reinforcing control, situational awareness, and decision-making under pressure. His approach is structured, deliberate, and grounded in real-world application.
+                </p>
+                <p>
+                  With decades of experience in martial arts and security-focused instruction, Paul brings a steady, professional teaching style that emphasizes reliability over speed and consistency over improvisation. He is known for reinforcing strong fundamentals, building physical confidence responsibly, and holding students to a standard that reflects real-world demands.
+                </p>
+              </div>
+
+              {/* Exact Credentials List from Live Site */}
+              <div className="pt-2">
+                <h1 className="text-base font-bold text-white uppercase tracking-wider mb-2">
+                  Professional Credentials
+                </h1>
+                <ul className="list-disc pl-5 space-y-1 text-xs sm:text-sm text-slate-300">
+                  <li>Judo practitioner</li>
+                  <li>USCCA Certified Firearms Instructor</li>
+                  <li>NRA Certified Firearms Instructor</li>
+                  <li>HTK Training Group Black Site Director</li>
+                  <li>HTK Certified Range Safety Officer</li>
+                  <li>Specialist in Weapons Retention &amp; Close-Quarters Engagement</li>
+                  <li>Expert in Movement Under Fire</li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

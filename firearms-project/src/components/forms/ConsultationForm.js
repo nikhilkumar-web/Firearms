@@ -2,11 +2,10 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ShieldCheck, CheckCircle, ArrowRight } from 'lucide-react';
 
 const US_STATES = [
-  "Florida", "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", 
-  "Delaware", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", 
+  "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", 
+  "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", 
   "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", 
   "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", 
   "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", 
@@ -14,260 +13,181 @@ const US_STATES = [
   "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"
 ];
 
-export default function ConsultationForm({ preselectedType = 'One on One Lesson' }) {
+export default function ConsultationForm() {
   const [formData, setFormData] = useState({
-    fullName: '',
+    name: '',
     phone: '',
     email: '',
     bestTime: 'Morning',
-    lessonType: preselectedType,
+    lessonType: 'One on One Lesson',
     state: 'Florida',
-    message: '',
-    agreeToTerms: true
+    agree: true
   });
 
-  const [status, setStatus] = useState({ state: 'idle', message: '' });
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value
-    }));
-  };
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setStatus({ state: 'loading', message: '' });
-
-    setTimeout(() => {
-      setStatus({
-        state: 'success',
-        message: 'Thank you! Your consultation request has been received. Instructor Todd or Paul will contact you shortly during your preferred time window.'
-      });
-    }, 1000);
+    setSubmitted(true);
   };
 
   return (
-    <div className="tactical-glass-card rounded-2xl p-6 sm:p-10 border border-white/10 relative overflow-hidden">
-      {/* Accent strip */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d99b26] via-[#f5b942] to-[#d99b26]"></div>
+    <div className="bg-[#111111] border border-white/10 rounded-2xl p-6 sm:p-10 shadow-2xl">
+      {/* Exact Subtitles */}
+      <h3 className="text-xl font-bold text-white uppercase tracking-wide">
+        Secure Your Strategic Advantage:
+      </h3>
+      <p className="text-sm text-[#BC8914] font-semibold mt-1 mb-6">
+        Contact South Florida’s Premier Firearms Experts Today.
+      </p>
 
-      <div className="mb-6">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#d99b26]/10 border border-[#d99b26]/20 text-[#f5b942] text-xs font-semibold uppercase tracking-wider mb-2">
-          <ShieldCheck className="w-3.5 h-3.5" />
-          Direct Instructor Scheduling
-        </div>
-        <h3 className="text-2xl font-bold text-white">
-          Contact South Florida&apos;s Premier Firearms Experts Today
-        </h3>
-        <p className="text-slate-400 text-xs sm:text-sm mt-1">
-          Take the first step toward true defensive readiness. Fill out the form below for a personalized training consultation.
-        </p>
-      </div>
-
-      {status.state === 'success' ? (
-        <div className="p-8 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-center space-y-4">
-          <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center">
-            <CheckCircle className="w-10 h-10" />
-          </div>
-          <h4 className="text-xl font-bold text-white">Consultation Request Received!</h4>
-          <p className="text-sm text-emerald-200/90 leading-relaxed max-w-md mx-auto">
-            {status.message}
+      {submitted ? (
+        <div className="p-6 rounded-xl bg-emerald-950/50 border border-emerald-500/40 text-center space-y-3">
+          <h4 className="text-lg font-bold text-white">Thank You!</h4>
+          <p className="text-sm text-emerald-200">
+            Your request has been submitted. Instructor Todd or Paul will contact you shortly.
           </p>
-          <div className="pt-2">
-            <button
-              onClick={() => {
-                setStatus({ state: 'idle', message: '' });
-                setFormData({
-                  fullName: '',
-                  phone: '',
-                  email: '',
-                  bestTime: 'Morning',
-                  lessonType: 'One on One Lesson',
-                  state: 'Florida',
-                  message: '',
-                  agreeToTerms: true
-                });
-              }}
-              className="text-xs text-[#f5b942] underline hover:text-white"
-            >
-              Submit another request
-            </button>
-          </div>
+          <button
+            onClick={() => setSubmitted(false)}
+            className="text-xs text-[#BC8914] underline hover:text-white"
+          >
+            Submit another message
+          </button>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* Full Name */}
-            <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
-                Full Name *
-              </label>
-              <input
-                type="text"
-                name="fullName"
-                required
-                value={formData.fullName}
-                onChange={handleChange}
-                placeholder="e.g. John Miller"
-                className="w-full px-4 py-3 rounded-lg bg-[#080b11] border border-white/10 text-white placeholder-slate-600 focus:outline-none focus:border-[#d99b26] text-sm"
-              />
-            </div>
+        <form onSubmit={handleSubmit} className="space-y-5 text-sm">
+          {/* Full Name */}
+          <div>
+            <label className="block text-xs font-semibold text-slate-300 uppercase mb-1.5">
+              Full Name *
+            </label>
+            <input
+              type="text"
+              required
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              placeholder="Your Name"
+              className="w-full px-4 py-3 rounded bg-[#0a0a0a] border border-white/10 text-white placeholder-slate-600 focus:outline-none focus:border-[#BC8914]"
+            />
+          </div>
 
-            {/* Phone Number */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Phone */}
             <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-semibold text-slate-300 uppercase mb-1.5">
                 Phone Number *
               </label>
               <input
                 type="tel"
-                name="phone"
                 required
                 value={formData.phone}
-                onChange={handleChange}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 placeholder="(561) 000-0000"
-                className="w-full px-4 py-3 rounded-lg bg-[#080b11] border border-white/10 text-white placeholder-slate-600 focus:outline-none focus:border-[#d99b26] text-sm"
+                className="w-full px-4 py-3 rounded bg-[#0a0a0a] border border-white/10 text-white placeholder-slate-600 focus:outline-none focus:border-[#BC8914]"
               />
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* Email Address */}
+            {/* Email */}
             <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-semibold text-slate-300 uppercase mb-1.5">
                 Email Address *
               </label>
               <input
                 type="email"
-                name="email"
                 required
                 value={formData.email}
-                onChange={handleChange}
-                placeholder="name@domain.com"
-                className="w-full px-4 py-3 rounded-lg bg-[#080b11] border border-white/10 text-white placeholder-slate-600 focus:outline-none focus:border-[#d99b26] text-sm"
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                placeholder="name@example.com"
+                className="w-full px-4 py-3 rounded bg-[#0a0a0a] border border-white/10 text-white placeholder-slate-600 focus:outline-none focus:border-[#BC8914]"
               />
             </div>
-
-            {/* State Selection */}
-            <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
-                Select State *
-              </label>
-              <select
-                name="state"
-                value={formData.state}
-                onChange={handleChange}
-                className="w-full px-4 py-3 rounded-lg bg-[#080b11] border border-white/10 text-white focus:outline-none focus:border-[#d99b26] text-sm"
-              >
-                {US_STATES.map((s) => (
-                  <option key={s} value={s} className="bg-[#0f141d] text-white">
-                    {s}
-                  </option>
-                ))}
-              </select>
-            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* Best Time to Call */}
-            <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
-                Best Time to Call
-              </label>
-              <div className="grid grid-cols-3 gap-2">
-                {['Morning', 'Afternoon', 'Evening'].map((t) => (
-                  <button
-                    type="button"
-                    key={t}
-                    onClick={() => setFormData(p => ({ ...p, bestTime: t }))}
-                    className={`py-2 text-xs font-medium rounded-lg border transition-all ${
-                      formData.bestTime === t
-                        ? 'bg-[#d99b26]/20 border-[#d99b26] text-[#f5b942]'
-                        : 'bg-[#080b11] border-white/10 text-slate-400 hover:border-white/20'
-                    }`}
-                  >
-                    {t}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Lesson Format */}
-            <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
-                Lesson Format
-              </label>
-              <div className="grid grid-cols-2 gap-2">
-                {['One on One Lesson', 'Group'].map((f) => (
-                  <button
-                    type="button"
-                    key={f}
-                    onClick={() => setFormData(p => ({ ...p, lessonType: f }))}
-                    className={`py-2 text-xs font-medium rounded-lg border transition-all ${
-                      formData.lessonType === f
-                        ? 'bg-[#d99b26]/20 border-[#d99b26] text-[#f5b942]'
-                        : 'bg-[#080b11] border-white/10 text-slate-400 hover:border-white/20'
-                    }`}
-                  >
-                    {f}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Notes */}
+          {/* Best Time to Call */}
           <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
-              Training Goals / Experience Level (Optional)
+            <label className="block text-xs font-semibold text-slate-300 uppercase mb-2">
+              Best Time to Call
             </label>
-            <textarea
-              name="message"
-              rows={3}
-              value={formData.message}
-              onChange={handleChange}
-              placeholder="E.g., New gun owner seeking Florida CCW, holster draw mechanics, private mentorship..."
-              className="w-full px-4 py-3 rounded-lg bg-[#080b11] border border-white/10 text-white placeholder-slate-600 focus:outline-none focus:border-[#d99b26] text-sm"
-            ></textarea>
+            <div className="flex flex-wrap gap-4">
+              {['Morning', 'Afternoon', 'Evening'].map((time) => (
+                <label key={time} className="flex items-center gap-2 cursor-pointer text-xs text-slate-300">
+                  <input
+                    type="radio"
+                    name="bestTime"
+                    value={time}
+                    checked={formData.bestTime === time}
+                    onChange={(e) => setFormData({ ...formData, bestTime: e.target.value })}
+                    className="accent-[#BC8914]"
+                  />
+                  <span>{time}</span>
+                </label>
+              ))}
+            </div>
           </div>
 
-          {/* Legal check */}
-          <div className="flex items-start gap-3 text-[11px] text-slate-400 leading-normal">
+          {/* One on One Lesson or Group */}
+          <div>
+            <label className="block text-xs font-semibold text-slate-300 uppercase mb-2">
+              One on One Lesson or Group
+            </label>
+            <div className="flex flex-wrap gap-4">
+              {['One on One Lesson', 'Group'].map((type) => (
+                <label key={type} className="flex items-center gap-2 cursor-pointer text-xs text-slate-300">
+                  <input
+                    type="radio"
+                    name="lessonType"
+                    value={type}
+                    checked={formData.lessonType === type}
+                    onChange={(e) => setFormData({ ...formData, lessonType: e.target.value })}
+                    className="accent-[#BC8914]"
+                  />
+                  <span>{type}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          {/* Select State */}
+          <div>
+            <label className="block text-xs font-semibold text-slate-300 uppercase mb-1.5">
+              Select State
+            </label>
+            <select
+              value={formData.state}
+              onChange={(e) => setFormData({ ...formData, state: e.target.value })}
+              className="w-full px-4 py-3 rounded bg-[#0a0a0a] border border-white/10 text-white focus:outline-none focus:border-[#BC8914]"
+            >
+              {US_STATES.map((s) => (
+                <option key={s} value={s} className="bg-[#111111] text-white">
+                  {s}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Exact Consent Text from Live Site */}
+          <div className="flex items-start gap-2 text-xs text-slate-400 leading-relaxed pt-2">
             <input
               type="checkbox"
-              id="agreeToTerms"
-              name="agreeToTerms"
               required
-              checked={formData.agreeToTerms}
-              onChange={handleChange}
-              className="mt-1 rounded accent-[#d99b26] cursor-pointer"
+              checked={formData.agree}
+              onChange={(e) => setFormData({ ...formData, agree: e.target.checked })}
+              className="mt-1 accent-[#BC8914] cursor-pointer"
             />
-            <label htmlFor="agreeToTerms" className="cursor-pointer">
-              By clicking &quot;Submit&quot;, I provide my electronic signature and authorize American Firearms Network to contact me at the phone number provided (including by call or text) for scheduling and training sessions. I agree to the{' '}
-              <Link href="/privacy-policy" className="text-[#f5b942] underline">Privacy Policy</Link> and{' '}
-              <Link href="/terms-of-service" className="text-[#f5b942] underline">Terms of Service</Link>.
-            </label>
+            <span>
+              By clicking &quot;Submit,&quot; I provide my electronic signature and authorize American Firearms Network to contact me at the phone number provided (including by call or text) for scheduling and to share information about training sessions. I acknowledge and agree to the{' '}
+              <Link href="/privacy-policy" className="text-[#BC8914] underline">Privacy Policy</Link> and{' '}
+              <Link href="/terms-of-service" className="text-[#BC8914] underline">Terms of Service</Link>.
+            </span>
           </div>
 
-          {/* Submit */}
+          {/* Exact Submit Button */}
           <div>
             <button
               type="submit"
-              disabled={status.state === 'loading'}
-              className="w-full py-4 rounded-xl bg-gradient-to-r from-[#d99b26] via-[#f5b942] to-[#b87b14] hover:opacity-95 text-black font-extrabold text-sm uppercase tracking-wider shadow-xl flex items-center justify-center gap-2 transition-transform active:scale-[0.99] disabled:opacity-50"
+              className="w-full py-4 rounded bg-[#BC8914] hover:bg-[#B1800F] text-black font-extrabold uppercase text-xs tracking-widest transition-colors shadow-lg"
             >
-              {status.state === 'loading' ? (
-                <span className="flex items-center gap-2">
-                  <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></span>
-                  Processing Consultation...
-                </span>
-              ) : (
-                <>
-                  <span>Consult Today & Secure Your Spot</span>
-                  <ArrowRight className="w-4 h-4" />
-                </>
-              )}
+              Submit
             </button>
           </div>
         </form>
