@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #080a0e;
+    --foreground: #f1f5f9;
+    --card: #0f141d;
+    --card-foreground: #f8fafc;
+    --border: #1e293b;
+    --primary: #d99b26;
+    --primary-hover: #b87b14;
+    --accent: #f5b942;
+    --muted: #94a3b8;
+    --muted-dark: #64748b;
+  }
+
+  body {
+    background-color: #080a0e;
+    color: #f1f5f9;
+    font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom Tactical Glassmorphism & Effects */
+.tactical-glass {
+  background: rgba(15, 20, 29, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(217, 155, 38, 0.15);
+}
+
+.tactical-glass-card {
+  background: linear-gradient(135deg, rgba(20, 27, 40, 0.9) 0%, rgba(13, 17, 25, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.tactical-glass-card:hover {
+  border-color: rgba(217, 155, 38, 0.4);
+  box-shadow: 0 15px 35px -10px rgba(217, 155, 38, 0.15);
+  transform: translateY(-2px);
+}
+
+.tactical-glow {
+  box-shadow: 0 0 25px -5px rgba(217, 155, 38, 0.35);
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #f5b942 0%, #d99b26 50%, #b87b14 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtle-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
