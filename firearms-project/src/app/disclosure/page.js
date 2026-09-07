@@ -21,6 +21,7 @@ export default function DisclosurePage() {
             </p>
           </section>
 
+
           <section className="space-y-3">
             <h2 className="text-lg font-bold text-white uppercase tracking-wider text-[#f5b942]">
               Liability Waiver

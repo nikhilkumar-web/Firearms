@@ -116,4 +116,3 @@ git add .
 git commit -m "Your descriptive commit message"
 git push origin main
 ```
-Repository: [https://github.com/nikhilkumar-web/Firearms](https://github.com/nikhilkumar-web/Firearms)
