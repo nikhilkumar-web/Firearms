@@ -115,7 +115,7 @@ export const courses = [
     summary: "Instruction tailored specifically for women, focusing on practical concealed carry methods, purse/on-body holsters, and confidence building.",
     duration: "3.5 Hours",
     level: "Beginner to Intermediate",
-    image: "/images/about/tactical-diagnostics.webp",
+    image: "/images/about/outdoor-range-group.webp",
     highlights: [
       "Concealed carry options tailored to women's attire",
       "Managing grip strength, recoil mitigation, and stance",
@@ -145,7 +145,7 @@ export const courses = [
   },
   {
     slug: "private-instruction",
-    title: "Private Instruction (1-on-1)",
+    title: "Private Instruction",
     category: "Custom Mentorship",
     tagline: "Dedicated Mentorship with Senior Lead Instructors",
     summary: "Direct personal coaching with Todd Grama or Paul Gayle. We evaluate your mechanics via high-speed diagnostics and tailor every minute to your goals.",
@@ -163,7 +163,7 @@ export const courses = [
   },
   {
     slug: "firearm-rental-and-range",
-    title: "Firearm Rental and Range Guidance",
+    title: "Firearm Rental and Range",
     category: "Range Experience",
     tagline: "Test Top Platforms Before You Buy with Expert Guidance",
     summary: "Access South Florida's premier shooting centers with a curated selection of modern handguns, rifles, and shotguns alongside professional coaches.",

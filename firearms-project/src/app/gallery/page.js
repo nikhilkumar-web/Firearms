@@ -1,150 +1,287 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { galleryImages } from '@/data/gallery';
-import { Eye, X, ShieldCheck, ArrowRight } from 'lucide-react';
+import { subscribeVideos, galleryShorts, galleryImages } from '@/data/gallery';
+import { ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react';
 
 export default function GalleryPage() {
-  const [activeCategory, setActiveCategory] = useState('All');
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
 
-  const categories = ['All', 'Handgun', 'Carbine', 'CCW', 'Tactical', 'Safety', 'Private', 'Combatives'];
+  const openLightbox = (index) => {
+    setLightboxIndex(index);
+  };
 
-  const filtered = activeCategory === 'All'
-    ? galleryImages
-    : galleryImages.filter((img) => img.category === activeCategory);
+  const closeLightbox = () => {
+    setLightboxIndex(null);
+  };
+
+  const showPrev = useCallback(() => {
+    setLightboxIndex((prev) => (prev === null ? null : (prev - 1 + galleryImages.length) % galleryImages.length));
+  }, []);
+
+  const showNext = useCallback(() => {
+    setLightboxIndex((prev) => (prev === null ? null : (prev + 1) % galleryImages.length));
+  }, []);
+
+  // Keyboard navigation for Lightbox
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (lightboxIndex === null) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showPrev();
+      if (e.key === 'ArrowRight') showNext();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxIndex, showPrev, showNext]);
+
+  // Distribute into 4 balanced columns for perfect masonry layout
+  const colCount = 4;
+  const columns = Array.from({ length: colCount }, () => []);
+  galleryImages.forEach((item, index) => {
+    columns[index % colCount].push({ item, index });
+  });
 
   return (
-    <div className="bg-[#080a0e] text-slate-100 min-h-screen">
-      {/* Header */}
-      <section className="relative py-20 lg:py-28 overflow-hidden bg-[#07090e] border-b border-white/10">
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#d99b26]/10 border border-[#d99b26]/20 text-[#f5b942] text-xs font-bold uppercase tracking-widest mb-4">
-            Live Action Showcase
-          </div>
-          <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight">
-            AFN <span className="gold-gradient-text">TRAINING GALLERY</span>
-          </h1>
-          <p className="mt-4 text-base sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            Real drills, real students, real proficiency. Explore our photographic record of defensive courses across Florida.
-          </p>
-        </div>
-      </section>
+    <main className="bg-[#FFFFFF] text-[#000000] overflow-x-hidden font-roboto">
+      
+      {/* 1. HERO BANNER SECTION (Elementor 2cce698) */}
+      <section 
+        className="relative w-full py-[60px] sm:py-[100px] overflow-hidden"
+        style={{
+          backgroundImage: 'url(/images/about/outdoor-range-group.webp)',
+          backgroundPosition: 'center center',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover'
+        }}
+      >
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{ backgroundColor: '#000000', opacity: 0.78 }}
+        />
 
-      {/* Gallery Section */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Category Filters */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${
-                activeCategory === cat
-                  ? 'bg-[#d99b26] text-black shadow-lg scale-105'
-                  : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10 border border-white/5'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {/* Image Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((img) => (
-            <div
-              key={img.id}
-              onClick={() => setSelectedImage(img)}
-              className="group relative h-80 rounded-3xl overflow-hidden bg-black/60 border border-white/10 cursor-pointer hover:border-[#d99b26]/50 transition-all shadow-xl"
-            >
-              <Image
-                src={img.src}
-                alt={img.title}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
-
-              {/* Category Badge */}
-              <div className="absolute top-4 left-4 px-3 py-1 rounded-md bg-black/80 backdrop-blur-md border border-white/10 text-xs font-bold text-[#f5b942] uppercase">
-                {img.category}
-              </div>
-
-              {/* Eye hover */}
-              <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/70 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                <Eye className="w-5 h-5 text-[#f5b942]" />
-              </div>
-
-              {/* Title & Description */}
-              <div className="absolute bottom-4 left-4 right-4 text-left">
-                <h3 className="text-lg font-bold text-white group-hover:text-[#f5b942] transition-colors line-clamp-1">
-                  {img.title}
-                </h3>
-                <p className="text-xs text-slate-300 line-clamp-2 mt-1 leading-relaxed">
-                  {img.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="mt-20 text-center">
-          <Link
-            href="/contact-us"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#d99b26] to-[#b87b14] text-black font-extrabold text-xs uppercase tracking-wider shadow-xl hover:scale-[1.02] transition-transform"
+        <div className="relative z-10 max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 
+            className="text-[28px] sm:text-[50px] font-semibold uppercase text-white font-gabarito leading-[34px] sm:leading-[60px]"
+            style={{ fontFamily: "'Gabarito', sans-serif" }}
           >
-            <span>Ready to Train With Us? Consult Today</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+            Gallery
+          </h1>
         </div>
       </section>
 
-      {/* Lightbox Modal */}
-      {selectedImage && (
-        <div
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in"
-          onClick={() => setSelectedImage(null)}
+      {/* 2. SUBSCRIBE TO YOUTUBE SECTION (Elementor 66c7e80) */}
+      <section className="py-[30px] sm:py-[50px] bg-[#FFFFFF]">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 
+            className="text-[28px] sm:text-[50px] font-semibold uppercase text-[#000000] font-gabarito leading-[34px] sm:leading-[60px] mb-6"
+            style={{ fontFamily: "'Gabarito', sans-serif" }}
+          >
+            Subscribe To Our Youtube Channel
+          </h2>
+
+          {/* 4 Videos Grid matching Elementor elementor-element-aae91bf */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+            {subscribeVideos.map((video) => (
+              <div 
+                key={video.id}
+                className="relative w-full aspect-video overflow-hidden bg-black"
+                style={{
+                  borderRadius: '5px',
+                  boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.6)'
+                }}
+              >
+                <iframe
+                  src={`https://www.youtube.com/embed/${video.id}?autoplay=0&controls=1&rel=0`}
+                  title={video.title}
+                  className="absolute inset-0 w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Red Subscribe Button matching Elementor button */}
+          <div className="pt-2">
+            <a
+              href="https://www.youtube.com/@AMERICANFIREARMSNETWORKS?sub_confirmation=1"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                backgroundColor: '#EB0F06',
+                border: '2px solid #A5AAAB',
+                padding: '12px 40px'
+              }}
+              className="inline-flex items-center justify-center text-white font-medium uppercase text-[14px] sm:text-[15px] leading-none tracking-wider transition-all hover:bg-[#000000] shadow-md font-roboto rounded-[2px]"
+            >
+              Subscribe Now
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. OUR VIDEOS SECTION (Elementor b0d5352 - YouTube Shorts 1:1 Aspect Ratio) */}
+      <section className="py-[30px] sm:py-[50px] bg-[#FFFFFF]">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 
+            className="text-[28px] sm:text-[50px] font-semibold uppercase text-[#000000] font-gabarito leading-[34px] sm:leading-[60px] mb-8"
+            style={{ fontFamily: "'Gabarito', sans-serif" }}
+          >
+            Our Videos
+          </h2>
+
+          {/* 3x3 Grid with 1:1 square aspect ratio matching Elementor --video-aspect-ratio: 1 */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {galleryShorts.map((video, idx) => (
+              <div 
+                key={`${video.id}-${idx}`}
+                className="relative w-full aspect-square overflow-hidden bg-black"
+                style={{
+                  borderRadius: '5px',
+                  boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.6)'
+                }}
+              >
+                <iframe
+                  src={`https://www.youtube.com/embed/${video.id}?autoplay=0&controls=1&rel=0`}
+                  title={video.title}
+                  className="absolute inset-0 w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Red View More Videos Button matching Elementor c406eb2 */}
+          <div className="mt-8 pt-2">
+            <a
+              href="https://www.youtube.com/@AMERICANFIREARMSNETWORKS?sub_confirmation=1"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                backgroundColor: '#EB0F06',
+                border: '2px solid #A5AAAB',
+                padding: '12px 40px'
+              }}
+              className="inline-flex items-center justify-center text-white font-medium uppercase text-[14px] sm:text-[15px] leading-none tracking-wider transition-all hover:bg-[#000000] shadow-md font-roboto rounded-[2px]"
+            >
+              View More Videos
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. OUR GALLERY SECTION (Elementor 40685c0 - Happy Addons Masonry Grid) */}
+      <section className="pt-[10px] pb-[60px] bg-[#FFFFFF]">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 
+            className="text-[28px] sm:text-[50px] font-semibold uppercase text-[#000000] font-gabarito leading-[34px] sm:leading-[60px] text-center mb-8"
+            style={{ fontFamily: "'Gabarito', sans-serif" }}
+          >
+            Our Gallery
+          </h2>
+
+          {/* 4-column Masonry Layout with clean column stacks */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 items-start">
+            {columns.map((col, colIdx) => (
+              <div key={colIdx} className="flex flex-col gap-5">
+                {col.map(({ item, index }) => (
+                  <div
+                    key={item.id}
+                    onClick={() => openLightbox(index)}
+                    className="relative overflow-hidden rounded-[4px] cursor-pointer group shadow-sm hover:shadow-md transition-shadow bg-gray-100"
+                  >
+                    {/* Image with elementor-animation-grow hover scale */}
+                    <div className="relative w-full overflow-hidden">
+                      <Image
+                        src={item.src}
+                        alt={item.alt || `AFN Gallery Image ${item.id}`}
+                        width={item.width || 800}
+                        height={item.height || 600}
+                        className="w-full h-auto object-cover transform transition-transform duration-300 group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                        loading="lazy"
+                      />
+                    </div>
+
+                    {/* Subtle Hover Overlay with Zoom Icon */}
+                    <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+                      <div className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center text-white">
+                        <ZoomIn className="w-5 h-5 text-white" />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. LIGHTBOX MODAL (Magnific Popup Replica) */}
+      {lightboxIndex !== null && (
+        <div 
+          className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-2 sm:p-6 select-none animate-in fade-in duration-200"
+          onClick={closeLightbox}
         >
-          <div
-            className="relative max-w-5xl w-full bg-[#0d121b] border border-white/20 rounded-3xl overflow-hidden shadow-2xl p-4 sm:p-6"
+          {/* Top Bar: Counter and Close */}
+          <div className="absolute top-4 left-4 right-4 flex items-center justify-between text-white z-10 px-2 sm:px-6">
+            <span className="text-sm font-medium tracking-wide text-gray-300 font-roboto">
+              {lightboxIndex + 1} of {galleryImages.length}
+            </span>
+            <button
+              onClick={closeLightbox}
+              className="p-2 text-white hover:text-[#B1800F] transition-colors rounded-full bg-black/40 hover:bg-black/80"
+              aria-label="Close image popup"
+            >
+              <X className="w-7 h-7" />
+            </button>
+          </div>
+
+          {/* Prev Arrow */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              showPrev();
+            }}
+            className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 p-2 sm:p-3 text-white hover:text-[#B1800F] transition-colors rounded-full bg-black/50 hover:bg-black/80 z-10"
+            aria-label="Previous image"
+          >
+            <ChevronLeft className="w-8 h-8 sm:w-10 sm:h-10" />
+          </button>
+
+          {/* Current Image Container */}
+          <div 
+            className="relative max-w-5xl max-h-[85vh] w-full h-[75vh] flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute top-6 right-6 z-10 p-2.5 rounded-full bg-black/80 hover:bg-black text-white hover:text-[#f5b942] transition-colors"
-            >
-              <X className="w-6 h-6" />
-            </button>
-            <div className="relative h-[65vh] w-full rounded-2xl overflow-hidden">
-              <Image
-                src={selectedImage.src}
-                alt={selectedImage.title}
-                fill
-                className="object-contain"
-              />
-            </div>
-            <div className="p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-t border-white/10 mt-4">
-              <div>
-                <span className="text-xs font-bold uppercase text-[#d99b26] bg-[#d99b26]/10 px-2.5 py-1 rounded">
-                  {selectedImage.category}
-                </span>
-                <h3 className="text-xl font-bold text-white mt-1.5">{selectedImage.title}</h3>
-                <p className="text-xs text-slate-400 mt-0.5">{selectedImage.description}</p>
-              </div>
-              <Link
-                href="/contact-us"
-                className="px-6 py-3 rounded-xl bg-[#d99b26] hover:bg-[#f5b942] text-black font-extrabold text-xs uppercase tracking-wider shrink-0"
-              >
-                Schedule This Training
-              </Link>
-            </div>
+            <Image
+              src={galleryImages[lightboxIndex].src}
+              alt={galleryImages[lightboxIndex].alt || 'Gallery photo'}
+              fill
+              className="object-contain"
+              priority
+              sizes="90vw"
+            />
           </div>
+
+          {/* Next Arrow */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              showNext();
+            }}
+            className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 p-2 sm:p-3 text-white hover:text-[#B1800F] transition-colors rounded-full bg-black/50 hover:bg-black/80 z-10"
+            aria-label="Next image"
+          >
+            <ChevronRight className="w-8 h-8 sm:w-10 sm:h-10" />
+          </button>
         </div>
       )}
-    </div>
+
+    </main>
   );
 }

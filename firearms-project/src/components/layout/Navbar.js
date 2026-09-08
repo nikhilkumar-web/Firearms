@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { courses } from '@/data/courses';
 import { partnerRanges } from '@/data/ranges';
-import { siteConfig } from '@/data/siteConfig';
 import { ChevronDown, Menu, X } from 'lucide-react';
 
 export default function Navbar() {
@@ -14,14 +13,15 @@ export default function Navbar() {
   const [rangesDropdown, setRangesDropdown] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#050505]/95 backdrop-blur-md border-b border-white/10">
-      <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        {/* Exact Logo */}
-        <Link href="/" className="flex items-center gap-3">
-          <div className="relative w-48 sm:w-56 h-12">
+    <header className="sticky top-0 z-50 bg-[#D6DBDD] border-b border-black/10 shadow-sm transition-all h-[71px]">
+      <nav className="max-w-[1300px] mx-auto px-3 sm:px-6 lg:px-8 h-[71px] flex items-center justify-between gap-3 xl:gap-4">
+        
+        {/* Exact Logo from Live Site */}
+        <Link href="/" className="flex items-center shrink-0">
+          <div className="relative w-[185px] xl:w-[215px] h-[38px]">
             <Image
-              src={siteConfig.logo}
-              alt={siteConfig.name}
+              src="/images/logo/logo.png"
+              alt="American Firearms Network"
               fill
               className="object-contain object-left"
               priority
@@ -29,12 +29,18 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Exact Desktop Menu */}
-        <div className="hidden lg:flex items-center gap-7 text-xs uppercase font-bold tracking-wider text-slate-200">
-          <Link href="/" className="hover:text-[#BC8914] transition-colors">
+        {/* Exact Desktop Navigation Menu: Gabarito bold uppercase single-line */}
+        <div className="hidden lg:flex items-center text-[14px] xl:text-[15px] uppercase font-bold font-gabarito text-[#000000] whitespace-nowrap shrink-0">
+          <Link 
+            href="/" 
+            className="text-[#000000] hover:text-[#AA8802] transition-colors px-2.5 xl:px-4 py-2 whitespace-nowrap font-medium"
+          >
             Home
           </Link>
-          <Link href="/about-us" className="hover:text-[#BC8914] transition-colors">
+          <Link 
+            href="/about-us" 
+            className="text-[#000000] hover:text-[#AA8802] transition-colors px-2.5 xl:px-4 py-2 whitespace-nowrap font-medium"
+          >
             About Us
           </Link>
 
@@ -46,19 +52,19 @@ export default function Navbar() {
           >
             <Link 
               href="/services" 
-              className="flex items-center gap-1 hover:text-[#BC8914] transition-colors py-2"
+              className="flex items-center gap-1 text-[#000000] hover:text-[#AA8802] transition-colors px-2.5 xl:px-4 py-2 whitespace-nowrap font-medium"
             >
-              Services
-              <ChevronDown className="w-3.5 h-3.5" />
+              <span>Services</span>
+              <ChevronDown className="w-3.5 h-3.5 stroke-[2.5]" />
             </Link>
 
             {servicesDropdown && (
-              <div className="absolute top-full left-0 w-80 bg-[#111111] border border-white/10 rounded-lg p-2 shadow-2xl">
+              <div className="absolute top-full left-0 w-80 bg-white border border-[#c4c4c4] rounded shadow-xl py-2 z-50">
                 {courses.map((course) => (
                   <Link
                     key={course.slug}
                     href={`/services/${course.slug}`}
-                    className="block px-3 py-2 rounded text-xs normal-case text-slate-300 hover:bg-white/5 hover:text-[#BC8914] transition-colors"
+                    className="block px-4 py-2 text-xs normal-case text-[#333333] hover:bg-[#f5f5f5] hover:text-[#AA8802] border-b border-[#f0f0f0] last:border-0 transition-colors font-roboto"
                   >
                     {course.title}
                   </Link>
@@ -67,7 +73,10 @@ export default function Navbar() {
             )}
           </div>
 
-          <Link href="/services" className="hover:text-[#BC8914] transition-colors">
+          <Link 
+            href="/resources" 
+            className="text-[#000000] hover:text-[#AA8802] transition-colors px-2.5 xl:px-4 py-2 whitespace-nowrap font-medium"
+          >
             Resources
           </Link>
 
@@ -79,88 +88,104 @@ export default function Navbar() {
           >
             <Link 
               href="/training-ranges" 
-              className="flex items-center gap-1 hover:text-[#BC8914] transition-colors py-2"
+              className="flex items-center gap-1 text-[#000000] hover:text-[#AA8802] transition-colors px-2.5 xl:px-4 py-2 whitespace-nowrap font-medium"
             >
-              Training Ranges
-              <ChevronDown className="w-3.5 h-3.5" />
+              <span>Training Ranges</span>
+              <ChevronDown className="w-3.5 h-3.5 stroke-[2.5]" />
             </Link>
 
             {rangesDropdown && (
-              <div className="absolute top-full left-0 w-80 bg-[#111111] border border-white/10 rounded-lg p-2 shadow-2xl">
+              <div className="absolute top-full left-0 w-80 bg-white border border-[#c4c4c4] rounded shadow-xl py-2 z-50">
                 {partnerRanges.map((range) => (
                   <Link
                     key={range.name}
                     href="/training-ranges"
-                    className="block px-3 py-2 rounded text-xs normal-case text-slate-300 hover:bg-white/5 hover:text-[#BC8914] transition-colors"
+                    className="block px-4 py-2 text-xs normal-case text-[#333333] hover:bg-[#f5f5f5] hover:text-[#AA8802] border-b border-[#f0f0f0] last:border-0 transition-colors font-roboto"
                   >
-                    <div className="font-semibold text-white">{range.name}</div>
+                    {range.name}
                   </Link>
                 ))}
               </div>
             )}
           </div>
 
-          <Link href="/gallery" className="hover:text-[#BC8914] transition-colors">
+          <Link 
+            href="/gallery" 
+            className="text-[#000000] hover:text-[#AA8802] transition-colors px-2.5 xl:px-4 py-2 whitespace-nowrap font-medium"
+          >
             Gallery
           </Link>
-          <Link href="/contact-us" className="hover:text-[#BC8914] transition-colors">
+          <Link 
+            href="/contact-us" 
+            className="text-[#000000] hover:text-[#AA8802] transition-colors px-2.5 xl:px-4 py-2 whitespace-nowrap font-medium"
+          >
             Contact Us
           </Link>
         </div>
 
-        {/* Exact CTA Button from Live Site */}
-        <div className="hidden lg:flex items-center">
+        {/* Exact "CONSULT TODAY!" Gold Button matching Elementor computed CSS */}
+        <div className="hidden lg:flex items-center shrink-0">
           <Link
             href="/contact-us"
-            className="px-5 py-2.5 rounded bg-[#BC8914] hover:bg-[#B1800F] text-black font-extrabold uppercase text-xs tracking-wider transition-colors shadow"
+            style={{
+              backgroundImage: 'linear-gradient(219deg, #B1800F 0%, #000000 67%)',
+              border: '1px solid #B1800F',
+              borderRadius: '3px'
+            }}
+            className="text-white font-medium uppercase text-[14px] xl:text-[15px] leading-normal tracking-normal transition-all hover:brightness-110 shadow-sm font-roboto px-5 xl:px-7 py-[11px] whitespace-nowrap inline-flex items-center justify-center"
           >
-            Consult Today!
+            CONSULT TODAY!
           </Link>
         </div>
 
-        {/* Mobile Button */}
+        {/* Mobile Hamburger Toggle */}
         <div className="lg:hidden flex items-center">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-white"
+            className="p-2 text-[#000000]"
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
           </button>
         </div>
       </nav>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#111111] border-b border-white/10 px-6 py-5 space-y-3 text-sm font-semibold uppercase">
-          <Link href="/" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#BC8914]">
+        <div className="lg:hidden bg-[#D6DBDD] border-b border-gray-300 px-6 py-5 space-y-3 text-sm font-bold uppercase text-[#000000] shadow-lg">
+          <Link href="/" onClick={() => setMobileMenuOpen(false)} className="block py-1 text-[#AA8802]">
             Home
           </Link>
-          <Link href="/about-us" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#BC8914]">
+          <Link href="/about-us" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#AA8802]">
             About Us
           </Link>
-          <Link href="/services" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#BC8914]">
+          <Link href="/services" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#AA8802]">
             Services
           </Link>
-          <Link href="/services" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#BC8914]">
+          <Link href="/resources" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#AA8802]">
             Resources
           </Link>
-          <Link href="/training-ranges" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#BC8914]">
+          <Link href="/training-ranges" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#AA8802]">
             Training Ranges
           </Link>
-          <Link href="/gallery" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#BC8914]">
+          <Link href="/gallery" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#AA8802]">
             Gallery
           </Link>
-          <Link href="/contact-us" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#BC8914]">
+          <Link href="/contact-us" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#AA8802]">
             Contact Us
           </Link>
           <div className="pt-2">
             <Link
               href="/contact-us"
               onClick={() => setMobileMenuOpen(false)}
-              className="block text-center py-3 rounded bg-[#BC8914] text-black font-bold uppercase text-xs"
+              style={{
+                backgroundImage: 'linear-gradient(219deg, #B1800F 0%, #000000 67%)',
+                border: '1px solid #B1800F',
+                borderRadius: '3px'
+              }}
+              className="block text-center py-3 text-white font-medium uppercase text-xs tracking-wider font-roboto"
             >
-              Consult Today!
+              CONSULT TODAY!
             </Link>
           </div>
         </div>

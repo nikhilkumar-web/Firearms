@@ -1,22 +1,21 @@
-import Image from 'next/image';
+import Link from 'next/link';
 import { siteConfig } from '@/data/siteConfig';
 
 export default function YouTubeSection() {
-  return (
-    <section className="py-20 bg-[#000000] text-white border-t border-white/10 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 z-0 opacity-20">
-        <Image
-          src="/images/video/video-bg.png"
-          alt="AFN YouTube"
-          fill
-          className="object-cover"
-        />
-      </div>
+  const channelVideos = [
+    { id: 'ctpQE_j8vyg', title: 'AFN Range Training 1' },
+    { id: 'JdkoNyPqL5A', title: 'AFN Range Training 2' },
+    { id: '3FJ-QV8-FFc', title: 'AFN Range Training 3' },
+    { id: 'mqybul_khzg', title: 'AFN Range Training 4' },
+  ];
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
+  return (
+    <section className="py-20 bg-[#050505] text-white border-t border-white/10 relative overflow-hidden">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-10">
+        
+        {/* Section Header */}
         <div className="space-y-4">
-          <h2 className="text-2xl sm:text-3xl font-extrabold uppercase tracking-wide text-white">
+          <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-wide text-white">
             Subscribe To Our YouTube Channel
           </h2>
           <div>
@@ -31,27 +30,47 @@ export default function YouTubeSection() {
           </div>
         </div>
 
+        {/* 4 Interactive YouTube Videos Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
+          {channelVideos.map((vid) => (
+            <div
+              key={vid.id}
+              className="relative aspect-video rounded-xl overflow-hidden border border-white/15 bg-black shadow-2xl hover:border-[#BC8914] transition-colors"
+            >
+              <iframe
+                src={`https://www.youtube.com/embed/${vid.id}?controls=1&rel=0&playsinline=1`}
+                title={vid.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full border-0"
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Intel / Range Statement */}
         <div className="max-w-3xl mx-auto space-y-4 pt-6">
-          <h2 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-wide text-white">
+          <h3 className="text-2xl sm:text-3xl font-extrabold uppercase tracking-wide text-white">
             THE INTEL DOESN&apos;T STOP AT THE RANGE.
-          </h2>
+          </h3>
           <p className="text-sm sm:text-base text-[#D6DBDD] leading-relaxed">
             High-cadence training, home defense breakdowns, and tactical gear reviews delivered directly to your screen. Join a community of thousands who don’t just watch, but implement.
           </p>
         </div>
 
-        {/* Instructors Phone Numbers & Social Links */}
-        <div className="pt-4 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-300">
-          <a href={`tel:${siteConfig.phoneTodd}`} className="hover:text-[#BC8914] font-semibold">
+        {/* Instructors Phone Numbers */}
+        <div className="pt-2 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-300">
+          <a href={`tel:${siteConfig.phoneTodd}`} className="hover:text-[#BC8914] font-semibold transition-colors">
             Instructor Todd - {siteConfig.phoneTodd}
           </a>
           <span className="text-white/30">•</span>
-          <a href={`tel:${siteConfig.phonePaul}`} className="hover:text-[#BC8914] font-semibold">
+          <a href={`tel:${siteConfig.phonePaul}`} className="hover:text-[#BC8914] font-semibold transition-colors">
             Instructor Paul - {siteConfig.phonePaul}
           </a>
         </div>
 
-        <div className="flex items-center justify-center gap-6 text-xs uppercase font-bold tracking-wider pt-2">
+        {/* Social Links */}
+        <div className="flex items-center justify-center gap-6 text-xs uppercase font-bold tracking-wider">
           <a
             href={siteConfig.youtubeUrl}
             target="_blank"
@@ -80,6 +99,7 @@ export default function YouTubeSection() {
           </a>
         </div>
 
+        {/* Bottom CTA */}
         <div>
           <a
             href={siteConfig.youtubeSubscribeUrl}

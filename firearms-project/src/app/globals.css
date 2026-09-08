@@ -1,4 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Calistoga&family=Gabarito:wght@400;500;600;700;800;900&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap');
 @import "tailwindcss";
+
+@theme {
+  --font-calistoga: "Calistoga", serif;
+  --font-gabarito: "Gabarito", sans-serif;
+  --font-roboto: "Roboto", sans-serif;
+}
+
+.font-gabarito {
+  font-family: 'Gabarito', sans-serif;
+}
+.font-calistoga {
+  font-family: 'Calistoga', serif;
+}
+.font-roboto {
+  font-family: 'Roboto', sans-serif;
+}
 
 @layer base {
   :root {
@@ -7,17 +24,17 @@
     --card: #0f141d;
     --card-foreground: #f8fafc;
     --border: #1e293b;
-    --primary: #d99b26;
-    --primary-hover: #b87b14;
-    --accent: #f5b942;
+    --primary: #B1800F;
+    --primary-hover: #966b0b;
+    --accent: #BC8914;
     --muted: #94a3b8;
     --muted-dark: #64748b;
   }
 
   body {
-    background-color: #080a0e;
+    background-color: #050505;
     color: #f1f5f9;
-    font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, sans-serif;
     overflow-x: hidden;
   }
 }
@@ -59,3 +76,73 @@
     linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
 }
+
+/* AFN Gallery Masonry Styling */
+.ha-image-grid__wrap {
+  position: relative;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  box-sizing: border-box;
+}
+
+.ha-image-grid__item {
+  display: block;
+  box-sizing: border-box;
+  padding: 8px;
+}
+
+.ha-image-grid__item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* AFN Elementor YouTube Video Embed Styles */
+.elementor-widget-video .elementor-widget-container,
+.elementor-widget-video:not(:has(.elementor-widget-container)) {
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+.elementor-widget-video .elementor-wrapper {
+  aspect-ratio: var(--video-aspect-ratio, 1.77777);
+  position: relative;
+  width: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.elementor-widget-video .elementor-wrapper iframe,
+.elementor-widget-video .elementor-wrapper video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: #000;
+}
+
+/* AFN Hero "Skill Development" Heading Text */
+.wpr-anim-text.wpr-anim-text-type-typing b,
+.wpr-anim-text.wpr-anim-text-type-typing b.wpr-anim-text-visible {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: inline-block !important;
+  color: #ffffff !important;
+  font-family: "Calistoga", Sans-serif !important;
+  text-transform: uppercase !important;
+}
+
+.wpr-anim-text.wpr-anim-text-type-typing .wpr-anim-text-inner {
+  vertical-align: top !important;
+  overflow: visible !important;
+  display: inline-block !important;
+}
+
+
+

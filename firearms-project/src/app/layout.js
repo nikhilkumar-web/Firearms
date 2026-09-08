@@ -1,18 +1,6 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { siteConfig } from "@/data/siteConfig";
-import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata = {
   title: "American Firearms Network | Firearms Training Florida",
@@ -22,24 +10,27 @@ export const metadata = {
     shortcut: "/images/logo/favicon.png",
     apple: "/images/logo/favicon.png",
   },
-  openGraph: {
-    title: "American Firearms Network | Firearms Training Florida",
-    description: "Professional firearms training in Florida focused on safety, skill development, legal education, and real-world defensive proficiency.",
-    siteName: siteConfig.name,
-    locale: "en_US",
-    type: "website",
-  },
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
-    >
-      <body className="min-h-full flex flex-col bg-[#080a0e] text-slate-100 selection:bg-[#d99b26] selection:text-black">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Calistoga&family=Gabarito:wght@400;500;600;700;800;900&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body suppressHydrationWarning className="overflow-x-hidden font-roboto bg-[#FFFFFF] text-[#000000]">
         <Navbar />
-        <main className="flex-1">{children}</main>
+        {children}
         <Footer />
       </body>
     </html>
