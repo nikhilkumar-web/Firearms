@@ -1,6 +1,29 @@
+import { Gabarito, Roboto, Calistoga } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+
+const gabarito = Gabarito({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-gabarito",
+  display: "swap",
+});
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700", "900"],
+  style: ["normal", "italic"],
+  variable: "--font-roboto",
+  display: "swap",
+});
+
+const calistoga = Calistoga({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-calistoga",
+  display: "swap",
+});
 
 export const metadata = {
   title: "American Firearms Network | Firearms Training Florida",
@@ -19,15 +42,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Calistoga&family=Gabarito:wght@400;500;600;700;800;900&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="en" suppressHydrationWarning className={`${gabarito.variable} ${roboto.variable} ${calistoga.variable}`}>
       <body suppressHydrationWarning className="overflow-x-hidden font-roboto bg-[#FFFFFF] text-[#000000]">
         <Navbar />
         {children}

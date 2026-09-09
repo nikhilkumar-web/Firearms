@@ -418,13 +418,24 @@ export default function AboutUsPage() {
                 >
                   PROFESSIONAL CREDENTIALS
                 </h4>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5 list-disc pl-5 text-[14px] sm:text-[15px] text-[#000000] font-roboto font-medium">
-                  {toddCredentials.map((c, i) => (
-                    <li key={i}>
-                      <span>{c}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 text-[14px] sm:text-[15px] text-[#000000] font-roboto font-medium">
+                  <ul className="space-y-1">
+                    {toddCredentials.slice(0, 6).map((c, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="shrink-0 select-none">•</span>
+                        <span className="flex-1">{c}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <ul className="space-y-1">
+                    {toddCredentials.slice(6).map((c, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="shrink-0 select-none">•</span>
+                        <span className="flex-1">{c}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -464,13 +475,24 @@ export default function AboutUsPage() {
                 >
                   PROFESSIONAL CREDENTIALS
                 </h4>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5 list-disc pl-5 text-[14px] sm:text-[15px] text-[#000000] font-roboto font-medium">
-                  {paulCredentials.map((c, i) => (
-                    <li key={i}>
-                      <span>{c}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 text-[14px] sm:text-[15px] text-[#000000] font-roboto font-medium">
+                  <ul className="space-y-1">
+                    {paulCredentials.filter((_, i) => [0, 2, 4, 6].includes(i)).map((c, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="shrink-0 select-none">•</span>
+                        <span className="flex-1">{c}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <ul className="space-y-1">
+                    {paulCredentials.filter((_, i) => [1, 3, 5].includes(i)).map((c, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="shrink-0 select-none">•</span>
+                        <span className="flex-1">{c}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
 

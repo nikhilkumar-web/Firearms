@@ -1,8 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { MapPin, CheckCircle } from 'lucide-react';
+import ContactPopupModal from '@/components/contact/ContactPopupModal';
 
 const US_STATES = [
   'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut',
@@ -22,7 +24,10 @@ const RIGHT_VIDEOS = [
   'mqybul_khzg'
 ];
 
-export default function ContactPage() {
+function ContactContent() {
+  const searchParams = useSearchParams();
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -36,6 +41,25 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Auto open modal on page load matching Elementor pum-2779 (500ms delay) or when ?popup=true
+  useEffect(() => {
+    const delay = searchParams?.get('popup') === 'true' ? 50 : 400;
+    const timer = setTimeout(() => {
+      setIsPopupOpen(true);
+    }, delay);
+
+    const handleOpenPopup = () => {
+      setIsPopupOpen(true);
+    };
+
+    window.addEventListener('open-contact-popup', handleOpenPopup);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('open-contact-popup', handleOpenPopup);
+    };
+  }, [searchParams]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -47,7 +71,6 @@ export default function ContactPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate submission delay
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
@@ -55,7 +78,13 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="bg-[#FFFFFF] text-[#000000] overflow-x-hidden font-roboto">
+    <main className="bg-[#FFFFFF] text-[#000000] overflow-x-hidden font-roboto relative">
+      
+      {/* Exact 1:1 Consultation Popup Modal (pum-2779) */}
+      <ContactPopupModal
+        isOpen={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
+      />
       
       {/* 1. HERO BANNER SECTION (Elementor c7a42db) */}
       <section 
@@ -255,7 +284,7 @@ export default function ContactPage() {
                       {isSubmitting ? 'Submitting...' : 'Submit'}
                     </button>
                     <div className="text-[12px] text-[#777777] mt-[15px] leading-[1.6] text-center">
-                      By clicking "Submit," I provide my electronic signature and authorize American Firearms Network to contact me at the phone number provided (including by call or text) for scheduling and to share information about training sessions. I acknowledge and agree to the{' '}
+                      By clicking &quot;Submit,&quot; I provide my electronic signature and authorize American Firearms Network to contact me at the phone number provided (including by call or text) for scheduling and to share information about training sessions. I acknowledge and agree to the{' '}
                       <Link href="/privacy-policy" className="text-[#000000] underline hover:opacity-80">
                         Privacy Policy
                       </Link>{' '}
@@ -354,5 +383,13 @@ export default function ContactPage() {
       </section>
 
     </main>
+  );
+}
+
+export default function ContactPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-white" />}>
+      <ContactContent />
+    </Suspense>
   );
 }

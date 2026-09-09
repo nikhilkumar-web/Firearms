@@ -1,20 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Calistoga&family=Gabarito:wght@400;500;600;700;800;900&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-calistoga: "Calistoga", serif;
-  --font-gabarito: "Gabarito", sans-serif;
-  --font-roboto: "Roboto", sans-serif;
+  --font-calistoga: var(--font-calistoga), "Calistoga", serif;
+  --font-gabarito: var(--font-gabarito), "Gabarito", sans-serif;
+  --font-roboto: var(--font-roboto), "Roboto", sans-serif;
 }
 
-.font-gabarito {
-  font-family: 'Gabarito', sans-serif;
+.font-gabarito, [style*="'Gabarito'"], [style*="Gabarito"] {
+  font-family: var(--font-gabarito), "Gabarito", sans-serif !important;
 }
-.font-calistoga {
-  font-family: 'Calistoga', serif;
+.font-calistoga, [style*="'Calistoga'"], [style*="Calistoga"] {
+  font-family: var(--font-calistoga), "Calistoga", serif !important;
 }
-.font-roboto {
-  font-family: 'Roboto', sans-serif;
+.font-roboto, [style*="'Roboto'"], [style*="Roboto"] {
+  font-family: var(--font-roboto), "Roboto", sans-serif !important;
 }
 
 @layer base {
@@ -144,5 +143,68 @@
   display: inline-block !important;
 }
 
-
-
+/* Legal Pages Content Styling */
+.legal-content h2 {
+  font-family: 'Gabarito', sans-serif;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+  color: #000000;
+  margin-top: 28px;
+  margin-bottom: 14px;
+}
+@media (min-width: 640px) {
+  .legal-content h2 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+}
+.legal-content h3 {
+  font-family: 'Gabarito', sans-serif;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;
+  color: #000000;
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+.legal-content h4 {
+  font-family: 'Gabarito', sans-serif;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 700;
+  color: #000000;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.legal-content p {
+  margin-bottom: 14px;
+  color: #333333;
+}
+.legal-content ul {
+  list-style-type: disc;
+  padding-left: 24px;
+  margin-bottom: 18px;
+}
+.legal-content ol {
+  list-style-type: decimal;
+  padding-left: 24px;
+  margin-bottom: 18px;
+}
+.legal-content li {
+  margin-bottom: 6px;
+  color: #333333;
+}
+.legal-content b,
+.legal-content strong {
+  font-weight: 700;
+  color: #000000;
+}
+.legal-content a {
+  color: #AA8802;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+.legal-content a:hover {
+  color: #B1800F;
+}

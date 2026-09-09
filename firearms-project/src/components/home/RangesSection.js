@@ -22,13 +22,14 @@ export default function RangesSection() {
         {/* Ranges Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {partnerRanges.map((range, idx) => (
-            <div
+            <Link
               key={idx}
-              className="tactical-glass-card rounded-2xl p-6 border border-white/10 flex flex-col justify-between group"
+              href={`/training-ranges/${range.slug}`}
+              className="tactical-glass-card rounded-2xl p-6 border border-white/10 flex flex-col justify-between group hover:border-[#BE8915]/50 transition-all cursor-pointer"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#d99b26]/10 border border-[#d99b26]/20 flex items-center justify-center text-[#f5b942]">
+                  <div className="w-10 h-10 rounded-xl bg-[#d99b26]/10 border border-[#d99b26]/20 flex items-center justify-center text-[#f5b942] group-hover:bg-[#BE8915] group-hover:text-black transition-colors">
                     <Target className="w-5 h-5" />
                   </div>
                   <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded bg-white/5 text-slate-400 border border-white/5">
@@ -47,17 +48,18 @@ export default function RangesSection() {
                 </p>
               </div>
 
-              <div className="pt-4 mt-4 border-t border-white/5 text-[11px] text-slate-500">
-                {range.type}
+              <div className="pt-4 mt-4 border-t border-white/5 text-[11px] text-slate-500 flex items-center justify-between">
+                <span>{range.type}</span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#BE8915] group-hover:translate-x-1 transition-transform" />
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
         {/* View All Ranges CTA */}
         <div className="mt-12 text-center">
           <Link
-            href="/training-ranges"
+            href="/training-ranges/gun-world-of-south-florida"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/20 hover:border-[#d99b26] text-white font-bold text-xs uppercase tracking-wider transition-all"
           >
             <span>Explore All 8 Florida Training Facilities</span>

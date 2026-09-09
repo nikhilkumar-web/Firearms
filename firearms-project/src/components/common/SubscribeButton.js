@@ -1,5 +1,5 @@
 export default function SubscribeButton({ 
-  text = "Subscribe Now", 
+  text = "SUBSCRIBE NOW", 
   className = "",
   style = {} 
 }) {
@@ -11,17 +11,17 @@ export default function SubscribeButton({
       style={{
         backgroundImage: 'linear-gradient(219deg, #EB0F06 0%, #E70C0C 67%)',
         border: '2px solid #A5AAAB',
-        padding: '12px 30px',
+        padding: '10px 15px',
         borderRadius: '3px',
         fontFamily: "'Roboto', sans-serif",
         ...style
       }}
-      className={`inline-flex flex-row-reverse items-center justify-center gap-2.5 text-white font-medium uppercase text-[14px] leading-none tracking-normal transition-all hover:brightness-110 shadow-lg whitespace-nowrap cursor-pointer ${className}`}
+      className={`inline-flex items-center justify-center gap-2 text-white font-medium uppercase text-[14px] leading-none tracking-wider transition-all hover:brightness-110 shadow-lg whitespace-nowrap cursor-pointer ${className}`}
     >
-      <svg aria-hidden="true" className="w-4 h-4 fill-current shrink-0" viewBox="0 0 576 512">
-        <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/>
-      </svg>
       <span>{text}</span>
+      <svg aria-hidden="true" className="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 448 512">
+        <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"/>
+      </svg>
     </a>
   );
 }

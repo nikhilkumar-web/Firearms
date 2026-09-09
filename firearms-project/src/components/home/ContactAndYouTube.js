@@ -47,7 +47,6 @@ export default function ContactAndYouTube() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate submission delay
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
@@ -221,7 +220,7 @@ export default function ContactAndYouTube() {
                     {isSubmitting ? 'Submitting...' : 'Submit'}
                   </button>
                   <div className="text-[12px] text-[#777777] mt-[15px] leading-[1.6] text-center">
-                    By clicking "Submit," I provide my electronic signature and authorize American Firearms Network to contact me at the phone number provided (including by call or text) for scheduling and to share information about training sessions. I acknowledge and agree to the{' '}
+                    By clicking &quot;Submit,&quot; I provide my electronic signature and authorize American Firearms Network to contact me at the phone number provided (including by call or text) for scheduling and to share information about training sessions. I acknowledge and agree to the{' '}
                     <Link href="/privacy-policy" className="text-[#000000] underline hover:opacity-80">
                       Privacy Policy
                     </Link>{' '}
@@ -262,7 +261,7 @@ export default function ContactAndYouTube() {
         >
           {/* Heading (Elementor 723300b) */}
           <h2 
-            className="text-[24px] sm:text-[28px] lg:text-[30px] font-semibold text-[#000000] text-center leading-[30px] sm:leading-[34px] lg:leading-[38px] mb-1"
+            className="text-[24px] sm:text-[28px] lg:text-[30px] font-semibold text-[#000000] text-center leading-[30px] sm:leading-[34px] lg:leading-[38px] mb-2"
             style={{ fontFamily: "'Gabarito', sans-serif" }}
           >
             Subscribe To Our Youtube Channel
@@ -291,12 +290,12 @@ export default function ContactAndYouTube() {
           </div>
 
           {/* Subscribe Button (Elementor 9409aa5) */}
-          <div className="pt-[10px] sm:pt-[20px] text-center">
+          <div className="pt-[15px] sm:pt-[20px] text-center">
             <a
               href="https://www.youtube.com/@AMERICANFIREARMSNETWORKS?sub_confirmation=1"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2.5 px-[20px] sm:px-[30px] lg:px-[40px] py-[10px] sm:py-[12px] text-[14px] leading-[18px] font-medium text-white uppercase tracking-wider rounded-[5px] transition-transform duration-200 hover:scale-[1.02]"
+              className="inline-flex items-center justify-center gap-2.5 px-[30px] lg:px-[40px] py-[12px] text-[15px] leading-[15px] font-medium text-white uppercase tracking-wider rounded-[3px] transition-transform duration-200 hover:scale-[1.02]"
               style={{
                 backgroundImage: 'linear-gradient(219deg, #EB0F06 0%, #E70C0C 67%)',
                 border: '2px solid #A5AAAB',

@@ -2,20 +2,23 @@ import Image from 'next/image';
 
 export default function InstructorsSection() {
   return (
-    <section className="bg-[#E6E6E6] text-[#000000] py-14 sm:py-20">
+    <section className="bg-[#E6E6E6] text-[#000000] py-[50px]">
       <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Exact Section Heading: Gabarito 42px line-height 50px font-weight 600 text-center #000000 */}
-        <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-semibold text-[#000000] tracking-normal font-gabarito mb-14 sm:mb-16 text-center leading-tight lg:leading-[50px]">
+        {/* Exact Section Heading: Gabarito 50px (mobile 28px/tablet 40px) line-height 60px font-weight 600 text-center #000000 */}
+        <h2 
+          className="text-[28px] sm:text-[40px] lg:text-[50px] font-semibold text-[#000000] tracking-normal mb-12 sm:mb-16 text-center leading-[36px] sm:leading-[48px] lg:leading-[60px]"
+          style={{ fontFamily: "'Gabarito', sans-serif" }}
+        >
           Meet The Instructors
         </h2>
 
-        {/* Instructor 1: Todd Grama */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center pb-16 border-b border-black/15">
+        {/* Instructor 1: Todd Grama (Elementor cf17f72) */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center pb-12 sm:pb-16 border-b border-black/15">
           
           {/* Todd Image */}
-          <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-[360px] h-[490px] rounded-xl overflow-hidden shadow-xl bg-[#D6DBDD]">
+          <div className="flex justify-center">
+            <div className="relative w-full max-w-[360px] h-[480px] rounded-xl overflow-hidden shadow-lg bg-[#D6DBDD]">
               <Image
                 src="/images/instructors/todd-grama.png"
                 alt="Todd Grama - Co-Founder & Lead Instructor"
@@ -27,12 +30,18 @@ export default function InstructorsSection() {
           </div>
 
           {/* Todd Bio & Credentials */}
-          <div className="lg:col-span-7 space-y-4 text-[16px] sm:text-[18px] leading-[24px] text-[#000000] text-justify font-roboto">
+          <div className="space-y-4 text-[16px] sm:text-[18px] leading-[24px] text-[#000000] text-justify font-roboto">
             <div className="text-left">
-              <h3 className="text-2xl sm:text-[34px] font-semibold text-[#000000] uppercase font-gabarito tracking-normal leading-[40px]">
+              <h3 
+                className="text-[28px] sm:text-[34px] font-semibold text-[#000000] uppercase tracking-normal leading-[34px] sm:leading-[40px]"
+                style={{ fontFamily: "'Gabarito', sans-serif" }}
+              >
                 TODD GRAMA
               </h3>
-              <p className="text-lg sm:text-[22px] font-semibold text-[#000000] font-gabarito leading-[28px] mt-1">
+              <p 
+                className="text-[20px] sm:text-[22px] font-semibold text-[#000000] leading-[28px] mt-1"
+                style={{ fontFamily: "'Gabarito', sans-serif" }}
+              >
                 Co-Founder &amp; Lead Instructor
               </p>
             </div>
@@ -50,37 +59,83 @@ export default function InstructorsSection() {
             </p>
 
             <div className="pt-2 text-left">
-              <h4 className="text-lg sm:text-[20px] font-semibold text-[#000000] uppercase font-gabarito mb-3 leading-[28px]">
+              <h4 
+                className="text-[18px] sm:text-[20px] font-semibold text-[#000000] leading-[28px] mb-2"
+                style={{ fontFamily: "'Gabarito', sans-serif" }}
+              >
                 Professional Credentials
               </h4>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5 list-disc pl-5 text-[15px] sm:text-[16px] font-medium leading-[22px] text-[#000000]">
-                <li>NRA Certified Firearms Instructor (Pistol)</li>
-                <li>Certified in Rifle</li>
-                <li>Certified in Shotgun</li>
-                <li>Certified in Inside the Home</li>
-                <li>Certified in Outside the Home</li>
-                <li>Range Master Certified Instructor</li>
-                <li>USCCA Firearms Instructor</li>
-                <li>USCCA Range Safety Officer</li>
-                <li>Code 4 Armed Church Security Certified</li>
-                <li>Licensed Florida Armed Security Officer</li>
-                <li>Instructor on the YouTube Channel &quot;The American Firearms Network&quot;</li>
-              </ul>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 text-[15px] sm:text-[16px] font-medium leading-[22px] text-[#000000]">
+                <ul className="space-y-1">
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 select-none">•</span>
+                    <span className="flex-1">NRA Certified Firearms Instructor (Pistol)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 select-none">•</span>
+                    <span className="flex-1">Certified in Rifle</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 select-none">•</span>
+                    <span className="flex-1">Certified in Shotgun</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 select-none">•</span>
+                    <span className="flex-1">Certified in Inside the Home</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 select-none">•</span>
+                    <span className="flex-1">Certified in Outside the Home</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 select-none">•</span>
+                    <span className="flex-1">Range Master Certified Instructor</span>
+                  </li>
+                </ul>
+                <ul className="space-y-1">
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 select-none">•</span>
+                    <span className="flex-1">USCCA Firearms Instructor</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 select-none">•</span>
+                    <span className="flex-1">USCCA Range Safety Officer</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 select-none">•</span>
+                    <span className="flex-1">Code 4 Armed Church Security Certified</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 select-none">•</span>
+                    <span className="flex-1">Licensed Florida Armed Security Officer</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 select-none">•</span>
+                    <span className="flex-1">Instructor on the YouTube Channel &quot;The American Firearms Network&quot;</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
 
         </div>
 
-        {/* Instructor 2: Paul Gayle */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center pt-16">
+        {/* Instructor 2: Paul Gayle (Elementor 4c8fe2a - reverse-tablet and reverse-mobile) */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center pt-12 sm:pt-16">
           
-          {/* Paul Bio & Credentials */}
-          <div className="lg:col-span-7 order-2 lg:order-1 space-y-4 text-[16px] sm:text-[18px] leading-[24px] text-[#000000] text-justify font-roboto">
+          {/* Paul Bio & Credentials (Order 2 on mobile, Order 1 on desktop) */}
+          <div className="order-2 lg:order-1 space-y-4 text-[16px] sm:text-[18px] leading-[24px] text-[#000000] text-justify font-roboto">
             <div className="text-left">
-              <h3 className="text-2xl sm:text-[34px] font-semibold text-[#000000] uppercase font-gabarito tracking-normal leading-[40px]">
+              <h3 
+                className="text-[28px] sm:text-[34px] font-semibold text-[#000000] uppercase tracking-normal leading-[34px] sm:leading-[40px]"
+                style={{ fontFamily: "'Gabarito', sans-serif" }}
+              >
                 PAUL GAYLE
               </h3>
-              <p className="text-lg sm:text-[22px] font-semibold text-[#000000] font-gabarito leading-[28px] mt-1">
+              <p 
+                className="text-[20px] sm:text-[22px] font-semibold text-[#000000] leading-[28px] mt-1"
+                style={{ fontFamily: "'Gabarito', sans-serif" }}
+              >
                 Co-Founder &amp; Lead Instructor
               </p>
             </div>
@@ -98,24 +153,52 @@ export default function InstructorsSection() {
             </p>
 
             <div className="pt-2 text-left">
-              <h4 className="text-lg sm:text-[20px] font-semibold text-[#000000] uppercase font-gabarito mb-3 leading-[28px]">
+              <h4 
+                className="text-[18px] sm:text-[20px] font-semibold text-[#000000] leading-[28px] mb-2"
+                style={{ fontFamily: "'Gabarito', sans-serif" }}
+              >
                 Professional Credentials
               </h4>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5 list-disc pl-5 text-[15px] sm:text-[16px] font-medium leading-[22px] text-[#000000]">
-                <li>Judo practitioner</li>
-                <li>USCCA Certified Firearms Instructor</li>
-                <li>NRA Certified Firearms Instructor</li>
-                <li>HTK Training Group Black Site Director</li>
-                <li>HTK Certified Range Safety Officer</li>
-                <li>Specialist in Weapons Retention &amp; Close-Quarters Engagement</li>
-                <li>Expert in Movement Under Fire</li>
-              </ul>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 text-[15px] sm:text-[16px] font-medium leading-[22px] text-[#000000]">
+                <ul className="space-y-1">
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 select-none">•</span>
+                    <span className="flex-1">Judo practitioner</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 select-none">•</span>
+                    <span className="flex-1">NRA Certified Firearms Instructor</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 select-none">•</span>
+                    <span className="flex-1">HTK Certified Range Safety Officer</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 select-none">•</span>
+                    <span className="flex-1">Expert in Movement Under Fire</span>
+                  </li>
+                </ul>
+                <ul className="space-y-1">
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 select-none">•</span>
+                    <span className="flex-1">USCCA Certified Firearms Instructor</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 select-none">•</span>
+                    <span className="flex-1">HTK Training Group Black Site Director</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 select-none">•</span>
+                    <span className="flex-1">Specialist in Weapons Retention &amp; Close-Quarters Engagement</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
 
-          {/* Paul Image */}
-          <div className="lg:col-span-5 order-1 lg:order-2 flex justify-center">
-            <div className="relative w-full max-w-[340px] h-[460px] rounded-xl overflow-hidden shadow-xl bg-[#D6DBDD]">
+          {/* Paul Image (Order 1 on mobile, Order 2 on desktop) */}
+          <div className="order-1 lg:order-2 flex justify-center">
+            <div className="relative w-full max-w-[340px] h-[460px] rounded-xl overflow-hidden shadow-lg bg-[#D6DBDD]">
               <Image
                 src="/images/instructors/paul-gayle.webp"
                 alt="Paul Gayle - Co-Founder & Lead Instructor"

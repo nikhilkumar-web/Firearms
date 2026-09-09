@@ -2,24 +2,33 @@ import Link from 'next/link';
 
 export default function AboutOverview() {
   return (
-    <section className="bg-[#D6DBDD] text-[#000000] py-12 sm:py-16">
+    <section className="bg-[#D6DBDD] text-[#000000] py-[50px]">
       <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Exact Section Heading: Gabarito 42px line-height 50px font-weight 600 text-center #000000 */}
-        <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-semibold text-[#000000] uppercase tracking-normal font-gabarito mb-10 sm:mb-14 text-center leading-tight lg:leading-[50px]">
+        {/* Exact Section Heading: Gabarito 50px (mobile 28px/tablet 40px) line-height 60px font-weight 600 text-center #000000 */}
+        <h2 
+          className="text-[28px] sm:text-[40px] lg:text-[50px] font-semibold text-[#000000] uppercase tracking-normal mb-10 sm:mb-14 text-center leading-[36px] sm:leading-[48px] lg:leading-[60px]"
+          style={{ fontFamily: "'Gabarito', sans-serif" }}
+        >
           ABOUT THE AMERICAN FIREARMS NETWORK
         </h2>
 
         {/* 2-Column Inner Layout matching Elementor data-id="9815577" */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           
-          {/* Left Column: YouTube Video Embed */}
+          {/* Left Column: YouTube Video Embed with Gold Border #BC8914 */}
           <div className="w-full">
-            <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-2xl bg-black border border-black/10">
+            <div 
+              className="relative w-full aspect-square overflow-hidden shadow-xl bg-black"
+              style={{
+                border: '2px solid #BC8914',
+                borderRadius: '2px'
+              }}
+            >
               <iframe
                 src="https://www.youtube.com/embed/J57IEQJu37c?autoplay=1&mute=1&loop=1&playlist=J57IEQJu37c&controls=1&rel=0&playsinline=1"
                 title="About The American Firearms Network"
-                className="absolute inset-0 w-full h-full"
+                className="absolute inset-0 w-full h-full border-0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
               ></iframe>
@@ -28,7 +37,10 @@ export default function AboutOverview() {
 
           {/* Right Column: Text Content and Action Buttons */}
           <div className="space-y-4 text-[16px] sm:text-[18px] leading-[24px] text-[#000000] text-justify font-roboto">
-            <h3 className="text-xl sm:text-[22px] font-bold text-[#000000] uppercase font-gabarito tracking-wide text-left">
+            <h3 
+              className="text-[20px] sm:text-[22px] font-bold text-[#000000] uppercase tracking-wide text-left"
+              style={{ fontFamily: "'Gabarito', sans-serif" }}
+            >
               YOUR ELITE PARTNER IN DEFENSIVE MASTERY
             </h3>
 
@@ -78,9 +90,10 @@ export default function AboutOverview() {
                   backgroundImage: 'linear-gradient(219deg, #EB0F06 0%, #E70C0C 67%)',
                   border: '2px solid #A5AAAB',
                   padding: '12px 40px',
-                  borderRadius: '3px'
+                  borderRadius: '3px',
+                  fontFamily: "'Roboto', sans-serif"
                 }}
-                className="inline-flex items-center gap-3 text-white font-medium uppercase text-[15px] leading-[15px] tracking-normal transition-all hover:brightness-110 hover:scale-105 shadow-md shrink-0 font-roboto h-[41px]"
+                className="inline-flex items-center gap-3 text-white font-medium uppercase text-[15px] leading-[15px] tracking-normal transition-all hover:brightness-110 hover:scale-105 shadow-md shrink-0 h-[41px]"
               >
                 <svg aria-hidden="true" className="w-[18px] h-[18px] fill-current" viewBox="0 0 576 512">
                   <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path>
@@ -94,9 +107,10 @@ export default function AboutOverview() {
                   backgroundImage: 'linear-gradient(219deg, #B1800F 0%, #000000 67%)',
                   border: '1px solid #A5AAAB',
                   padding: '12px 40px',
-                  borderRadius: '3px'
+                  borderRadius: '3px',
+                  fontFamily: "'Roboto', sans-serif"
                 }}
-                className="inline-flex items-center justify-center text-white font-medium uppercase text-[15px] leading-[15px] tracking-normal transition-all hover:brightness-125 hover:scale-105 shadow-md shrink-0 font-roboto h-[41px]"
+                className="inline-flex items-center justify-center text-white font-medium uppercase text-[15px] leading-[15px] tracking-normal transition-all hover:brightness-125 hover:scale-105 shadow-md shrink-0 h-[41px]"
               >
                 READ MORE
               </Link>
