@@ -1,27 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { X, Check, Loader2 } from 'lucide-react';
-
-const US_STATES = [
-  'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut',
-  'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana',
-  'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts',
-  'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada',
-  'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-  'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina',
-  'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
-  'West Virginia', 'Wisconsin', 'Wyoming'
-];
-
-const FLORIDA_CITIES = [
-  'West Palm Beach', 'Miami', 'Fort Lauderdale', 'Boca Raton', 'Palm Beach Gardens',
-  'Jupiter', 'Boynton Beach', 'Delray Beach', 'Wellington', 'Coral Springs',
-  'Pompano Beach', 'Hollywood', 'Orlando', 'Tampa', 'Jacksonville', 'Other City'
-];
+import { US_STATES, getCitiesForState } from '@/data/locations';
+import Recaptcha from '@/components/common/Recaptcha';
 
 export default function ContactPopupModal({ isOpen, onClose }) {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -32,8 +19,13 @@ export default function ContactPopupModal({ isOpen, onClose }) {
     remarks: ''
   });
 
+  const availableCities = getCitiesForState(formData.state);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [recaptchaToken, setRecaptchaToken] = useState('');
+  const handleRecaptchaChange = useCallback((token) => setRecaptchaToken(token), []);
 
   // Close on Escape key press
   useEffect(() => {
@@ -58,19 +50,71 @@ export default function ContactPopupModal({ isOpen, onClose }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value
-    }));
+    if (name === 'state') {
+      setFormData((prev) => ({
+        ...prev,
+        state: value,
+        city: '',
+      }));
+    } else if (name === 'phone') {
+      const cleaned = value.replace(/[^\d\s\-\(\)\+]/g, '').slice(0, 16);
+      setFormData((prev) => ({
+        ...prev,
+        phone: cleaned,
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
+    setSubmitError('');
+
+    const nameTrimmed = formData.name.trim();
+    if (nameTrimmed.length < 2) {
+      setIsSubmitting(false);
+      setSubmitError('Please enter your name.');
+      return;
+    }
+
+    const phoneDigits = formData.phone.replace(/\D/g, '');
+    if (phoneDigits.length < 10) {
+      setIsSubmitting(false);
+      setSubmitError('Please enter a valid 10-digit phone number.');
+      return;
+    }
+
+    if (!recaptchaToken) {
+      setIsSubmitting(false);
+      setSubmitError('Please complete the reCAPTCHA challenge.');
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, recaptchaToken, source: 'contact-popup' }),
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Unable to submit your request.');
+      }
+
       setIsSubmitting(false);
       setSubmitted(true);
-    }, 600);
+      if (onClose) onClose();
+      router.push('/thank-you');
+    } catch (error) {
+      setIsSubmitting(false);
+      setSubmitError(error.message || 'Unable to submit your request.');
+    }
   };
 
   return (
@@ -174,9 +218,10 @@ export default function ContactPopupModal({ isOpen, onClose }) {
                   type="tel"
                   name="phone"
                   required
+                  inputMode="numeric"
                   value={formData.phone}
                   onChange={handleChange}
-                  placeholder="Phone Number"
+                  placeholder="Phone Number (10 digits)"
                   className="w-full h-[52px] px-[14px] border border-[#d1d1d1] rounded-[5px] bg-[#fcfcfc] text-[16px] text-black placeholder:text-[#777777] focus:outline-none focus:border-black focus:bg-white transition-all shadow-none"
                 />
               </div>
@@ -235,8 +280,8 @@ export default function ContactPopupModal({ isOpen, onClose }) {
                   onChange={handleChange}
                   className="w-full h-[52px] px-[14px] border border-[#d1d1d1] rounded-[5px] bg-[#fcfcfc] text-[16px] text-black focus:outline-none focus:border-black focus:bg-white transition-all shadow-none cursor-pointer"
                 >
-                  <option value="">Select City</option>
-                  {FLORIDA_CITIES.map((ct) => (
+                  <option value="">{formData.state ? 'Select City' : 'Select state first'}</option>
+                  {availableCities.map((ct) => (
                     <option key={ct} value={ct}>
                       {ct}
                     </option>
@@ -257,12 +302,14 @@ export default function ContactPopupModal({ isOpen, onClose }) {
               />
             </div>
 
-            {/* Row 5: Submit Button (Directly after Remarks - NO reCAPTCHA) */}
+            <Recaptcha onChange={handleRecaptchaChange} />
+
+            {/* Row 5: Submit Button */}
             <div className="pt-2 sm:pt-3">
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full h-[54px] bg-[#000000] text-white font-bold text-[18px] uppercase tracking-wider rounded-[5px] hover:bg-[#222222] transition-colors cursor-pointer flex items-center justify-center shadow-md disabled:opacity-75"
+              className="w-full h-[54px] bg-[#000000] text-white font-bold text-[18px] uppercase tracking-wider rounded-[5px] hover:bg-blue-600 disabled:hover:bg-[#000000] transition-colors cursor-pointer disabled:cursor-wait flex items-center justify-center shadow-md disabled:opacity-75"
               >
                 {isSubmitting ? (
                   <span className="flex items-center gap-2">
@@ -274,6 +321,12 @@ export default function ContactPopupModal({ isOpen, onClose }) {
                 )}
               </button>
             </div>
+
+            {submitError && (
+              <p role="alert" className="text-sm text-red-600 text-center">
+                {submitError}
+              </p>
+            )}
 
             {/* Row 6: Consent Disclaimer */}
             <div className="consent-text text-[11.5px] sm:text-[12px] text-[#777777] mt-[14px] leading-[1.6] text-center">

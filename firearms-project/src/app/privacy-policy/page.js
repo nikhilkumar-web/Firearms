@@ -13,7 +13,7 @@ export default function PrivacyPolicyPage() {
       <section 
         className="relative w-full py-[50px] sm:py-[70px] overflow-hidden"
         style={{
-          backgroundImage: 'url(/images/about/outdoor-range-group.webp)',
+          backgroundImage: 'url(https://american-firearms.s3-eu-central-2.ionoscloud.com/images/about/outdoor-range-group.webp)',
           backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover'

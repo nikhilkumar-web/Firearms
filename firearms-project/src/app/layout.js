@@ -2,6 +2,8 @@ import { Gabarito, Roboto, Calistoga } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import YouTubeSubscribeModal from "@/components/common/YouTubeSubscribeModal";
+import CookieConsentBanner from "@/components/common/CookieConsentBanner";
 
 const gabarito = Gabarito({
   subsets: ["latin"],
@@ -29,9 +31,9 @@ export const metadata = {
   title: "American Firearms Network | Firearms Training Florida",
   description: "Professional firearms training in Florida focused on safety, skill development, legal education, and real-world defensive proficiency.",
   icons: {
-    icon: "/images/logo/favicon.png",
-    shortcut: "/images/logo/favicon.png",
-    apple: "/images/logo/favicon.png",
+    icon: "https://american-firearms.s3-eu-central-2.ionoscloud.com/images/logo/favicon.png",
+    shortcut: "https://american-firearms.s3-eu-central-2.ionoscloud.com/images/logo/favicon.png",
+    apple: "https://american-firearms.s3-eu-central-2.ionoscloud.com/images/logo/favicon.png",
   },
 };
 
@@ -47,6 +49,8 @@ export default function RootLayout({ children }) {
         <Navbar />
         {children}
         <Footer />
+        <YouTubeSubscribeModal />
+        <CookieConsentBanner />
       </body>
     </html>
   );

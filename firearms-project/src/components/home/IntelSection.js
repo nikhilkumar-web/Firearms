@@ -5,7 +5,7 @@ export default function IntelSection() {
       <div 
         className="w-full relative rounded-[20px] overflow-hidden shadow-2xl -mb-20 sm:-mb-24 lg:-mb-[115px]"
         style={{
-          backgroundImage: 'url(/images/about/range-service.webp)',
+          backgroundImage: 'url(https://american-firearms.s3-eu-central-2.ionoscloud.com/images/about/range-service.webp)',
           backgroundPosition: 'center center',
           backgroundSize: 'cover',
           borderRadius: '20px'

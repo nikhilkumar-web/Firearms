@@ -6,7 +6,7 @@ export default function SkillBanner() {
       className="relative py-[80px] sm:py-[100px] text-white overflow-hidden text-center"
       style={{
         backgroundColor: '#CBCBCB',
-        backgroundImage: "url('/images/home/media_12-f1510ca5-800h.webp')",
+        backgroundImage: "url('https://american-firearms.s3-eu-central-2.ionoscloud.com/images/about/outdoor-range-group.webp')",
         backgroundPosition: 'center center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover'
@@ -30,7 +30,7 @@ export default function SkillBanner() {
 
         {/* Sub-paragraph: 18px line-height 24px #F0F0F0 text-center */}
         <p 
-          className="text-[15px] sm:text-[18px] text-[#F0F0F0] max-w-4xl mx-auto leading-[22px] sm:leading-[24px] font-normal"
+          className="text-[15px] sm:text-[18px] text-[#F0F0F0] max-w-[1100px] mx-auto leading-[22px] sm:leading-[24px] font-normal"
           style={{ fontFamily: "'Roboto', sans-serif" }}
         >
           Owning a firearm is only the first step; mastering it is your responsibility. At the <strong className="font-bold text-white">American Firearms Network</strong>, we strip away the “range day” fluff and focus on mission-critical proficiency. Whether you are a first-time owner or a seasoned enthusiast, our professional instruction—led by <strong className="font-bold text-white">Todd Grama</strong>—is designed to build the confidence and speed required to protect what matters most.
@@ -40,16 +40,9 @@ export default function SkillBanner() {
         <div className="pt-6">
           <Link
             href="/contact-us?popup=true"
-            style={{
-              backgroundImage: 'linear-gradient(219deg, #B1800F 0%, #000000 67%)',
-              border: '2px solid #A5AAAB',
-              padding: '12px 40px',
-              borderRadius: '3px',
-              fontFamily: "'Roboto', sans-serif"
-            }}
-            className="inline-block text-white font-medium uppercase text-[15px] leading-[15px] tracking-normal transition-all hover:brightness-125 hover:scale-105 shadow-xl"
+            className="btn-tactical-gold text-white font-medium uppercase text-[15px] leading-[15px] tracking-normal font-roboto px-10 py-3.5 rounded-[3px] shadow-xl"
           >
-            START YOUR TRAINING
+            <span>START YOUR TRAINING</span>
           </Link>
         </div>
       </div>

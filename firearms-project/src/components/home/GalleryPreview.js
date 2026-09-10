@@ -38,11 +38,16 @@ export default function GalleryPreview() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [lightboxIndex, showPrev, showNext]);
 
-  // Distribute into 4 balanced columns for perfect masonry layout
-  const colCount = 4;
-  const columns = Array.from({ length: colCount }, () => []);
+  // Distribute into 4 balanced columns for Desktop (lg >= 1024px)
+  const columnsDesktop = Array.from({ length: 4 }, () => []);
   galleryImages.forEach((item, index) => {
-    columns[index % colCount].push({ item, index });
+    columnsDesktop[index % 4].push({ item, index });
+  });
+
+  // Distribute into 2 balanced columns for Tablet (sm: 640px to 1023px)
+  const columnsTablet = Array.from({ length: 2 }, () => []);
+  galleryImages.forEach((item, index) => {
+    columnsTablet[index % 2].push({ item, index });
   });
 
   return (
@@ -51,23 +56,22 @@ export default function GalleryPreview() {
         
         {/* Exact Section Heading: Gabarito 50px desktop / 42px tablet / 28px mobile, 600 weight, uppercase, centered */}
         <h2 
-          className="text-[28px] sm:text-[42px] lg:text-[50px] font-semibold uppercase text-[#000000] leading-[34px] sm:leading-[50px] lg:leading-[60px] text-center mb-8 sm:mb-10"
+          className="text-[26px] sm:text-[38px] lg:text-[50px] font-semibold uppercase text-[#000000] leading-[32px] sm:leading-[46px] lg:leading-[60px] text-center mb-6 sm:mb-10"
           style={{ fontFamily: "'Gabarito', sans-serif" }}
         >
           OUR GALLERY
         </h2>
 
-        {/* 4-column Masonry Layout with clean column stacks matching Gallery page */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 items-start">
-          {columns.map((col, colIdx) => (
-            <div key={colIdx} className="flex flex-col gap-4 sm:gap-5">
+        {/* 1. Desktop: 4-column Masonry Layout */}
+        <div className="hidden lg:grid grid-cols-4 gap-5 items-start">
+          {columnsDesktop.map((col, colIdx) => (
+            <div key={colIdx} className="flex flex-col gap-5">
               {col.map(({ item, index }) => (
                 <div
                   key={item.id}
                   onClick={() => openLightbox(index)}
                   className="relative overflow-hidden rounded-[4px] cursor-pointer group shadow-sm hover:shadow-md transition-shadow bg-gray-200"
                 >
-                  {/* Image with elementor-animation-grow hover scale */}
                   <div className="relative w-full overflow-hidden">
                     <Image
                       src={item.src}
@@ -75,12 +79,10 @@ export default function GalleryPreview() {
                       width={item.width || 800}
                       height={item.height || 600}
                       className="w-full h-auto object-cover transform transition-transform duration-300 group-hover:scale-105"
-                      sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      sizes="25vw"
                       loading="lazy"
                     />
                   </div>
-
-                  {/* Subtle Hover Overlay with Zoom Icon */}
                   <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
                     <div className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center text-white">
                       <ZoomIn className="w-5 h-5 text-white" />
@@ -92,20 +94,73 @@ export default function GalleryPreview() {
           ))}
         </div>
 
+        {/* 2. Tablet: 2-column Balanced Masonry Layout */}
+        <div className="hidden sm:grid lg:hidden grid-cols-2 gap-4 sm:gap-5 items-start">
+          {columnsTablet.map((col, colIdx) => (
+            <div key={colIdx} className="flex flex-col gap-4 sm:gap-5">
+              {col.map(({ item, index }) => (
+                <div
+                  key={item.id}
+                  onClick={() => openLightbox(index)}
+                  className="relative overflow-hidden rounded-[4px] cursor-pointer group shadow-sm hover:shadow-md transition-shadow bg-gray-200"
+                >
+                  <div className="relative w-full overflow-hidden">
+                    <Image
+                      src={item.src}
+                      alt={item.alt || `AFN Gallery Image ${item.id}`}
+                      width={item.width || 800}
+                      height={item.height || 600}
+                      className="w-full h-auto object-cover transform transition-transform duration-300 group-hover:scale-105"
+                      sizes="50vw"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+                    <div className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center text-white">
+                      <ZoomIn className="w-5 h-5 text-white" />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        {/* 3. Mobile: 1-column Clean Layout */}
+        <div className="grid sm:hidden grid-cols-1 gap-4 items-start max-w-[460px] mx-auto">
+          {galleryImages.map((item, index) => (
+            <div
+              key={item.id}
+              onClick={() => openLightbox(index)}
+              className="relative overflow-hidden rounded-[4px] cursor-pointer group shadow-sm hover:shadow-md transition-shadow bg-gray-200"
+            >
+              <div className="relative w-full overflow-hidden">
+                <Image
+                  src={item.src}
+                  alt={item.alt || `AFN Gallery Image ${item.id}`}
+                  width={item.width || 800}
+                  height={item.height || 600}
+                  className="w-full h-auto object-cover transform transition-transform duration-300 group-hover:scale-105"
+                  sizes="100vw"
+                  loading="lazy"
+                />
+              </div>
+              <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+                <div className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center text-white">
+                  <ZoomIn className="w-5 h-5 text-white" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
         {/* View More Button matching Elementor .elementor-button db40f1d */}
         <div className="mt-10 sm:mt-12 text-center">
           <Link
             href="/gallery"
-            style={{
-              backgroundImage: 'linear-gradient(219deg, #B1800F 0%, #000000 67%)',
-              border: '1px solid #A5AAAB',
-              padding: '12px 40px',
-              borderRadius: '3px',
-              fontFamily: "'Roboto', sans-serif"
-            }}
-            className="inline-flex items-center justify-center text-white font-medium uppercase text-[14px] leading-[18px] tracking-normal transition-all hover:scale-105 hover:brightness-110 shadow-md rounded-[3px]"
+            className="btn-tactical-gold text-white font-medium uppercase text-[14px] leading-[18px] tracking-normal font-roboto px-10 py-3 rounded-[3px] shadow-md"
           >
-            View More
+            <span>View More</span>
           </Link>
         </div>
 

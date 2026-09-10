@@ -63,6 +63,158 @@
   box-shadow: 0 0 25px -5px rgba(217, 155, 38, 0.35);
 }
 
+/* ============================================================
+   AFN Interactive Tactical Button Animations (Live Site Match)
+   ============================================================ */
+.btn-gold,
+.btn-tactical-gold {
+  position: relative;
+  background-image: linear-gradient(219deg, #B1800F 0%, #000000 67%) !important;
+  border: 1px solid #B1800F !important;
+  color: #ffffff !important;
+  overflow: hidden !important;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-gold::before,
+.btn-tactical-gold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(244deg, #000000 14%, #BC8914 100%) !important;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.btn-gold::after,
+.btn-tactical-gold::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: skewX(-25deg);
+  transition: left 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.btn-gold > *,
+.btn-tactical-gold > *,
+.btn-gold span,
+.btn-tactical-gold span {
+  position: relative;
+  z-index: 3;
+}
+
+.btn-gold:hover,
+.btn-tactical-gold:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  border-color: #FDD247 !important;
+  box-shadow: 0 6px 22px rgba(188, 137, 20, 0.5), 0 0 12px rgba(253, 210, 71, 0.35) !important;
+}
+
+.btn-gold:hover::before,
+.btn-tactical-gold:hover::before {
+  opacity: 1;
+}
+
+.btn-gold:hover::after,
+.btn-tactical-gold:hover::after {
+  left: 150%;
+}
+
+.btn-gold:active,
+.btn-tactical-gold:active {
+  transform: translateY(1px) scale(0.97) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+  transition-duration: 0.1s !important;
+}
+
+/* Red / YouTube Action Buttons */
+.btn-red,
+.btn-tactical-red {
+  position: relative;
+  background-image: linear-gradient(219deg, #EB0F06 0%, #E70C0C 67%) !important;
+  border: 1px solid #EB0F06 !important;
+  color: #ffffff !important;
+  overflow: hidden !important;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  box-shadow: 0 4px 12px rgba(235, 15, 6, 0.3) !important;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-red::before,
+.btn-tactical-red::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(244deg, #990A04 0%, #FF2B20 100%) !important;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.btn-red::after,
+.btn-tactical-red::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-25deg);
+  transition: left 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.btn-red > *,
+.btn-tactical-red > *,
+.btn-red span,
+.btn-tactical-red span {
+  position: relative;
+  z-index: 3;
+}
+
+.btn-red:hover,
+.btn-tactical-red:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  border-color: #FF6B64 !important;
+  box-shadow: 0 6px 22px rgba(235, 15, 6, 0.55), 0 0 14px rgba(255, 43, 32, 0.4) !important;
+}
+
+.btn-red:hover::before,
+.btn-tactical-red:hover::before {
+  opacity: 1;
+}
+
+.btn-red:hover::after,
+.btn-tactical-red:hover::after {
+  left: 150%;
+}
+
+.btn-red:active,
+.btn-tactical-red:active {
+  transform: translateY(1px) scale(0.97) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;
+  transition-duration: 0.1s !important;
+}
+
 .gold-gradient-text {
   background: linear-gradient(135deg, #f5b942 0%, #d99b26 50%, #b87b14 100%);
   -webkit-background-clip: text;

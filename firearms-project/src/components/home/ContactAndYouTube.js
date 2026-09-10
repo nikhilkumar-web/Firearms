@@ -1,19 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { MapPin, CheckCircle } from 'lucide-react';
+import Recaptcha from '@/components/common/Recaptcha';
 
-const US_STATES = [
-  'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut',
-  'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana',
-  'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts',
-  'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada',
-  'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-  'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina',
-  'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
-  'West Virginia', 'Wisconsin', 'Wyoming'
-];
+import { US_STATES, getCitiesForState } from '@/data/locations';
 
 const RIGHT_VIDEOS = [
   'ctpQE_j8vyg',
@@ -23,6 +16,7 @@ const RIGHT_VIDEOS = [
 ];
 
 export default function ContactAndYouTube() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -35,26 +29,82 @@ export default function ContactAndYouTube() {
 
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [recaptchaToken, setRecaptchaToken] = useState('');
+  const handleRecaptchaChange = useCallback((token) => setRecaptchaToken(token), []);
+
+  const availableCities = getCitiesForState(formData.state);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value
-    }));
+    if (name === 'state') {
+      setFormData((prev) => ({
+        ...prev,
+        state: value,
+        cityLocation: '',
+      }));
+    } else if (name === 'phone') {
+      const cleaned = value.replace(/[^\d\s\-\(\)\+]/g, '').slice(0, 16);
+      setFormData((prev) => ({
+        ...prev,
+        phone: cleaned,
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
+    setSubmitError('');
+
+    const nameTrimmed = formData.name.trim();
+    if (nameTrimmed.length < 2) {
+      setIsSubmitting(false);
+      setSubmitError('Please enter your name.');
+      return;
+    }
+
+    const phoneDigits = formData.phone.replace(/\D/g, '');
+    if (phoneDigits.length < 10) {
+      setIsSubmitting(false);
+      setSubmitError('Please enter a valid 10-digit phone number.');
+      return;
+    }
+
+    if (!recaptchaToken) {
+      setIsSubmitting(false);
+      setSubmitError('Please complete the reCAPTCHA challenge.');
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, recaptchaToken, source: 'home-page' }),
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Unable to submit your request.');
+      }
+
       setIsSubmitting(false);
       setSubmitted(true);
-    }, 600);
+      router.push('/thank-you');
+    } catch (error) {
+      setIsSubmitting(false);
+      setSubmitError(error.message || 'Unable to submit your request.');
+    }
   };
 
   return (
-    <section className="bg-[#FFFFFF] text-[#000000] py-[30px] sm:py-[50px] px-3 sm:px-6 lg:px-8 font-roboto">
+    <section className="bg-[#FFFFFF] text-[#000000] pt-[30px] sm:pt-[50px] pb-[50px] px-3 sm:px-6 lg:px-8 font-roboto">
       <div className="max-w-[1300px] mx-auto flex flex-col lg:flex-row gap-[20px] items-start">
         
         {/* LEFT COLUMN: Icon Box + Contact Form + Map (Elementor 3d9bad7 - 64.153%) */}
@@ -132,9 +182,10 @@ export default function ContactAndYouTube() {
                       type="tel"
                       name="phone"
                       required
+                      inputMode="numeric"
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="Phone Number"
+                      placeholder="Phone Number (10 digits)"
                       className="w-full h-[50px] px-[14px] border border-[#d1d1d1] rounded-[5px] bg-[#fcfcfc] text-[16px] text-black placeholder:text-black placeholder:text-[14px] focus:outline-none focus:border-black focus:bg-white transition-all shadow-none"
                     />
                   </div>
@@ -187,14 +238,19 @@ export default function ContactAndYouTube() {
                     </select>
                   </div>
                   <div>
-                    <input
-                      type="text"
+                    <select
                       name="cityLocation"
                       value={formData.cityLocation}
                       onChange={handleChange}
-                      placeholder={formData.state ? "City / Location" : "Select state first"}
-                      className="w-full h-[50px] px-[14px] border border-[#d1d1d1] rounded-[5px] bg-[#fcfcfc] text-[16px] text-black placeholder:text-black placeholder:text-[14px] focus:outline-none focus:border-black focus:bg-white transition-all shadow-none"
-                    />
+                      className="w-full h-[50px] px-[14px] border border-[#d1d1d1] rounded-[5px] bg-[#fcfcfc] text-[15px] sm:text-[16px] text-black focus:outline-none focus:border-black focus:bg-white transition-all shadow-none cursor-pointer"
+                    >
+                      <option value="">{formData.state ? 'Select City' : 'Select state first'}</option>
+                      {availableCities.map((ct) => (
+                        <option key={ct} value={ct}>
+                          {ct}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
 
@@ -212,13 +268,19 @@ export default function ContactAndYouTube() {
 
                 {/* Row 5: Submit Area */}
                 <div className="pt-1">
+                  <Recaptcha onChange={handleRecaptchaChange} />
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-[16px] bg-[#000000] text-[#FFFFFF] font-bold text-[18px] uppercase tracking-wider rounded-[5px] hover:bg-[#333333] transition-colors cursor-pointer flex items-center justify-center"
+                    className="w-full py-[16px] bg-[#000000] text-[#FFFFFF] font-bold text-[18px] uppercase tracking-wider rounded-[5px] hover:bg-blue-600 disabled:hover:bg-[#000000] transition-colors cursor-pointer disabled:cursor-wait flex items-center justify-center shadow-md disabled:opacity-75"
                   >
                     {isSubmitting ? 'Submitting...' : 'Submit'}
                   </button>
+                  {submitError && (
+                    <p role="alert" className="mt-3 text-center text-sm font-medium text-red-600">
+                      {submitError}
+                    </p>
+                  )}
                   <div className="text-[12px] text-[#777777] mt-[15px] leading-[1.6] text-center">
                     By clicking &quot;Submit,&quot; I provide my electronic signature and authorize American Firearms Network to contact me at the phone number provided (including by call or text) for scheduling and to share information about training sessions. I acknowledge and agree to the{' '}
                     <Link href="/privacy-policy" className="text-[#000000] underline hover:opacity-80">
@@ -278,10 +340,11 @@ export default function ContactAndYouTube() {
                 }}
               >
                 <iframe
-                  src={`https://www.youtube.com/embed/${id}`}
+                  src={`https://www.youtube-nocookie.com/embed/${id}?rel=0`}
                   title={`YouTube video ${index + 1}`}
                   className="w-full h-full border-0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
                   loading="lazy"
                 />

@@ -12,7 +12,7 @@ export default function RangePageContent({ range }) {
       <section 
         className="relative py-[50px] md:py-[100px] overflow-hidden bg-cover bg-center"
         style={{
-          backgroundImage: "url('/images/services/service-hero-bg.jpg')",
+          backgroundImage: "url('https://american-firearms.s3-eu-central-2.ionoscloud.com/images/about/page-header-bg.jpg')",
           backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover'
@@ -112,10 +112,11 @@ export default function RangePageContent({ range }) {
                 }}
               >
                 <iframe
-                  src={`https://www.youtube.com/embed/${id}?controls=1&rel=0`}
+                  src={`https://www.youtube-nocookie.com/embed/${id}?controls=1&rel=0`}
                   title={`YouTube video ${idx + 1}`}
                   className="w-full h-full border-0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
                   loading="lazy"
                 />

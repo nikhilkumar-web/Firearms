@@ -17,7 +17,7 @@ export default function AboutOverview() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           
           {/* Left Column: YouTube Video Embed with Gold Border #BC8914 */}
-          <div className="w-full">
+          <div className="w-full lg:-translate-y-[45px]">
             <div 
               className="relative w-full aspect-square overflow-hidden shadow-xl bg-black"
               style={{
@@ -68,16 +68,7 @@ export default function AboutOverview() {
 
             <p>
               <strong className="text-[#000000] font-bold block mb-1 text-left">Digital Intelligence: The AFN YouTube Experience</strong>
-              Our mission extends beyond the firing line. We leverage a high-performance YouTube Network to deliver tactical insights, gear reviews, and training “deep-dives” straight to your screen. We aren’t a passive media channel—we are an active institution using every digital tool to build a more capable, confident, and legally-informed citizenry.
-            </p>
-
-            <p>
-              <strong className="text-[#000000] font-bold block mb-1 text-left">Forging the Adaptive Mindset</strong>
-              At AFN, you don’t just “train”—you evolve. Join a network dedicated to the practical application of defensive skills and situational awareness.
-            </p>
-
-            <p className="font-bold text-[#000000] italic text-[18px] pt-1 text-left">
-              “Standard range days only reveal where you are; AFN takes you where you need to be.”
+              Our mission extends beyond the firing line. We leverage a high-performance YouTube Network to deliver tactical insights, gear reviews, and training “deep-dives” straight to your screen. We aren’t a passive media channel—we are an active institution using every digital tool to build a more capable, confident, and legally-informed citizenry. Forging the Adaptive Mindset: At AFN, you don’t just “train”—you evolve. Join a network dedicated to the practical application of defensive skills and situational awareness. <span className="font-bold italic">“Standard range days only reveal where you are; AFN takes you where you need to be.”</span>
             </p>
 
             {/* Action Buttons matching Elementor .elementor-button padding 12px 40px */}
@@ -86,33 +77,19 @@ export default function AboutOverview() {
                 href="https://www.youtube.com/@AMERICANFIREARMSNETWORKS?sub_confirmation=1"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{
-                  backgroundImage: 'linear-gradient(219deg, #EB0F06 0%, #E70C0C 67%)',
-                  border: '2px solid #A5AAAB',
-                  padding: '12px 40px',
-                  borderRadius: '3px',
-                  fontFamily: "'Roboto', sans-serif"
-                }}
-                className="inline-flex items-center gap-3 text-white font-medium uppercase text-[15px] leading-[15px] tracking-normal transition-all hover:brightness-110 hover:scale-105 shadow-md shrink-0 h-[41px]"
+                className="btn-tactical-red gap-3 text-white font-medium uppercase text-[15px] leading-[15px] tracking-normal font-roboto px-8 py-3 rounded-[3px] h-[41px] shrink-0"
               >
                 <svg aria-hidden="true" className="w-[18px] h-[18px] fill-current" viewBox="0 0 576 512">
                   <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path>
                 </svg>
-                SUBSCRIBE NOW
+                <span>SUBSCRIBE NOW</span>
               </a>
 
               <Link
                 href="/about-us"
-                style={{
-                  backgroundImage: 'linear-gradient(219deg, #B1800F 0%, #000000 67%)',
-                  border: '1px solid #A5AAAB',
-                  padding: '12px 40px',
-                  borderRadius: '3px',
-                  fontFamily: "'Roboto', sans-serif"
-                }}
-                className="inline-flex items-center justify-center text-white font-medium uppercase text-[15px] leading-[15px] tracking-normal transition-all hover:brightness-125 hover:scale-105 shadow-md shrink-0 h-[41px]"
+                className="btn-tactical-gold text-white font-medium uppercase text-[15px] leading-[15px] tracking-normal font-roboto px-8 py-3 rounded-[3px] h-[41px] shrink-0"
               >
-                READ MORE
+                <span>READ MORE</span>
               </Link>
             </div>
 

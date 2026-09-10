@@ -4,6 +4,20 @@ import { Crosshair, Star, ShieldCheck, Scale } from 'lucide-react';
 
 const pillarIcons = [Crosshair, Star, ShieldCheck, Scale];
 
+function formatBulletWithBold(text) {
+  if (!text || typeof text !== 'string') return text;
+  if (text.includes('<b') || text.includes('<strong')) {
+    return text;
+  }
+  const colonIdx = text.indexOf(':');
+  if (colonIdx > 0 && colonIdx <= 65) {
+    const prefix = text.slice(0, colonIdx + 1);
+    const rest = text.slice(colonIdx + 1);
+    return `<b class="font-bold text-[#000000]">${prefix}</b>${rest}`;
+  }
+  return text;
+}
+
 export default function CoursePageContent({ course }) {
   if (!course) return null;
 
@@ -14,20 +28,20 @@ export default function CoursePageContent({ course }) {
       
       {/* 1. HERO HEADER SECTION (Elementor 7d5bb4f) */}
       <section 
-        className="relative py-[70px] sm:py-[90px] lg:py-[100px] overflow-hidden bg-cover bg-center"
+        className="relative py-[50px] sm:py-[65px] lg:py-[80px] overflow-hidden bg-cover bg-center"
         style={{
-          backgroundImage: "url('/images/services/service-hero-bg.jpg')",
+          backgroundImage: "url('https://american-firearms.s3-eu-central-2.ionoscloud.com/images/about/page-header-bg.jpg')",
           backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover'
         }}
       >
-        {/* Dark Background Overlay (0.78 opacity) */}
-        <div className="absolute inset-0 bg-[#000000]" style={{ opacity: 0.78 }} />
+        {/* Dark Background Overlay (0.78 opacity matching Elementor) */}
+        <div className="absolute inset-0 bg-[#000000]" style={{ backgroundColor: '#000000', opacity: 0.78 }} />
 
         <div className="relative z-10 max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 
-            className="text-[24px] sm:text-[36px] lg:text-[45px] font-bold text-white uppercase tracking-wider font-gabarito leading-tight sm:leading-snug break-words"
+            className="text-[28px] sm:text-[38px] lg:text-[50px] font-semibold text-white font-gabarito leading-[34px] sm:leading-[46px] lg:leading-[60px]"
             style={{ fontFamily: "'Gabarito', sans-serif" }}
           >
             {course.title}
@@ -36,10 +50,10 @@ export default function CoursePageContent({ course }) {
       </section>
 
       {/* 2. SUBSCRIBE TO OUR YOUTUBE CHANNEL (Elementor af566e9) */}
-      <section className="py-[40px] sm:py-[50px] bg-[#FFFFFF] border-b border-black/5">
+      <section className="py-[36px] sm:py-[45px] bg-[#FFFFFF] border-b border-black/5">
         <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
           <h2 
-            className="text-[22px] sm:text-[26px] lg:text-[28px] font-bold uppercase text-[#000000] text-center mb-6 sm:mb-8 font-gabarito tracking-wide"
+            className="text-[28px] sm:text-[36px] lg:text-[44px] font-semibold text-[#000000] text-center mb-6 sm:mb-8 font-gabarito leading-[34px] sm:leading-[44px] lg:leading-[52px]"
             style={{ fontFamily: "'Gabarito', sans-serif" }}
           >
             Subscribe To Our YouTube Channel
@@ -49,83 +63,106 @@ export default function CoursePageContent({ course }) {
             {(videoIds || ['ctpQE_j8vyg', 'JdkoNyPqL5A', 'mqybul_khzg', '3FJ-QV8-FFc']).slice(0, 4).map((id, idx) => (
               <div 
                 key={idx}
-                className="w-full aspect-video rounded-[8px] overflow-hidden bg-black shadow-md border border-black/10"
+                className="w-full aspect-video rounded-[5px] overflow-hidden bg-black shadow-[0px_0px_10px_0px_rgba(0,0,0,0.6)]"
               >
                 <iframe
-                  src={`https://www.youtube.com/embed/${id}?controls=1&rel=0`}
+                  src={`https://www.youtube-nocookie.com/embed/${id}?controls=1&rel=0`}
                   title={`YouTube video ${idx + 1}`}
                   className="w-full h-full border-0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
                   loading="lazy"
                 />
               </div>
             ))}
           </div>
+
+          {/* Centered Red SUBSCRIBE NOW Button matching Elementor 28bebcf */}
+          <div className="pt-6 sm:pt-7 text-center">
+            <a
+              href="https://www.youtube.com/@AMERICANFIREARMSNETWORKS"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-[#EB0F06] hover:bg-[#000000] text-white font-roboto font-medium uppercase text-[14px] px-[40px] py-[12px] border-2 border-[#A5AAAB] transition-colors shadow-sm"
+              style={{ fontFamily: "'Roboto', sans-serif" }}
+            >
+              SUBSCRIBE NOW
+            </a>
+          </div>
         </div>
       </section>
 
       {/* 3. OVERVIEW & INTRODUCTION (Elementor 57a13e2 - Exact #D6DBDD Signature Grey Background) */}
-      <section className="py-[50px] sm:py-[70px] lg:py-[80px] bg-[#D6DBDD] border-b border-black/10">
+      <section className="py-[36px] sm:py-[46px] bg-[#D6DBDD] border-b border-black/10">
         <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-14">
+          <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
             
-            {/* Left Image (50%) */}
-            <div className="w-full lg:w-1/2">
-              <div className="relative w-full h-[260px] sm:h-[380px] lg:h-[460px] rounded-[10px] overflow-hidden shadow-lg border border-black/10">
-                <Image
-                  src={overview?.image || '/images/gallery/gallery-defensive-posture.png'}
-                  alt={course.title}
-                  fill
-                  className="object-cover object-center"
-                  priority
-                />
-              </div>
+            {/* Left Image: Width 38.512% matching Elementor c56e2b5 */}
+            <div className="w-full lg:w-[38.512%] shrink-0 flex justify-center">
+              <Image
+                src={overview?.image || 'https://american-firearms.s3-eu-central-2.ionoscloud.com/images/services/defensive-firearms-training-overview.webp'}
+                alt={course.title}
+                width={800}
+                height={534}
+                priority
+                className="w-full h-auto object-contain rounded-none shadow-none"
+              />
             </div>
 
-            {/* Right Text Content (50%) */}
-            <div className="w-full lg:w-1/2 space-y-4">
-              {overview?.subtitle && (
-                <span 
-                  className="text-[#B1800F] font-bold text-[14px] sm:text-[15px] uppercase tracking-wider block font-gabarito"
-                  style={{ fontFamily: "'Gabarito', sans-serif" }}
-                >
-                  {overview.subtitle}
-                </span>
-              )}
+            {/* Right Text Content: Width 61.488% matching Elementor ce5737f */}
+            <div className="w-full lg:w-[61.488%] flex flex-col justify-center text-left min-w-0">
+              {/* Heading 1: Exact Gabarito typography wrapping cleanly across lines like live site */}
+              <h2 
+                className="text-[26px] sm:text-[34px] lg:text-[40px] xl:text-[46px] font-semibold text-[#000000] font-gabarito leading-[32px] sm:leading-[42px] lg:leading-[50px] xl:leading-[54px] break-words text-left"
+                style={{ fontFamily: "'Gabarito', sans-serif" }}
+              >
+                {overview?.subtitle || `${course.title} | AFN`}
+              </h2>
 
+              {/* Subheading matching Elementor 485ff2c: Gabarito font-weight 600 */}
               {overview?.tagline && (
-                <h2 
-                  className="text-[22px] sm:text-[28px] lg:text-[32px] font-bold text-[#000000] leading-tight font-gabarito"
+                <h3 
+                  className="text-[17px] sm:text-[19px] font-semibold text-[#000000] font-gabarito leading-[24px] mt-2.5 sm:mt-3"
                   style={{ fontFamily: "'Gabarito', sans-serif" }}
                 >
                   {overview.tagline}
-                </h2>
+                </h3>
               )}
 
-              <div className="space-y-3 pt-1">
-                {(overview?.paragraphs || []).map((p, idx) => (
-                  <p 
-                    key={idx}
-                    className="font-roboto text-[15px] sm:text-[16px] leading-[26px] text-[#222222] font-normal"
-                    style={{ fontFamily: "'Roboto', sans-serif" }}
-                  >
-                    {p}
-                  </p>
-                ))}
+              {/* Paragraphs matching Elementor a158fdc: Roboto 16px line-height 22px */}
+              <div className="space-y-2.5 sm:space-y-3 font-roboto text-[15px] sm:text-[16px] leading-[22px] text-[#000000] mt-3.5 sm:mt-4 font-normal">
+                {(overview?.paragraphs || []).map((p, idx) => {
+                  const isTaglineRepeat = overview?.tagline && p.trim() === overview.tagline.trim();
+                  if (isTaglineRepeat) {
+                    return <p key={idx}><b>{p}</b></p>;
+                  }
+                  const regex = /(The American Firearms Network \(AFN\)|American Firearms Network \(AFN\))/g;
+                  if (regex.test(p)) {
+                    const parts = p.split(regex);
+                    return (
+                      <p key={idx}>
+                        {parts.map((part, i) => 
+                          part === "The American Firearms Network (AFN)" || part === "American Firearms Network (AFN)" ? (
+                            <b key={i}>{part}</b>
+                          ) : (
+                            part
+                          )
+                        )}
+                      </p>
+                    );
+                  }
+                  return <p key={idx}>{p}</p>;
+                })}
               </div>
 
-              <div className="pt-4">
+              {/* Button matching Elementor 5f6c0f6 */}
+              <div className="pt-5">
                 <Link
                   href="/contact-us?popup=true"
-                  style={{
-                    backgroundImage: 'linear-gradient(219deg, #B1800F 0%, #000000 67%)',
-                    border: '1px solid #B1800F',
-                    borderRadius: '3px'
-                  }}
-                  className="text-white font-medium uppercase text-[15px] px-8 py-[12px] inline-flex items-center justify-center font-roboto hover:brightness-110 shadow transition-all cursor-pointer"
+                  className="btn-tactical-gold text-white font-roboto font-medium uppercase text-[14px] px-[40px] py-[12px] shadow-sm rounded-[3px]"
                 >
-                  Contact Us
+                  <span>Contact Us</span>
                 </Link>
               </div>
             </div>
@@ -136,9 +173,9 @@ export default function CoursePageContent({ course }) {
 
       {/* 4. WHY TRAIN WITH AFN / 4 PILLARS (Elementor 94fa7ff - Fixed Parallax Range Background matching Resources) */}
       <section 
-        className="relative py-[60px] sm:py-[90px] overflow-hidden text-white"
+        className="relative py-[36px] sm:py-[46px] overflow-hidden text-white"
         style={{
-          backgroundImage: "url('/images/about/range-service.webp')",
+          backgroundImage: "url('https://american-firearms.s3-eu-central-2.ionoscloud.com/images/about/range-service.webp')",
           backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
@@ -146,23 +183,23 @@ export default function CoursePageContent({ course }) {
         }}
       >
         {/* Dark Background Overlay (0.68 opacity matching Resources section) */}
-        <div className="absolute inset-0 bg-[#000000]" style={{ opacity: 0.68 }} />
+        <div className="absolute inset-0 bg-[#000000]" style={{ backgroundColor: '#000000', opacity: 0.68 }} />
 
         <div className="relative z-10 max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 
-            className="text-[22px] sm:text-[32px] lg:text-[40px] font-bold uppercase text-white font-gabarito mb-3 tracking-wide leading-tight sm:leading-normal"
+            className="text-[26px] sm:text-[34px] lg:text-[44px] font-semibold text-white font-gabarito mb-2 sm:mb-3 leading-[32px] sm:leading-[42px] lg:leading-[52px]"
             style={{ fontFamily: "'Gabarito', sans-serif" }}
           >
             {whyTrain?.heading || 'Why Train with The American Firearms Network?'}
           </h2>
           <p 
-            className="text-[#E2E6E8] font-roboto text-[15px] sm:text-[16px] max-w-3xl mx-auto mb-10 sm:mb-12 leading-relaxed"
+            className="text-[#E2E6E8] font-roboto text-[15px] sm:text-[16px] max-w-3xl mx-auto mb-6 sm:mb-8 leading-relaxed"
             style={{ fontFamily: "'Roboto', sans-serif" }}
           >
             {whyTrain?.subtitle}
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
             {(whyTrain?.pillars || []).map((pillar, idx) => {
               const IconComp = pillarIcons[idx % pillarIcons.length];
               return (
@@ -174,13 +211,13 @@ export default function CoursePageContent({ course }) {
                     boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.35)',
                     borderRadius: '10px'
                   }}
-                  className="p-6 text-center flex flex-col items-center justify-start hover:border-[#FDD247] transition-all duration-200 group"
+                  className="p-5 sm:p-6 text-center flex flex-col items-center justify-start hover:border-[#FDD247] transition-all duration-200 group"
                 >
-                  <div className="w-[56px] h-[56px] rounded-full border-2 border-[#D3960C] bg-black/60 flex items-center justify-center text-[#FDD247] mb-4 group-hover:scale-105 transition-transform shadow-md">
-                    <IconComp className="w-6 h-6" />
+                  <div className="w-[52px] h-[52px] rounded-full border-2 border-[#D3960C] bg-black/60 flex items-center justify-center text-[#FDD247] mb-3.5 group-hover:scale-105 transition-transform shadow-md">
+                    <IconComp className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
                   <h3 
-                    className="text-[18px] font-bold text-white font-gabarito mb-2 leading-snug"
+                    className="text-[17px] sm:text-[18px] font-bold text-white font-gabarito mb-2 leading-snug"
                     style={{ fontFamily: "'Gabarito', sans-serif" }}
                   >
                     {pillar.title}
@@ -199,54 +236,80 @@ export default function CoursePageContent({ course }) {
       </section>
 
       {/* 5. CURRICULUM BREAKDOWN SECTION (Elementor 0dd77a5) */}
-      <section className="py-[50px] sm:py-[70px] lg:py-[80px] bg-[#FFFFFF]">
+      <section className="py-[36px] sm:py-[46px] bg-[#FFFFFF]">
         <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-8 lg:gap-14">
+          <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-6 lg:gap-10">
             
-            {/* Left Column: Curriculum Breakdown (50%) */}
-            <div className="w-full lg:w-1/2 space-y-5">
+            {/* Left Column: Curriculum Breakdown (58%-60% width) */}
+            <div className="w-full lg:w-[58%] xl:w-[60%] space-y-3.5">
               <h2 
-                className="text-[24px] sm:text-[28px] lg:text-[32px] font-bold text-[#000000] font-gabarito leading-tight"
+                className="text-[26px] sm:text-[34px] lg:text-[40px] xl:text-[44px] font-semibold text-[#000000] font-gabarito leading-[32px] sm:leading-[42px] lg:leading-[48px] xl:leading-[52px]"
                 style={{ fontFamily: "'Gabarito', sans-serif" }}
-              >
-                {curriculum?.heading || 'Our Training Curriculum'}
-              </h2>
+                dangerouslySetInnerHTML={{ __html: curriculum?.heading || 'Our Training Curriculum' }}
+              />
 
               {curriculum?.intro && (
                 <p 
-                  className="font-roboto text-[15px] sm:text-[16px] leading-[26px] text-[#333333]"
+                  className="font-roboto text-[15px] sm:text-[16px] leading-[24px] text-[#000000]"
                   style={{ fontFamily: "'Roboto', sans-serif" }}
                 >
                   {curriculum.intro}
                 </p>
               )}
 
-              <ul className="space-y-3 pt-1">
-                {(curriculum?.items || []).map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <span className="w-2 h-2 rounded-full bg-[#B1800F] shrink-0 mt-2.5" />
-                    <p 
-                      className="font-roboto text-[15px] sm:text-[16px] leading-[24px] text-[#333333]"
-                      style={{ fontFamily: "'Roboto', sans-serif" }}
-                    >
-                      <strong className="text-black font-bold font-roboto">{item.title}: </strong>
-                      {item.desc}
-                    </p>
-                  </li>
-                ))}
-              </ul>
+              {/* Render Structured Sections if present */}
+              {curriculum?.sections ? (
+                <div className="space-y-4 pt-1">
+                  {curriculum.sections.map((sec, sIdx) => (
+                    <div key={sIdx} className="space-y-1.5">
+                      <h3 
+                        className="text-[17px] sm:text-[19px] lg:text-[21px] font-bold text-[#000000] font-gabarito leading-snug"
+                        style={{ fontFamily: "'Gabarito', sans-serif" }}
+                      >
+                        {sec.title}
+                      </h3>
+                      {sec.subtitle && (
+                        <p className="font-roboto text-[15px] sm:text-[16px] text-[#000000] leading-relaxed">
+                          {sec.subtitle}
+                        </p>
+                      )}
+                      {sec.bullets && sec.bullets.length > 0 && (
+                        <ul className="list-disc pl-5 space-y-1 font-roboto text-[15px] sm:text-[16px] text-[#000000] leading-relaxed [&_b]:font-bold [&_b]:text-black [&_strong]:font-bold [&_strong]:text-black">
+                          {sec.bullets.map((b, bIdx) => (
+                            <li key={bIdx} dangerouslySetInnerHTML={{ __html: formatBulletWithBold(b) }} />
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <ul className="list-disc pl-5 space-y-2 pt-1 font-roboto text-[15px] sm:text-[16px] text-[#000000] leading-relaxed [&_b]:font-bold [&_b]:text-black [&_strong]:font-bold [&_strong]:text-black">
+                  {(curriculum?.items || []).map((item, idx) => (
+                    <li key={idx}>
+                      {item.title && item.title !== item.desc ? (
+                        <>
+                          <b className="font-bold text-[#000000]">{item.title}:</b>{' '}
+                          <span>{item.desc}</span>
+                        </>
+                      ) : (
+                        <span>{item.desc || item.title}</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
 
-            {/* Right Column: Action Image (50%) */}
-            <div className="w-full lg:w-1/2">
-              <div className="relative w-full h-[260px] sm:h-[380px] lg:h-[460px] rounded-[10px] overflow-hidden shadow-lg border border-gray-200">
-                <Image
-                  src={curriculum?.image || '/images/gallery/gallery-range-line.webp'}
-                  alt={curriculum?.heading || course.title}
-                  fill
-                  className="object-cover object-center"
-                />
-              </div>
+            {/* Right Column: Action Image (40%-42% width) */}
+            <div className="w-full lg:w-[42%] xl:w-[40%] flex justify-center lg:justify-end">
+              <Image
+                src={curriculum?.image || 'https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/gallery-range-line.webp'}
+                alt={typeof curriculum?.heading === 'string' ? curriculum.heading.replace(/<[^>]+>/g, '') : course.title}
+                width={480}
+                height={640}
+                className="w-full max-w-[420px] xl:max-w-[460px] h-auto object-contain rounded-none shadow-none"
+              />
             </div>
 
           </div>

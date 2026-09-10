@@ -1,8 +1,8 @@
 import Image from 'next/image';
 
-export default function InstructorsSection() {
+export default function InstructorsSection({ bgClassName = 'bg-[#E6E6E6]' }) {
   return (
-    <section className="bg-[#E6E6E6] text-[#000000] py-[50px]">
+    <section className={`${bgClassName} text-[#000000] py-[50px]`}>
       <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Exact Section Heading: Gabarito 50px (mobile 28px/tablet 40px) line-height 60px font-weight 600 text-center #000000 */}
@@ -14,15 +14,16 @@ export default function InstructorsSection() {
         </h2>
 
         {/* Instructor 1: Todd Grama (Elementor cf17f72) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center pb-12 sm:pb-16 border-b border-black/15">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 pb-12 sm:pb-16 border-b border-black/15">
           
           {/* Todd Image */}
-          <div className="flex justify-center">
-            <div className="relative w-full max-w-[360px] h-[480px] rounded-xl overflow-hidden shadow-lg bg-[#D6DBDD]">
+          <div className="shrink-0">
+            <div className="relative w-[320px] sm:w-[380px] lg:w-[410px] h-[430px] sm:h-[510px] lg:h-[550px] rounded-xl overflow-hidden shadow-lg bg-[#D6DBDD]">
               <Image
-                src="/images/instructors/todd-grama.png"
+                src="https://american-firearms.s3-eu-central-2.ionoscloud.com/images/instructors/todd-grama.png"
                 alt="Todd Grama - Co-Founder & Lead Instructor"
                 fill
+                sizes="(max-width: 640px) 320px, (max-width: 1024px) 380px, 410px"
                 priority
                 className="object-cover object-top"
               />
@@ -30,7 +31,7 @@ export default function InstructorsSection() {
           </div>
 
           {/* Todd Bio & Credentials */}
-          <div className="space-y-4 text-[16px] sm:text-[18px] leading-[24px] text-[#000000] text-justify font-roboto">
+          <div className="w-full max-w-[590px] space-y-4 text-[16px] sm:text-[18px] leading-[24px] text-[#000000] text-justify font-roboto">
             <div className="text-left">
               <h3 
                 className="text-[28px] sm:text-[34px] font-semibold text-[#000000] uppercase tracking-normal leading-[34px] sm:leading-[40px]"
@@ -121,10 +122,10 @@ export default function InstructorsSection() {
         </div>
 
         {/* Instructor 2: Paul Gayle (Elementor 4c8fe2a - reverse-tablet and reverse-mobile) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center pt-12 sm:pt-16">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 pt-12 sm:pt-16">
           
           {/* Paul Bio & Credentials (Order 2 on mobile, Order 1 on desktop) */}
-          <div className="order-2 lg:order-1 space-y-4 text-[16px] sm:text-[18px] leading-[24px] text-[#000000] text-justify font-roboto">
+          <div className="order-2 lg:order-1 w-full max-w-[590px] space-y-4 text-[16px] sm:text-[18px] leading-[24px] text-[#000000] text-justify font-roboto">
             <div className="text-left">
               <h3 
                 className="text-[28px] sm:text-[34px] font-semibold text-[#000000] uppercase tracking-normal leading-[34px] sm:leading-[40px]"
@@ -197,12 +198,13 @@ export default function InstructorsSection() {
           </div>
 
           {/* Paul Image (Order 1 on mobile, Order 2 on desktop) */}
-          <div className="order-1 lg:order-2 flex justify-center">
-            <div className="relative w-full max-w-[340px] h-[460px] rounded-xl overflow-hidden shadow-lg bg-[#D6DBDD]">
+          <div className="order-1 lg:order-2 shrink-0">
+            <div className="relative w-[320px] sm:w-[380px] lg:w-[410px] h-[430px] sm:h-[510px] lg:h-[550px] rounded-xl overflow-hidden shadow-lg bg-[#D6DBDD]">
               <Image
-                src="/images/instructors/paul-gayle.webp"
+                src="https://american-firearms.s3-eu-central-2.ionoscloud.com/images/instructors/paul-gayle.webp"
                 alt="Paul Gayle - Co-Founder & Lead Instructor"
                 fill
+                sizes="(max-width: 640px) 320px, (max-width: 1024px) 380px, 410px"
                 priority
                 className="object-cover object-top"
               />

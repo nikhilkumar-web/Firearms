@@ -66,7 +66,7 @@ export default function ReviewsPage() {
       <section
         className="relative py-[80px] sm:py-[100px] text-white overflow-hidden text-center"
         style={{
-          backgroundImage: "url('/images/reviews/reviews-hero-bg.jpg')",
+          backgroundImage: "url('https://american-firearms.s3-eu-central-2.ionoscloud.com/images/about/page-header-bg.jpg')",
           backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover'
@@ -95,7 +95,7 @@ export default function ReviewsPage() {
           <div
             className="relative rounded-[15px] overflow-hidden p-5 sm:p-8 lg:p-10"
             style={{
-              backgroundImage: "url('/images/reviews/caucasian-woman-observing-black-male-instructor.webp')",
+              backgroundImage: "url('https://american-firearms.s3-eu-central-2.ionoscloud.com/images/reviews/caucasian-woman-observing-black-male-instructor.webp')",
               backgroundPosition: 'center center',
               backgroundRepeat: 'no-repeat',
               backgroundSize: 'cover',

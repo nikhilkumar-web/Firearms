@@ -1,5 +1,5 @@
 export const subscribeVideos = [
-  { id: 'ctpQE_j8vyg', title: 'Weapons Lights - Our Thoughts' },
+  { id: 'ctpQE_j8vyg', title: 'Inexpensive Ways to Train' },
   { id: 'JdkoNyPqL5A', title: 'Experimentation Can Take You To The Next Level' },
   { id: 'mqybul_khzg', title: 'Who Are You Listening To?' },
   { id: '3FJ-QV8-FFc', title: 'Tactical Range Drills' }
@@ -20,128 +20,112 @@ export const galleryShorts = [
 export const galleryImages = [
   {
     id: 1,
-    src: '/images/instructors/todd-grama.png',
-    full: 'https://americanfirearmsnetwork.com/wp-content/uploads/2026/01/TheFirearmsLearningAnnex_img1-730h.png',
+    src: 'https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/gallery-training-demo.png',
     alt: 'Firearms Training Demonstration and Gear',
     width: 480,
     height: 640
   },
   {
     id: 2,
-    src: '/images/gallery/gallery-outdoor-service.webp',
-    full: 'https://americanfirearmsnetwork.com/wp-content/uploads/2026/01/firearmstrainingofpalmbeach_range-service-1000h-1024x768.webp',
+    src: 'https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/gallery-range-service.webp',
     alt: 'Outdoor Firearms Training Range Service',
-    width: 1333,
-    height: 1000
+    width: 1024,
+    height: 768
   },
   {
     id: 3,
-    src: '/images/gallery/gallery-firing-line.webp',
-    full: 'https://americanfirearmsnetwork.com/wp-content/uploads/2026/01/media_12-f1510ca5-800h-1024x768.webp',
+    src: 'https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/gallery-outdoor-group.webp',
     alt: 'Tactical Outdoor Training Group on the Line',
-    width: 1067,
-    height: 800
+    width: 1024,
+    height: 768
   },
   {
     id: 4,
-    src: '/images/gallery/gallery-defensive-posture.png',
-    full: 'https://americanfirearmsnetwork.com/wp-content/uploads/2026/01/media_1-800h.png',
+    src: 'https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/gallery-ammunition-loading.png',
     alt: 'Handgun Ammunition Loading and Anatomy',
     width: 600,
     height: 800
   },
   {
     id: 5,
-    src: '/images/video/video-bg.png',
-    full: 'https://americanfirearmsnetwork.com/wp-content/uploads/2026/01/TheFirearmsLearningAnnex_mkvBG-800h.png',
+    src: 'https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/gallery-precision-aiming.png',
     alt: 'Precision Handgun Aiming and Training',
     width: 808,
     height: 455
   },
   {
     id: 6,
-    src: '/images/gallery/gallery-equipment-layout.png',
-    full: 'https://americanfirearmsnetwork.com/wp-content/uploads/2026/01/media_13-800h-1024x768.png',
+    src: 'https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/gallery-equipment-layout.png',
     alt: 'Tactical Rifle and Handgun Equipment Layout',
-    width: 1067,
-    height: 800
+    width: 1024,
+    height: 768
   },
   {
     id: 7,
-    src: '/images/gallery/gallery-private-instruction.png',
-    full: 'https://americanfirearmsnetwork.com/wp-content/uploads/2026/01/media_15-800h.png',
+    src: 'https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/gallery-safety-drills.png',
     alt: 'Instructor Tactical Range Coaching',
     width: 600,
     height: 800
   },
   {
     id: 8,
-    src: '/images/gallery/gallery-target-qualification.png',
-    full: 'https://americanfirearmsnetwork.com/wp-content/uploads/2026/01/media_14-800h-1024x768.png',
+    src: 'https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/gallery-target-qualification.png',
     alt: 'Live Fire Target Qualification Drill',
-    width: 1067,
-    height: 800
+    width: 1024,
+    height: 768
   },
   {
     id: 9,
-    src: '/images/gallery/gallery-safety-fundamentals.png',
-    full: 'https://americanfirearmsnetwork.com/wp-content/uploads/2026/01/media_1-e5c25db1-800h.png',
+    src: 'https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/media_1-e5c25db1-800h.png',
     alt: 'Close-up Firearms Safety Fundamentals',
     width: 600,
     height: 800
   },
   {
     id: 10,
-    src: '/images/gallery/gallery-group-drills.png',
-    full: 'https://americanfirearmsnetwork.com/wp-content/uploads/2026/01/media_16-800h.png',
+    src: 'https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/gallery-tactical-stance.png',
     alt: 'Tactical Holster Draw and Stance',
     width: 600,
     height: 800
   },
   {
     id: 11,
-    src: '/images/gallery/gallery-concealed-carry.webp',
-    full: 'https://americanfirearmsnetwork.com/wp-content/uploads/2026/01/media_11-800h.webp',
+    src: 'https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/gallery-concealed-carry.webp',
     alt: 'Instructor Demonstrating Concealed Carry Position',
-    width: 600,
-    height: 800
+    width: 800,
+    height: 1067
   },
   {
     id: 12,
-    src: '/images/gallery/gallery-target-evaluation.webp',
-    full: 'https://americanfirearmsnetwork.com/wp-content/uploads/2026/01/TheFirearmsLearningAnnex_img7-800h.webp',
+    src: 'https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/gallery-target-evaluation.webp',
     alt: 'Handgun Drills and Speed Target Engagement',
     width: 480,
     height: 640
   },
   {
     id: 13,
-    src: '/images/gallery/gallery-pistol-fundamentals.webp',
-    full: 'https://americanfirearmsnetwork.com/wp-content/uploads/2026/01/TheFirearmsLearningAnnex_img4-800h.webp',
+    src: 'https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/gallery-pistol-fundamentals.webp',
     alt: 'American Firearms Network Banner & Booth',
     width: 600,
     height: 450
   },
   {
     id: 14,
-    src: '/images/gallery/gallery-range-line.webp',
-    full: 'https://americanfirearmsnetwork.com/wp-content/uploads/2026/01/media_12-800h.webp',
+    src: 'https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/gallery-range-line.webp',
     alt: 'Student and Instructor Range Discussion',
-    width: 600,
-    height: 800
+    width: 800,
+    height: 600
   },
   {
     id: 15,
-    src: '/images/about/classroom-training.jpg',
-    full: 'https://americanfirearmsnetwork.com/wp-content/uploads/2026/01/TheFirearmsLearningAnnex_img5-800h.jpg',
+    src: 'https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/gallery-training-ecosystem.jpg',
     alt: 'Tactical Defensive Posture Evaluation',
     width: 500,
     height: 376
   },
   {
     id: 16,
-    src: '/images/gallery/gallery-tactical-movement.webp',
-    full: 'https://americanfirearmsnetwork.com/wp-content/uploads/2026/01/TheFirearmsLearningAnnex_img6-800h.webp',
+    src: 'https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/gallery-tactical-movement.webp',
     alt: 'Range Group Picture with American Firearms Network',
     width: 600,
     height: 399

@@ -32,7 +32,7 @@ export default function TestimonialsSection() {
       className="relative py-[50px] text-white overflow-hidden"
       style={{
         backgroundColor: '#F6F8F5',
-        backgroundImage: "url('/images/home/media_1-e5c25db1-800h.png')",
+        backgroundImage: "url('https://american-firearms.s3-eu-central-2.ionoscloud.com/images/home/tactical-banner-bg.png')",
         backgroundPosition: 'center center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover'
@@ -99,16 +99,9 @@ export default function TestimonialsSection() {
             <div className="text-center pt-2">
               <Link
                 href="/reviews"
-                style={{
-                  backgroundImage: 'linear-gradient(219deg, #B1800F 0%, #000000 67%)',
-                  border: '1px solid #A5AAAB',
-                  padding: '10px 40px',
-                  borderRadius: '3px',
-                  fontFamily: "'Roboto', sans-serif"
-                }}
-                className="inline-block text-white font-medium uppercase text-[15px] leading-[15px] tracking-normal transition-all hover:brightness-125 hover:scale-105 shadow-lg"
+                className="btn-tactical-gold text-white font-medium uppercase text-[15px] leading-[15px] tracking-normal font-roboto px-10 py-3 rounded-[3px] shadow-lg"
               >
-                MORE REVIEWS
+                <span>MORE REVIEWS</span>
               </Link>
             </div>
           </div>

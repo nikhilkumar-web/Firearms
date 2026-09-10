@@ -28,8 +28,7 @@ export default function Hero() {
           preload="auto"
           className="w-full h-full object-cover object-center pointer-events-none"
         >
-          <source src="/video/American-Firearms-Network-Video.mp4" type="video/mp4" />
-          <source src="/images/video/American-Firearms-Network-Video.mp4" type="video/mp4" />
+          <source src="https://american-firearms.s3-eu-central-2.ionoscloud.com/video/American-Firearms-Network-Video.mp4" type="video/mp4" />
         </video>
         {/* Dark overlay matching live site elementor-background-overlay: #000000 with 0.76 opacity */}
         <div
@@ -73,16 +72,9 @@ export default function Hero() {
               <div className="mt-2.5">
                 <Link
                   href="/contact-us?popup=true"
-                  style={{
-                    backgroundImage: 'linear-gradient(219deg, #B1800F 0%, #000000 67%)',
-                    border: '1px solid #A5AAAB',
-                    padding: '12px 40px',
-                    borderRadius: '3px',
-                    fontFamily: "'Roboto', sans-serif"
-                  }}
-                  className="inline-block text-[#FFFFFF] font-medium uppercase text-[16px] md:text-[18px] leading-[20px] tracking-normal transition-all hover:brightness-125 shadow-md"
+                  className="btn-tactical-gold text-[#FFFFFF] font-medium uppercase text-[16px] md:text-[18px] leading-[20px] tracking-normal font-roboto px-10 py-3 rounded-[3px] shadow-md"
                 >
-                  CLICK HERE
+                  <span>CLICK HERE</span>
                 </Link>
               </div>
             </div>
@@ -98,16 +90,9 @@ export default function Hero() {
               <div className="mt-2.5">
                 <Link
                   href="/contact-us?popup=true"
-                  style={{
-                    backgroundImage: 'linear-gradient(219deg, #B1800F 0%, #000000 67%)',
-                    border: '1px solid #A5AAAB',
-                    padding: '12px 40px',
-                    borderRadius: '3px',
-                    fontFamily: "'Roboto', sans-serif"
-                  }}
-                  className="inline-block text-[#FFFFFF] font-medium uppercase text-[16px] md:text-[18px] leading-[20px] tracking-normal transition-all hover:brightness-125 shadow-md"
+                  className="btn-tactical-gold text-[#FFFFFF] font-medium uppercase text-[16px] md:text-[18px] leading-[20px] tracking-normal font-roboto px-10 py-3 rounded-[3px] shadow-md"
                 >
-                  CLICK HERE
+                  <span>CLICK HERE</span>
                 </Link>
               </div>
             </div>

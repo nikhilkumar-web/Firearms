@@ -6,7 +6,7 @@ export const instructors = [
     phone: "347-853-2249",
     phoneDisplay: "Instructor Todd - 347-853-2249",
     email: "todd@firearmslearning.com",
-    image: "/images/instructors/todd-grama.png",
+    image: "https://american-firearms.s3-eu-central-2.ionoscloud.com/images/instructors/todd-grama.png",
     bio: "Todd Grama is a co-founder of the American Firearms Network and a senior firearms instructor known for setting and enforcing the highest standards in defensive training and range operations across Florida. His instruction is methodical, performance-oriented, and centered around building responsible, capable protectors through discipline, structure, and accountability.",
     credentials: [
       "NRA Certified Firearms Instructor (Pistol, Rifle, Shotgun)",
@@ -28,7 +28,7 @@ export const instructors = [
     phone: "561-225-8615",
     phoneDisplay: "Instructor Paul - 561-225-8615",
     email: "todd@firearmslearning.com",
-    image: "/images/instructors/paul-gayle.webp",
+    image: "https://american-firearms.s3-eu-central-2.ionoscloud.com/images/instructors/paul-gayle.webp",
     bio: "Paul Gayle is a co-founder of the American Firearms Network and a veteran combatives and tactical firearms instructor. With decades of martial arts mastery and security operations experience, Paul specializes in preparing students for the raw physical realities of close-quarters defensive encounters, movement under fire, and weapon retention under severe stress.",
     credentials: [
       "Judo Practitioner & Hand-to-Hand Combatives Veteran",

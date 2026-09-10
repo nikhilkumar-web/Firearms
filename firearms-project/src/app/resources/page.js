@@ -14,7 +14,7 @@ export default function ResourcesPage() {
       <section 
         className="relative w-full py-[60px] sm:py-[100px] overflow-hidden"
         style={{
-          backgroundImage: 'url(/images/about/outdoor-range-group.webp)',
+          backgroundImage: 'url(https://american-firearms.s3-eu-central-2.ionoscloud.com/images/about/outdoor-range-group.webp)',
           backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover'
@@ -57,10 +57,11 @@ export default function ResourcesPage() {
                 }}
               >
                 <iframe
-                  src={`https://www.youtube.com/embed/${video.id}?autoplay=0&controls=1&rel=0`}
+                  src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=0&controls=1&rel=0`}
                   title={video.title}
                   className="absolute inset-0 w-full h-full"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
                 />
               </div>
@@ -149,7 +150,7 @@ export default function ResourcesPage() {
             <div className="w-full flex items-center justify-center">
               <div className="relative w-full max-w-[520px] aspect-[3/4] overflow-hidden">
                 <Image
-                  src="/images/gallery/gallery-defensive-posture.png"
+                  src="https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/gallery-defensive-posture.png"
                   alt="Handgun Ammunition Loading and Anatomy"
                   fill
                   className="object-contain object-center"
@@ -165,7 +166,7 @@ export default function ResourcesPage() {
       <section 
         className="relative py-[30px] sm:py-[50px] overflow-hidden"
         style={{
-          backgroundImage: 'url(/images/about/range-service.webp)',
+          backgroundImage: 'url(https://american-firearms.s3-eu-central-2.ionoscloud.com/images/about/range-service.webp)',
           backgroundPosition: 'center center',
           backgroundSize: 'cover',
           backgroundAttachment: 'fixed'
@@ -236,7 +237,7 @@ export default function ResourcesPage() {
                     boxShadow: '0px 0px 10px 0px rgba(192, 140, 21, 0.43)',
                     backgroundColor: '#00000082',
                   }}
-                  className="relative flex items-center justify-center p-2 sm:p-[15px] hover:bg-[url('/images/resources/table-hover-bg.jpg')] bg-cover bg-center transition-all duration-200 overflow-hidden cursor-default"
+                  className="relative flex items-center justify-center p-2 sm:p-[15px] hover:bg-[url('https://american-firearms.s3-eu-central-2.ionoscloud.com/images/resources/table-hover-bg.jpg')] bg-cover bg-center transition-all duration-200 overflow-hidden cursor-default"
                 >
                   <span className="relative z-10 text-white text-[11px] sm:text-[16px] font-normal leading-[15px] sm:leading-[22px]">
                     {row.caliber}
@@ -249,7 +250,7 @@ export default function ResourcesPage() {
                     boxShadow: '0px 0px 10px 0px rgba(192, 140, 21, 0.43)',
                     backgroundColor: '#00000082',
                   }}
-                  className="relative flex items-center justify-center p-2 sm:p-[15px] hover:bg-[url('/images/resources/table-hover-bg.jpg')] bg-cover bg-center transition-all duration-200 overflow-hidden cursor-default"
+                  className="relative flex items-center justify-center p-2 sm:p-[15px] hover:bg-[url('https://american-firearms.s3-eu-central-2.ionoscloud.com/images/resources/table-hover-bg.jpg')] bg-cover bg-center transition-all duration-200 overflow-hidden cursor-default"
                 >
                   <span className="relative z-10 text-white text-[11px] sm:text-[16px] font-normal leading-[15px] sm:leading-[22px]">
                     {row.useCase}
@@ -262,7 +263,7 @@ export default function ResourcesPage() {
                     boxShadow: '0px 0px 10px 0px rgba(192, 140, 21, 0.43)',
                     backgroundColor: '#00000082',
                   }}
-                  className="relative flex items-center justify-center p-2 sm:p-[15px] hover:bg-[url('/images/resources/table-hover-bg.jpg')] bg-cover bg-center transition-all duration-200 overflow-hidden cursor-default"
+                  className="relative flex items-center justify-center p-2 sm:p-[15px] hover:bg-[url('https://american-firearms.s3-eu-central-2.ionoscloud.com/images/resources/table-hover-bg.jpg')] bg-cover bg-center transition-all duration-200 overflow-hidden cursor-default"
                 >
                   <span className="relative z-10 text-white text-[10px] sm:text-[16px] font-normal leading-[14px] sm:leading-[22px]">
                     {row.characteristics}
@@ -317,7 +318,7 @@ export default function ResourcesPage() {
             <div className="lg:col-span-5 flex items-center justify-center">
               <div className="relative w-full aspect-[4/3] overflow-hidden">
                 <Image
-                  src="/images/gallery/gallery-tactical-carbine.png"
+                  src="https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/gallery-tactical-carbine.png"
                   alt="Ammunition Bullets and Calibers Overview"
                   fill
                   className="object-contain object-center"
@@ -332,7 +333,7 @@ export default function ResourcesPage() {
       <section 
         className="relative py-[40px] sm:py-[50px] overflow-hidden"
         style={{
-          backgroundImage: 'url(/images/about/range-service.webp)',
+          backgroundImage: 'url(https://american-firearms.s3-eu-central-2.ionoscloud.com/images/about/range-service.webp)',
           backgroundPosition: 'center center',
           backgroundSize: 'cover',
           backgroundAttachment: 'fixed'
@@ -368,7 +369,7 @@ export default function ResourcesPage() {
                 }}
               >
                 <Image
-                  src="/images/gallery/gallery-tactical-movement.webp"
+                  src="https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/gallery-tactical-movement.webp"
                   alt="American Firearms Network Training Group"
                   fill
                   className="object-cover object-center"
@@ -402,10 +403,11 @@ export default function ResourcesPage() {
                 }}
               >
                 <iframe
-                  src={`https://www.youtube.com/embed/${video.id}?autoplay=0&controls=1&rel=0`}
+                  src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=0&controls=1&rel=0`}
                   title={video.title}
                   className="absolute inset-0 w-full h-full"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
                 />
               </div>
@@ -449,26 +451,26 @@ export default function ResourcesPage() {
               
               const BookContent = (
                 <div className="flex flex-col items-center text-center group">
-                  {/* Book Image with exact height 455px matching live site */}
-                  <div className="w-full h-[455px] flex items-center justify-center overflow-hidden mb-2">
+                  {/* Every cover uses the same fixed 2:3 frame so the grid stays aligned. */}
+                  <div className="w-full aspect-[2/3] flex items-center justify-center overflow-hidden mb-2">
                     {book.img ? (
                       /* eslint-disable-next-line @next/next/no-img-element */
                       <img
                         src={book.img}
                         alt={book.title}
                         loading="lazy"
-                        className="w-full h-[455px] object-contain group-hover:scale-[1.02] transition-transform duration-200"
+                        className="w-full h-full object-fill group-hover:scale-[1.02] transition-transform duration-200"
                       />
                     ) : (
-                      <div className="w-full h-[455px] flex items-center justify-center bg-gray-100 text-gray-400 text-sm">
+                      <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400 text-sm">
                         No Cover
                       </div>
                     )}
                   </div>
 
-                  {/* Title: Roboto 19px font-weight 600 color #FA9372 text-center with -mt-[14px] matching Elementor margin */}
+                  {/* Title sits below the book cover with a small, consistent gap. */}
                   <h3 
-                    className="text-[19px] font-semibold font-roboto leading-snug text-[#FA9372] group-hover:text-[#B1800F] transition-colors text-center px-1 -mt-[14px]"
+                    className="text-[19px] font-semibold font-roboto leading-snug text-[#FA9372] group-hover:text-[#B1800F] transition-colors text-center px-1 mt-2"
                     style={{ fontFamily: "'Roboto', sans-serif", color: '#FA9372' }}
                   >
                     {book.title}

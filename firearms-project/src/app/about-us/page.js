@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import SubscribeButton from '@/components/common/SubscribeButton';
+import InstructorsSection from '@/components/home/InstructorsSection';
 
 export const metadata = {
   title: "About Us | American Firearms Network",
@@ -14,31 +15,6 @@ export default function AboutUsPage() {
     { id: 'mqybul_khzg', title: 'Who Are You Listening To?' }
   ];
 
-  const toddCredentials = [
-    'NRA Certified Firearms Instructor',
-    'Certified in Pistol',
-    'Certified in Rifle',
-    'Certified in Shotgun',
-    'Certified in Inside the Home',
-    'Certified in Outside the Home',
-    'Range Master Certified Instructor',
-    'USCCA Firearms Instructor',
-    'USCCA Range Safety Officer',
-    'Code 4 Armed Church Security Certified',
-    'Licensed Florida Armed Security Officer',
-    'Instructor on the YouTube Channel "The American Firearms Network"'
-  ];
-
-  const paulCredentials = [
-    'Judo practitioner',
-    'USCCA Certified Firearms Instructor',
-    'NRA Certified Firearms Instructor',
-    'HTK Training Group Black Site Director',
-    'HTK Certified Range Safety Officer',
-    'Specialist in Weapons Retention & Close-Quarters Engagement',
-    'Expert in Movement Under Fire'
-  ];
-
   return (
     <main className="bg-white text-[#000000] overflow-x-hidden">
       
@@ -46,13 +22,16 @@ export default function AboutUsPage() {
       <section 
         className="relative py-[100px] text-center overflow-hidden"
         style={{
-          backgroundImage: 'url(/images/about/classroom-training.jpg)',
+          backgroundImage: "url('https://american-firearms.s3-eu-central-2.ionoscloud.com/images/about/outdoor-range-group.webp')",
           backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover'
         }}
       >
-        <div className="absolute inset-0 bg-black/78" />
+        <div 
+          className="absolute inset-0 pointer-events-none" 
+          style={{ backgroundColor: '#000000', opacity: 0.78 }}
+        />
         <div className="relative z-10 max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
           <h1 
             className="text-[36px] sm:text-[50px] font-semibold uppercase text-white font-gabarito leading-[44px] sm:leading-[60px]"
@@ -211,7 +190,7 @@ export default function AboutUsPage() {
             {/* Left Image: Outdoor Range Group */}
             <div className="w-full lg:w-[40.469%] shrink-0 flex justify-center">
               <Image
-                src="/images/about/outdoor-range-group.webp"
+                src="https://american-firearms.s3-eu-central-2.ionoscloud.com/images/about/outdoor-range-group.webp"
                 alt="AFN Firearms Training Range Group"
                 width={800}
                 height={600}
@@ -222,6 +201,13 @@ export default function AboutUsPage() {
 
             {/* Right Text */}
             <div className="w-full lg:w-[59.531%] space-y-4 text-justify font-roboto text-[16px] sm:text-[18px] leading-[24px] text-[#000000]">
+              <h3 
+                className="text-[20px] sm:text-[24px] font-semibold text-[#000000] font-gabarito leading-[28px] sm:leading-[30px] text-left"
+                style={{ fontFamily: "'Gabarito', sans-serif" }}
+              >
+                Setting the Standard for Responsible American Firearms Training
+              </h3>
+
               <p>
                 The American Firearms Network (AFN) exists to develop <b>competent, responsible firearm users</b> prepared for real-world conditions. Based in <b>West Palm Beach, Florida</b>, AFN is a professional firearms training organization and educational media platform built for individuals who take personal protection seriously.
               </p>
@@ -237,13 +223,7 @@ export default function AboutUsPage() {
               </h3>
               
               <p>
-                Owning a firearm is a right. Using one responsibly requires <b>training, accountability, and continuous development</b>.
-              </p>
-              <p>
-                AFN was founded to close the gap between ownership and proficiency. We provide structured firearms education for people who want more than minimum standards—people who understand that confidence comes from preparation, not equipment alone.
-              </p>
-              <p>
-                Our role is simple: deliver clear instruction, reinforce safe practices, and help students and viewers build skills they can rely on outside controlled range environments.
+                Owning a firearm is a right. Using one responsibly requires <b>training, accountability, and continuous development</b>. AFN was founded to close the gap between ownership and proficiency. We provide structured firearms education for people who want more than minimum standards—people who understand that confidence comes from preparation, not equipment alone. Our role is simple: deliver clear instruction, reinforce safe practices, and help students and viewers build skills they can rely on outside controlled range environments.
               </p>
             </div>
           </div>
@@ -284,7 +264,7 @@ export default function AboutUsPage() {
             {/* Right Image: Classroom Training */}
             <div className="w-full lg:w-[40.469%] shrink-0 flex justify-center">
               <Image
-                src="/images/about/classroom-training.jpg"
+                src="https://american-firearms.s3-eu-central-2.ionoscloud.com/images/about/classroom-training.jpg"
                 alt="AFN Classroom Firearms Education"
                 width={500}
                 height={376}
@@ -301,7 +281,7 @@ export default function AboutUsPage() {
       <section 
         className="relative py-[30px] overflow-hidden"
         style={{
-          backgroundImage: 'url(/images/about/hs-bg-image-copyright.jpg)',
+          backgroundImage: 'url(https://american-firearms.s3-eu-central-2.ionoscloud.com/images/about/page-header-bg.jpg)',
           backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover'
@@ -309,20 +289,20 @@ export default function AboutUsPage() {
       >
         <div className="absolute inset-0 bg-[#000000] opacity-72" style={{ backgroundColor: '#000000', opacity: 0.72 }} />
         <div className="relative z-10 max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 min-h-[453px] flex items-center">
-          <div className="w-full flex flex-col lg:flex-row items-center">
+          <div className="w-full flex flex-col lg:flex-row items-center py-4">
             {/* Left Column: 39.38% width, hidden on tablet and mobile */}
             <div className="hidden lg:block lg:w-[39.38%] shrink-0" />
 
             {/* Right Column: 60.62% width */}
-            <div className="w-full lg:w-[60.62%] space-y-6">
+            <div className="w-full lg:w-[60.62%] space-y-5">
               <h2 
-                className="text-[26px] sm:text-[32px] font-semibold text-white font-gabarito"
+                className="text-[30px] sm:text-[40px] lg:text-[50px] font-semibold text-white font-gabarito leading-[36px] sm:leading-[48px] lg:leading-[60px]"
                 style={{ fontFamily: "'Gabarito', sans-serif" }}
               >
                 What Makes AFN Different
               </h2>
 
-              <ul className="space-y-4 font-roboto text-[14px] sm:text-[15px] text-white leading-relaxed">
+              <ul className="space-y-3.5 font-roboto text-[15px] sm:text-[16px] lg:text-[18px] text-white leading-[22px] lg:leading-[25px]">
                 <li className="flex items-start gap-3">
                   <svg aria-hidden="true" className="w-5 h-5 fill-[#B1800F] shrink-0 mt-1" viewBox="0 0 512 512">
                     <path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"/>
@@ -360,158 +340,7 @@ export default function AboutUsPage() {
       </section>
 
       {/* SECTION 6: Meet The Instructors matching Elementor 08232a6 */}
-      <section className="bg-white py-[60px]">
-        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-          
-          <h2 
-            className="text-[28px] sm:text-[36px] font-semibold text-center text-[#000000] font-gabarito"
-            style={{ fontFamily: "'Gabarito', sans-serif" }}
-          >
-            Meet The Instructors
-          </h2>
-
-          {/* Instructor 1: Todd Grama (Image Left, Bio Right) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            <div className="lg:col-span-5 flex justify-center lg:justify-start">
-              <div className="w-full max-w-[380px]">
-                <Image
-                  src="/images/instructors/todd-grama.png"
-                  alt="Todd Grama - Co-Founder & Lead Instructor"
-                  width={480}
-                  height={640}
-                  priority
-                  className="w-full h-auto rounded-none shadow-none object-contain"
-                />
-              </div>
-            </div>
-
-            <div className="lg:col-span-7 space-y-4">
-              <div>
-                <h3 
-                  className="text-[26px] sm:text-[34px] font-semibold text-[#000000] font-gabarito uppercase leading-[40px]"
-                  style={{ fontFamily: "'Gabarito', sans-serif" }}
-                >
-                  TODD GRAMA
-                </h3>
-                <h4 
-                  className="text-[18px] sm:text-[22px] font-semibold text-[#000000] font-gabarito leading-[28px] mt-1"
-                  style={{ fontFamily: "'Gabarito', sans-serif" }}
-                >
-                  Co-Founder &amp; Lead Instructor
-                </h4>
-              </div>
-
-              <p className="text-[15px] sm:text-[16px] text-[#000000] font-roboto leading-relaxed text-justify">
-                Todd Grama is a co-founder of the American Firearms Network and a senior firearms instructor known for setting and enforcing high standards in defensive training and range operations. His work is focused on developing responsible, capable firearm users who understand that proficiency is built through discipline, structure, and accountability.
-              </p>
-              <p className="text-[15px] sm:text-[16px] text-[#000000] font-roboto leading-relaxed text-justify">
-                Todd’s instruction is methodical and performance-oriented. He emphasizes sound fundamentals, efficient mechanics, and clear decision-making—skills that remain reliable under stress. Students train under a system that prioritizes safety, legal awareness, and repeatable execution, ensuring progress is measurable and skills are transferable beyond the range.
-              </p>
-              <p className="text-[15px] sm:text-[16px] text-[#000000] font-roboto leading-relaxed text-justify">
-                With a career built on the dual pillars of tactical armed security and sophisticated range management, Todd brings a composed, authoritative presence to every course. He is respected for his attention to detail, clear communication, and ability to elevate students at every level without compromising standards. His leadership helps define the instructional consistency and professionalism that characterize AFN training.
-              </p>
-
-              <div className="pt-2 space-y-3">
-                <h4 
-                  className="text-[18px] sm:text-[20px] font-semibold text-[#000000] font-gabarito uppercase leading-[28px]"
-                  style={{ fontFamily: "'Gabarito', sans-serif" }}
-                >
-                  PROFESSIONAL CREDENTIALS
-                </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 text-[14px] sm:text-[15px] text-[#000000] font-roboto font-medium">
-                  <ul className="space-y-1">
-                    {toddCredentials.slice(0, 6).map((c, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <span className="shrink-0 select-none">•</span>
-                        <span className="flex-1">{c}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <ul className="space-y-1">
-                    {toddCredentials.slice(6).map((c, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <span className="shrink-0 select-none">•</span>
-                        <span className="flex-1">{c}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Instructor 2: Paul Gayle (Bio Left, Image Right) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-8 border-t border-black/10">
-            <div className="lg:col-span-7 space-y-4 order-2 lg:order-1">
-              <div>
-                <h3 
-                  className="text-[26px] sm:text-[34px] font-semibold text-[#000000] font-gabarito uppercase leading-[40px]"
-                  style={{ fontFamily: "'Gabarito', sans-serif" }}
-                >
-                  PAUL GAYLE
-                </h3>
-                <h4 
-                  className="text-[18px] sm:text-[22px] font-semibold text-[#000000] font-gabarito leading-[28px] mt-1"
-                  style={{ fontFamily: "'Gabarito', sans-serif" }}
-                >
-                  Co-Founder &amp; Lead Instructor
-                </h4>
-              </div>
-
-              <p className="text-[15px] sm:text-[16px] text-[#000000] font-roboto leading-relaxed text-justify">
-                Paul Gayle is a co-founder of the American Firearms Network and a senior firearms and combatives instructor with extensive experience in defensive training and physical skill development. His instruction prepares students for the practical realities of high-stress situations where control, movement, and judgment are critical.
-              </p>
-              <p className="text-[15px] sm:text-[16px] text-[#000000] font-roboto leading-relaxed text-justify">
-                Paul’s training integrates firearms proficiency with disciplined movement and weapon management. He focuses on helping students maintain effectiveness when conditions are dynamic—reinforcing control, situational awareness, and decision-making under pressure. His approach is structured, deliberate, and grounded in real-world application.
-              </p>
-              <p className="text-[15px] sm:text-[16px] text-[#000000] font-roboto leading-relaxed text-justify">
-                With decades of experience in martial arts and security-focused instruction, Paul brings a steady, professional teaching style that emphasizes reliability over speed and consistency over improvisation. He is known for reinforcing strong fundamentals, building physical confidence responsibly, and holding students to a standard that reflects real-world demands.
-              </p>
-
-              <div className="pt-2 space-y-3">
-                <h4 
-                  className="text-[18px] sm:text-[20px] font-semibold text-[#000000] font-gabarito uppercase leading-[28px]"
-                  style={{ fontFamily: "'Gabarito', sans-serif" }}
-                >
-                  PROFESSIONAL CREDENTIALS
-                </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 text-[14px] sm:text-[15px] text-[#000000] font-roboto font-medium">
-                  <ul className="space-y-1">
-                    {paulCredentials.filter((_, i) => [0, 2, 4, 6].includes(i)).map((c, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <span className="shrink-0 select-none">•</span>
-                        <span className="flex-1">{c}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <ul className="space-y-1">
-                    {paulCredentials.filter((_, i) => [1, 3, 5].includes(i)).map((c, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <span className="shrink-0 select-none">•</span>
-                        <span className="flex-1">{c}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5 order-1 lg:order-2 flex justify-center lg:justify-end">
-              <div className="w-full max-w-[340px]">
-                <Image
-                  src="/images/instructors/paul-gayle.webp"
-                  alt="Paul Gayle - Co-Founder & Lead Instructor"
-                  width={334}
-                  height={455}
-                  priority
-                  className="w-full h-auto rounded-none shadow-none object-contain"
-                />
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
+      <InstructorsSection bgClassName="bg-white" />
 
     </main>
   );
