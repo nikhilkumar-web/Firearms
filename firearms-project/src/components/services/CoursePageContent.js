@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Crosshair, Star, ShieldCheck, Scale } from 'lucide-react';
 
-const pillarIcons = [Crosshair, Star, ShieldCheck, Scale];
+const pillarIcons = [Crosshair, Star, Star, Crosshair];
 const iconMap = {
   crosshair: Crosshair,
   star: Star,

@@ -8,6 +8,47 @@ const MAX_FIELD_LENGTH = 500;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const ALLOWED_SOURCES = new Set(['contact-page', 'contact-popup', 'consultation-form', 'home-page']);
 
+// In-memory sliding window rate limiter: IP -> Array of timestamps
+const rateLimitMap = new Map();
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
+const MAX_REQUESTS_PER_MINUTE = 5;       // Max 5 submissions per minute per IP
+const EXTENDED_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
+const MAX_REQUESTS_PER_10MIN = 15;        // Max 15 submissions per 10 minutes per IP
+
+function isRateLimited(ip) {
+  if (!ip) return false;
+  const now = Date.now();
+  const timestamps = rateLimitMap.get(ip) || [];
+
+  // Filter timestamps within the 10-minute window
+  const recent = timestamps.filter((t) => now - t < EXTENDED_WINDOW_MS);
+
+  // Check 1-minute burst limit
+  const minuteCount = recent.filter((t) => now - t < RATE_LIMIT_WINDOW_MS).length;
+  if (minuteCount >= MAX_REQUESTS_PER_MINUTE) {
+    return { limited: true, retryAfter: 60 };
+  }
+
+  // Check 10-minute limit
+  if (recent.length >= MAX_REQUESTS_PER_10MIN) {
+    return { limited: true, retryAfter: 300 };
+  }
+
+  recent.push(now);
+  rateLimitMap.set(ip, recent);
+
+  // Cleanup old entries periodically to avoid memory growth
+  if (rateLimitMap.size > 2000) {
+    for (const [key, times] of rateLimitMap.entries()) {
+      if (times.every((t) => now - t >= EXTENDED_WINDOW_MS)) {
+        rateLimitMap.delete(key);
+      }
+    }
+  }
+
+  return { limited: false };
+}
+
 function cleanString(value) {
   return typeof value === 'string' ? value.trim() : '';
 }
@@ -34,6 +75,25 @@ async function verifyRecaptcha(token, remoteIp) {
 }
 
 export async function POST(request) {
+  const clientIp =
+    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    request.headers.get('x-real-ip') ||
+    '127.0.0.1';
+
+  // 1. IP Rate Limiting check
+  const rateCheck = isRateLimited(clientIp);
+  if (rateCheck.limited) {
+    return NextResponse.json(
+      { error: 'Too many submissions. Please wait a moment before trying again.' },
+      {
+        status: 429,
+        headers: {
+          'Retry-After': String(rateCheck.retryAfter),
+        },
+      }
+    );
+  }
+
   let body;
 
   try {
@@ -84,10 +144,7 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Invalid form source.' }, { status: 422 });
   }
 
-  const verification = await verifyRecaptcha(
-    recaptchaToken,
-    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
-  );
+  const verification = await verifyRecaptcha(recaptchaToken, clientIp);
   if (!verification.configured) {
     return NextResponse.json(
       { error: 'Spam protection is not configured. Please try again later.' },

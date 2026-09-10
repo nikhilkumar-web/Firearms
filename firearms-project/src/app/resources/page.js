@@ -2,8 +2,8 @@ import Image from 'next/image';
 import { caliberComparison, bulletTypes, channelVideos, resourceVideos, suggestedReadings } from '@/data/resourcesData';
 
 export const metadata = {
-  title: 'Resources | The American Firearms Network',
-  description: 'Master your ballistics, firearm safety, handgun ammunition guide, recommended tactical readings, and instructional training videos from American Firearms Network.',
+  title: "Firearms Resources & Ammo Guides | American Firearms Network",
+  description: "Explore firearms resources from American Firearms Network, including handgun ammunition guides, ballistics education, and safety insights.",
 };
 
 export default function ResourcesPage() {

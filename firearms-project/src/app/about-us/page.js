@@ -3,8 +3,8 @@ import SubscribeButton from '@/components/common/SubscribeButton';
 import InstructorsSection from '@/components/home/InstructorsSection';
 
 export const metadata = {
-  title: "About Us | American Firearms Network",
-  description: "Learn about American Firearms Network (AFN) in West Palm Beach, Florida. Setting the standard for responsible firearms training, safety, and defensive readiness.",
+  title: "About American Firearms Network | Professional Firearms Training",
+  description: "About American Firearms Network, a Florida-based organization offering professional firearms training, safety, and skill development.",
 };
 
 export default function AboutUsPage() {
