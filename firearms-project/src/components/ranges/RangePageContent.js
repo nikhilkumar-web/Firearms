@@ -112,7 +112,7 @@ export default function RangePageContent({ range }) {
                 }}
               >
                 <iframe
-                  src={`https://www.youtube-nocookie.com/embed/${id}?controls=1&rel=0`}
+                  src={`https://www.youtube.com/embed/${id}?controls=1&rel=0`}
                   title={`YouTube video ${idx + 1}`}
                   className="w-full h-full border-0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

@@ -57,10 +57,10 @@ export default function ResourcesPage() {
                 }}
               >
                 <iframe
-                  src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=0&controls=1&rel=0`}
+                  src={`https://www.youtube.com/embed/${video.id}?autoplay=0&controls=1&rel=0`}
                   title={video.title}
                   className="absolute inset-0 w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
                 />
@@ -403,10 +403,10 @@ export default function ResourcesPage() {
                 }}
               >
                 <iframe
-                  src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=0&controls=1&rel=0`}
+                  src={`https://www.youtube.com/embed/${video.id}?autoplay=0&controls=1&rel=0`}
                   title={video.title}
                   className="absolute inset-0 w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
                 />

@@ -3,6 +3,12 @@ import Link from 'next/link';
 import { Crosshair, Star, ShieldCheck, Scale } from 'lucide-react';
 
 const pillarIcons = [Crosshair, Star, ShieldCheck, Scale];
+const iconMap = {
+  crosshair: Crosshair,
+  star: Star,
+  shield: ShieldCheck,
+  scale: Scale,
+};
 
 function formatBulletWithBold(text) {
   if (!text || typeof text !== 'string') return text;
@@ -66,7 +72,7 @@ export default function CoursePageContent({ course }) {
                 className="w-full aspect-video rounded-[5px] overflow-hidden bg-black shadow-[0px_0px_10px_0px_rgba(0,0,0,0.6)]"
               >
                 <iframe
-                  src={`https://www.youtube-nocookie.com/embed/${id}?controls=1&rel=0`}
+                  src={`https://www.youtube.com/embed/${id}?controls=1&rel=0`}
                   title={`YouTube video ${idx + 1}`}
                   className="w-full h-full border-0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -137,6 +143,15 @@ export default function CoursePageContent({ course }) {
                   if (isTaglineRepeat) {
                     return <p key={idx}><b>{p}</b></p>;
                   }
+                  if (p.includes('<b') || p.includes('<strong')) {
+                    return (
+                      <p 
+                        key={idx} 
+                        className="[&_b]:font-bold [&_b]:text-black [&_strong]:font-bold [&_strong]:text-black"
+                        dangerouslySetInnerHTML={{ __html: p }} 
+                      />
+                    );
+                  }
                   const regex = /(The American Firearms Network \(AFN\)|American Firearms Network \(AFN\))/g;
                   if (regex.test(p)) {
                     const parts = p.split(regex);
@@ -155,6 +170,25 @@ export default function CoursePageContent({ course }) {
                   return <p key={idx}>{p}</p>;
                 })}
               </div>
+
+              {/* Subsections if present in overview (e.g. Situational Awareness) */}
+              {overview?.subsections && overview.subsections.length > 0 && (
+                <div className="space-y-4 pt-3 font-roboto">
+                  {overview.subsections.map((sub, sIdx) => (
+                    <div key={sIdx} className="space-y-1.5">
+                      <h4 
+                        className="text-[18px] sm:text-[20px] font-bold text-[#000000] font-gabarito leading-snug [&_b]:font-bold [&_b]:text-black"
+                        style={{ fontFamily: "'Gabarito', sans-serif" }}
+                        dangerouslySetInnerHTML={{ __html: sub.title }}
+                      />
+                      <p 
+                        className="font-roboto text-[15px] sm:text-[16px] leading-[22px] text-[#000000] font-normal [&_b]:font-bold [&_b]:text-black"
+                        dangerouslySetInnerHTML={{ __html: sub.description }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
 
               {/* Button matching Elementor 5f6c0f6 */}
               <div className="pt-5">
@@ -187,21 +221,29 @@ export default function CoursePageContent({ course }) {
 
         <div className="relative z-10 max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 
-            className="text-[26px] sm:text-[34px] lg:text-[44px] font-semibold text-white font-gabarito mb-2 sm:mb-3 leading-[32px] sm:leading-[42px] lg:leading-[52px]"
+            className={`text-[26px] sm:text-[34px] lg:text-[44px] font-semibold text-white font-gabarito leading-[32px] sm:leading-[42px] lg:leading-[52px] ${
+              whyTrain?.subtitle ? 'mb-2 sm:mb-3' : 'mb-6 sm:mb-8'
+            }`}
             style={{ fontFamily: "'Gabarito', sans-serif" }}
           >
             {whyTrain?.heading || 'Why Train with The American Firearms Network?'}
           </h2>
-          <p 
-            className="text-[#E2E6E8] font-roboto text-[15px] sm:text-[16px] max-w-3xl mx-auto mb-6 sm:mb-8 leading-relaxed"
-            style={{ fontFamily: "'Roboto', sans-serif" }}
-          >
-            {whyTrain?.subtitle}
-          </p>
+          {whyTrain?.subtitle && (
+            <p 
+              className="text-[#E2E6E8] font-roboto text-[15px] sm:text-[16px] max-w-3xl mx-auto mb-6 sm:mb-8 leading-relaxed"
+              style={{ fontFamily: "'Roboto', sans-serif" }}
+            >
+              {whyTrain.subtitle}
+            </p>
+          )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+          <div className={`grid gap-5 sm:gap-6 ${
+            (whyTrain?.pillars || []).length === 3
+              ? 'grid-cols-1 md:grid-cols-3 max-w-[1240px] mx-auto'
+              : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
+          }`}>
             {(whyTrain?.pillars || []).map((pillar, idx) => {
-              const IconComp = pillarIcons[idx % pillarIcons.length];
+              const IconComp = (pillar.icon && iconMap[pillar.icon]) || pillarIcons[idx % pillarIcons.length];
               return (
                 <div 
                   key={idx}
@@ -217,17 +259,15 @@ export default function CoursePageContent({ course }) {
                     <IconComp className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
                   <h3 
-                    className="text-[17px] sm:text-[18px] font-bold text-white font-gabarito mb-2 leading-snug"
+                    className="text-[17px] sm:text-[18px] font-bold text-white font-gabarito mb-2 leading-snug [&_b]:font-bold [&_b]:text-[#FDD247]"
                     style={{ fontFamily: "'Gabarito', sans-serif" }}
-                  >
-                    {pillar.title}
-                  </h3>
+                    dangerouslySetInnerHTML={{ __html: pillar.title }}
+                  />
                   <p 
-                    className="text-[#E0E0E0] font-roboto text-[14px] leading-[22px] font-normal"
+                    className="text-[#E0E0E0] font-roboto text-[14px] leading-[22px] font-normal [&_b]:font-bold [&_b]:text-white"
                     style={{ fontFamily: "'Roboto', sans-serif" }}
-                  >
-                    {pillar.description}
-                  </p>
+                    dangerouslySetInnerHTML={{ __html: pillar.description }}
+                  />
                 </div>
               );
             })}
@@ -269,9 +309,10 @@ export default function CoursePageContent({ course }) {
                         {sec.title}
                       </h3>
                       {sec.subtitle && (
-                        <p className="font-roboto text-[15px] sm:text-[16px] text-[#000000] leading-relaxed">
-                          {sec.subtitle}
-                        </p>
+                        <p 
+                          className="font-roboto text-[15px] sm:text-[16px] text-[#000000] leading-relaxed [&_b]:font-bold [&_b]:text-black [&_strong]:font-bold [&_strong]:text-black"
+                          dangerouslySetInnerHTML={{ __html: sec.subtitle }}
+                        />
                       )}
                       {sec.bullets && sec.bullets.length > 0 && (
                         <ul className="list-disc pl-5 space-y-1 font-roboto text-[15px] sm:text-[16px] text-[#000000] leading-relaxed [&_b]:font-bold [&_b]:text-black [&_strong]:font-bold [&_strong]:text-black">

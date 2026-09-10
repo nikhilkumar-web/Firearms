@@ -106,7 +106,7 @@ export default function GalleryPage() {
                 >
                   {isPlaying ? (
                     <iframe
-                      src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&controls=1&rel=0&playsinline=1`}
+                      src={`https://www.youtube.com/embed/${video.id}?autoplay=1&controls=1&rel=0&playsinline=1`}
                       title={video.title}
                       className="absolute inset-0 w-full h-full"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -178,7 +178,7 @@ export default function GalleryPage() {
                 >
                   {isPlaying ? (
                     <iframe
-                      src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&controls=1&rel=0&playsinline=1`}
+                      src={`https://www.youtube.com/embed/${video.id}?autoplay=1&controls=1&rel=0&playsinline=1`}
                       title={video.title}
                       className="absolute inset-0 w-full h-full"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

@@ -167,11 +167,11 @@ function ContactContent() {
 
       {/* 2. MAIN CONTENT SECTION (Elementor 7602af6) */}
       <section className="py-[30px] sm:py-[50px] px-3 sm:px-6 lg:px-8">
-        <div className="max-w-[1300px] mx-auto flex flex-col lg:flex-row gap-[20px] items-start">
+        <div className="max-w-[1300px] mx-auto flex flex-col lg:flex-row gap-[20px] items-stretch">
           
           {/* LEFT COLUMN: Icon Box + Contact Form + Map (Elementor 4162ce8 - 64.153%) */}
           <div 
-            className="w-full lg:w-[64.153%] bg-[#FFFFFF] p-4 sm:p-7 rounded-[15px]"
+            className="w-full lg:w-[64.153%] bg-[#FFFFFF] p-4 sm:p-7 rounded-[15px] flex flex-col justify-between"
             style={{
               boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.3)'
             }}
@@ -196,7 +196,7 @@ function ContactContent() {
             </div>
 
             {/* Contact Form 7 Grid (Elementor d496ffd) */}
-            <div className="max-w-[800px] mx-auto">
+            <div className="max-w-[800px] mx-auto w-full flex-1 flex flex-col justify-between">
               {submitted ? (
                 <div className="p-8 text-center bg-[#f7faf7] border border-green-200 rounded-[10px] my-6">
                   <CheckCircle className="w-12 h-12 text-green-600 mx-auto mb-3" />
@@ -225,7 +225,7 @@ function ContactContent() {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="cf7-grid space-y-3 sm:space-y-4">
+                <form onSubmit={handleSubmit} className="cf7-grid space-y-3 sm:space-y-4 flex-1 flex flex-col justify-between">
                   {/* Row 1: Name & Phone Number */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
@@ -317,14 +317,14 @@ function ContactContent() {
                   </div>
 
                   {/* Row 4: Remarks Textarea */}
-                  <div>
+                  <div className="flex-1 flex flex-col min-h-[176px]">
                     <textarea
                       name="remarks"
                       rows={6}
                       value={formData.remarks}
                       onChange={handleChange}
                       placeholder="Any Remarks?"
-                      className="w-full h-[100px] sm:h-[176px] p-[14px] border border-[#d1d1d1] rounded-[5px] bg-[#fcfcfc] text-[16px] text-black placeholder:text-black placeholder:text-[14px] focus:outline-none focus:border-black focus:bg-white transition-all shadow-none resize-y"
+                      className="w-full flex-1 min-h-[176px] p-[14px] border border-[#d1d1d1] rounded-[5px] bg-[#fcfcfc] text-[16px] text-black placeholder:text-black placeholder:text-[14px] focus:outline-none focus:border-black focus:bg-white transition-all shadow-none resize-y"
                     />
                   </div>
 
@@ -364,7 +364,7 @@ function ContactContent() {
 
             {/* Google Maps Embed (Elementor e7aacaf / 7811658) */}
             <div 
-              className="mt-[20px] sm:mt-[25px] rounded-[10px] overflow-hidden h-[211px] sm:h-[276px] w-full"
+              className="mt-[20px] sm:mt-[25px] rounded-[10px] overflow-hidden h-[211px] sm:h-[276px] w-full shrink-0"
               style={{
                 boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.24)'
               }}
@@ -382,54 +382,51 @@ function ContactContent() {
 
           {/* RIGHT COLUMN: Subscribe to YouTube Channel (Elementor d4d1ca4 - 35.77%) */}
           <div 
-            className="w-full lg:w-[35.77%] bg-[#FFFFFF] p-4 sm:p-7 rounded-[15px] flex flex-col"
+            className="w-full lg:w-[35.77%] bg-[#FFFFFF] p-4 sm:p-7 rounded-[15px] flex flex-col justify-between"
             style={{
               boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.3)'
             }}
           >
-            {/* Heading (Elementor 1ce80ec) */}
-            <h2 
-              className="text-[24px] sm:text-[28px] lg:text-[30px] font-semibold text-[#000000] text-center leading-[30px] sm:leading-[34px] lg:leading-[38px] mb-1"
-              style={{ fontFamily: "'Gabarito', sans-serif" }}
-            >
-              Subscribe To Our Youtube Channel
-            </h2>
+            <div>
+              {/* Heading (Elementor 1ce80ec) */}
+              <h2 
+                className="text-[24px] sm:text-[28px] lg:text-[30px] font-semibold text-[#000000] text-center leading-[30px] sm:leading-[34px] lg:leading-[38px] mb-2"
+                style={{ fontFamily: "'Gabarito', sans-serif" }}
+              >
+                Subscribe To Our Youtube Channel
+              </h2>
 
-            {/* 4 Video Cards */}
-            <div className="space-y-[20px] mt-2">
-              {RIGHT_VIDEOS.map((id, index) => (
-                <div 
-                  key={index}
-                  className="w-full aspect-[16/9] rounded-[5px] overflow-hidden"
-                  style={{
-                    boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.6)'
-                  }}
-                >
-                  <iframe
-                    src={`https://www.youtube-nocookie.com/embed/${id}?rel=0`}
-                    title={`YouTube video ${index + 1}`}
-                    className="w-full h-full border-0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                    loading="lazy"
-                  />
-                </div>
-              ))}
+              {/* 4 Video Cards */}
+              <div className="space-y-[20px] mt-2">
+                {RIGHT_VIDEOS.map((id, index) => (
+                  <div 
+                    key={index}
+                    className="w-full aspect-[16/9] rounded-[5px] overflow-hidden"
+                    style={{
+                      boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.6)'
+                    }}
+                  >
+                    <iframe
+                      src={`https://www.youtube.com/embed/${id}?rel=0`}
+                      title={`YouTube video ${index + 1}`}
+                      className="w-full h-full border-0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Subscribe Button (Elementor 3fe3177) */}
-            <div className="pt-[10px] sm:pt-[20px] text-center">
+            <div className="pt-[15px] sm:pt-[20px] mt-auto text-center">
               <a
                 href="https://www.youtube.com/@AMERICANFIREARMSNETWORKS?sub_confirmation=1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-[20px] sm:px-[30px] lg:px-[40px] py-[10px] sm:py-[12px] text-[14px] leading-[18px] font-medium text-white uppercase tracking-wider rounded-[5px] transition-transform duration-200 hover:scale-[1.02]"
-                style={{
-                  backgroundImage: 'linear-gradient(219deg, #EB0F06 0%, #E70C0C 67%)',
-                  border: '2px solid #A5AAAB',
-                  fontFamily: "'Roboto', sans-serif"
-                }}
+                className="btn-tactical-red gap-2.5 px-[30px] lg:px-[40px] py-[12px] text-[15px] leading-[15px] font-medium text-white uppercase tracking-wider rounded-[3px]"
               >
                 <span>SUBSCRIBE NOW</span>
                 <svg 

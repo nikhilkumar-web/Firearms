@@ -125,7 +125,7 @@ export const courses = [
           "title": "2. The Legalities of Self-Defense",
           "subtitle": "The most critical part of our course. We cover:",
           "bullets": [
-            "The \"Castle Doctrine\" and \"Stand Your Ground\" laws.",
+            "The <b>\"Castle Doctrine\" and \"Stand Your Ground\"</b> laws.",
             "The definition of \"imminent threat\" and \"deadly force.\"",
             "Prohibited carry locations (Federal buildings, schools, etc.).",
             "Interacting with Law Enforcement while carrying."
@@ -200,7 +200,7 @@ export const courses = [
         },
         {
           "title": "2. Handgun Anatomy & Operation",
-          "subtitle": "Understand the difference between revolvers and semi-automatics. We break down:",
+          "subtitle": "Understand the difference between <b>revolvers</b> and <b>semi-automatics</b>. We break down:",
           "bullets": [
             "Action types and triggers.",
             "Magazine loading and unloading.",
@@ -281,7 +281,7 @@ export const courses = [
         },
         {
           "title": "2. High-Stress Malfunction Clearance",
-          "subtitle": "When your firearm fails in a fight, you don't have time to think. We drill Type 1, Type 2, and Type 3 (Double Feed) clearances until they are subconscious reactions, even when one-handed or under physical exertion.",
+          "subtitle": "When your firearm fails in a fight, you don't have time to think. We drill <b> Type 1, Type 2, and Type 3 (Double Feed) </b> clearances until they are subconscious reactions, even when one-handed or under physical exertion.",
           "bullets": []
         },
         {
@@ -319,7 +319,17 @@ export const courses = [
       "tagline": "The Best Way to Win a Fight is to Never Be There in the First Place.",
       "paragraphs": [
         "The most important tool for your protection isn't carried in a holster—it sits between your ears. At The American Firearms Network (AFN), we believe that tactical proficiency is incomplete without the \"Left of Bang\" skills required to identify, avoid, and de-escalate threats before they turn violent.",
-        "Our Situational Awareness (SA) Training is designed for everyone: from corporate professionals and solo travelers to concealed carry holders who understand that a firearm is always the last resort, not the first."
+        "Our <b>Situational Awareness (SA)</b> Training is designed for everyone: from corporate professionals and solo travelers to concealed carry holders who understand that a firearm is always the last resort, not the first."
+      ],
+      "subsections": [
+        {
+          "title": "What is Situational Awareness?",
+          "description": "Situational awareness is the ability to perceive, understand, and anticipate environmental elements and events. In a self-defense context, it means recognizing the \"pre-attack indicators\" that most people miss because they are distracted by their phones or surroundings."
+        },
+        {
+          "title": "The AFN Mindset: <b>The OODA Loop</b>",
+          "description": "We teach the legendary <b>OODA Loop</b> (Observe, Orient, Decide, Act) framework, used by elite military units and law enforcement to make split-second decisions in high-stakes environments."
+        }
       ],
       "image": "https://american-firearms.s3-eu-central-2.ionoscloud.com/images/services/situational-awareness-training-overview.webp"
     },
@@ -328,12 +338,12 @@ export const courses = [
       "subtitle": "Situational awareness is the ability to perceive, understand, and anticipate environmental elements and events. In a self-defense context, it means recognizing the \"pre-attack indicators\" that most people miss because they are distracted by their phones or surroundings.",
       "pillars": [
         {
-          "title": "What is Situational Awareness?",
-          "description": "Situational awareness is the ability to perceive, understand, and anticipate environmental elements and events. In a self-defense context, it means recognizing the \"pre-attack indicators\" that most people miss because they are distracted by their phones or surroundings."
+          "title": "Pre-Attack Indicators",
+          "description": "Learn to detect body language shifts, glancing behavior, and staging movements before an encounter initiates."
         },
         {
-          "title": "The AFN Mindset: The OODA Loop",
-          "description": "We teach the legendary OODA Loop (Observe, Orient, Decide, Act) framework, used by elite military units and law enforcement to make split-second decisions in high-stakes environments."
+          "title": "The <b>OODA Loop</b> Mindset",
+          "description": "We teach the legendary <b>OODA Loop</b> (Observe, Orient, Decide, Act) framework used to make split-second tactical decisions."
         },
         {
           "title": "Preventing Conflict",
@@ -410,7 +420,7 @@ export const courses = [
     },
     "whyTrain": {
       "heading": "Why Train With The American Firearms Network?",
-      "subtitle": "At AFN, our tactical programs are designed to provide the tactical edge through elite standards:",
+      "subtitle": "While many states have moved toward \"Constitutional Carry,\" holding a formal Concealed Carry Permit remains the best practice for serious shooters.",
       "pillars": [
         {
           "title": "Combat-Experienced Instructors",
@@ -423,10 +433,6 @@ export const courses = [
         {
           "title": "Force-on-Force Training",
           "description": "Where available, we utilize non-lethal marking rounds (Simunitions) to provide the most realistic \"opponent-based\" training possible."
-        },
-        {
-          "title": "Stress Inoculation & Tactics",
-          "description": "We build subconscious competence under high heart rate and adrenaline conditions so your training holds up in real-life conflict."
         }
       ]
     },
@@ -484,7 +490,7 @@ export const courses = [
       "tagline": "Empowerment Through Education. Confidence Through Proficiency.",
       "paragraphs": [
         "At The American Firearms Network (AFN), we recognize that the fastest-growing demographic of firearm owners is women. We also understand that many women prefer a training environment that is supportive, ego-free, and tailored to their specific needs.",
-        "Our Women’s Only Firearms Training program is designed by women, for women. Whether you are interested in home defense, personal protection, or recreational shooting, our courses provide a comfortable space to ask questions, build skills, and join a community of like-minded, empowered women."
+        "Our <b>Women’s Only Firearms Training</b> program is designed by women, for women. Whether you are interested in home defense, personal protection, or recreational shooting, our courses provide a comfortable space to ask questions, build skills, and join a community of like-minded, empowered women."
       ],
       "image": "https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/gallery-pistol-fundamentals.webp"
     },
@@ -560,7 +566,7 @@ export const courses = [
       "tagline": "Education is the Best Safety Lock. Empowering the Next Generation of Responsible Citizens.",
       "paragraphs": [
         "At The American Firearms Network (AFN), we believe that curiosity without education is a safety risk. For families who choose to have firearms in the home, the most effective way to prevent accidents is through early, age-appropriate education.",
-        "Our Youth Firearms Safety Courses are designed to demystify firearms, remove the \"curiosity factor,\" and instill a lifelong respect for safety. We provide a non-political, safety-first environment where children and teenagers can learn the gravity of firearm handling under the guidance of certified professionals."
+        "Our <b>Youth Firearms Safety Courses</b> are designed to demystify firearms, remove the \"curiosity factor,\" and instill a lifelong respect for safety. We provide a non-political, safety-first environment where children and teenagers can learn the gravity of firearm handling under the guidance of certified professionals."
       ],
       "image": "https://american-firearms.s3-eu-central-2.ionoscloud.com/images/services/youth-firearms-safety-courses-overview.webp"
     },
@@ -592,7 +598,7 @@ export const courses = [
       "sections": [
         {
           "title": "1. The \"Stop, Don't Touch\" Program (Ages 5–10)",
-          "subtitle": "Designed for younger children, this curriculum focuses on the NRA Eddie Eagle GunSafe® principles. We use engaging, age-appropriate methods to teach the four vital steps:",
+          "subtitle": "Designed for younger children, this curriculum focuses on the <b>NRA Eddie Eagle GunSafe®</b> principles. We use engaging, age-appropriate methods to teach the four vital steps:",
           "bullets": [
             "STOP!",
             "Don’t Touch.",
@@ -641,24 +647,28 @@ export const courses = [
       "image": "https://american-firearms.s3-eu-central-2.ionoscloud.com/images/reviews/caucasian-woman-observing-black-male-instructor.webp"
     },
     "whyTrain": {
-      "heading": "The AFN Private Coaching Advantage",
-      "subtitle": "Why settle for a \"one-size-fits-all\" curriculum? Private instruction allows for a deep dive into the specific mechanics and mental hurdles unique to you.",
+      "heading": "How It Works",
+      "subtitle": "",
       "pillars": [
         {
-          "title": "100% Instructor Focus",
-          "description": "Receive real-time, frame-by-frame feedback on every shot you fire."
+          "title": "Consultation",
+          "description": "We discuss your current experience level and specific goals.",
+          "icon": "crosshair"
         },
         {
-          "title": "Customized Curriculum",
-          "description": "Skip what you already know. We focus exclusively on the skills you want to build, from concealed carry draws to long-range precision."
+          "title": "Instructor Match",
+          "description": "We pair you with an AFN-certified specialist (e.g., a female instructor for women's safety, or a former LEO for tactical training).",
+          "icon": "star"
         },
         {
-          "title": "Discreet & Professional",
-          "description": "We offer flexible scheduling and private range bays for those who value privacy and a distraction-free environment."
+          "title": "Range Session",
+          "description": "You meet at a premier AFN partner facility for high-intensity, focused coaching.",
+          "icon": "star"
         },
         {
-          "title": "Rapid Skill Acquisition",
-          "description": "Students in private instruction typically achieve in two hours what takes eight hours in a traditional group setting."
+          "title": "After-Action Report",
+          "description": "Receive a digital summary of your progress and a \"Homework\" drill plan to maintain your skills.",
+          "icon": "crosshair"
         }
       ]
     },
@@ -691,7 +701,7 @@ export const courses = [
           "bullets": []
         }
       ],
-      "image": "https://american-firearms.s3-eu-central-2.ionoscloud.com/images/gallery/gallery-tactical-movement.webp"
+      "image": "https://americanfirearmsnetwork.com/wp-content/uploads/2026/01/TheFirearmsLearningAnnex_img8-800h.webp"
     }
   },
   {
