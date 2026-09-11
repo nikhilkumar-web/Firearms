@@ -52,21 +52,14 @@ export default function ServicesOverview() {
             }}
             className="group relative overflow-hidden flex flex-col justify-between text-center transition-all duration-300 hover:scale-[1.01] hover:border-[#D4A017] hover:shadow-[0_0_16px_#C08C15]"
           >
-            {/* Background Image on Hover (matching live site military tactical rifle position) */}
+            {/* Background Image on Hover (Smooth slide-up from bottom with constant brightness) */}
             <div 
-              className="absolute inset-0 bg-cover bg-center transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100 pointer-events-none"
+              className="absolute inset-0 transition-transform duration-500 ease-out translate-y-full group-hover:translate-y-0 pointer-events-none"
               style={{
-                backgroundImage: "url('https://american-firearms.s3-eu-central-2.ionoscloud.com/images/home/military-tactical-strategy-rifle-position.webp')",
+                backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.72)), url('https://american-firearms.s3-eu-central-2.ionoscloud.com/images/home/military-tactical-strategy-rifle-position.webp')",
                 backgroundPosition: 'center center',
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover'
-              }}
-            />
-            {/* Dark Overlay on Hover (0.84 opacity matching Elementor) */}
-            <div 
-              className="absolute inset-0 transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100 pointer-events-none"
-              style={{
-                backgroundColor: 'rgba(0, 0, 0, 0.84)'
               }}
             />
 
@@ -111,21 +104,14 @@ export default function ServicesOverview() {
             }}
             className="group relative overflow-hidden flex flex-col justify-between text-center transition-all duration-300 hover:scale-[1.01] hover:border-[#D4A017] hover:shadow-[0_0_16px_#C08C15]"
           >
-            {/* Background Image on Hover (matching live site military tactical rifle position) */}
+            {/* Background Image on Hover (Smooth slide-up from bottom with constant brightness) */}
             <div 
-              className="absolute inset-0 bg-cover bg-center transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100 pointer-events-none"
+              className="absolute inset-0 transition-transform duration-500 ease-out translate-y-full group-hover:translate-y-0 pointer-events-none"
               style={{
-                backgroundImage: "url('https://american-firearms.s3-eu-central-2.ionoscloud.com/images/home/military-tactical-strategy-rifle-position.webp')",
+                backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.72)), url('https://american-firearms.s3-eu-central-2.ionoscloud.com/images/home/military-tactical-strategy-rifle-position.webp')",
                 backgroundPosition: 'center center',
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover'
-              }}
-            />
-            {/* Dark Overlay on Hover (0.84 opacity matching Elementor) */}
-            <div 
-              className="absolute inset-0 transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100 pointer-events-none"
-              style={{
-                backgroundColor: 'rgba(0, 0, 0, 0.84)'
               }}
             />
 

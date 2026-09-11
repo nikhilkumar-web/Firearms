@@ -38,6 +38,28 @@ export default function GalleryPreview() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [lightboxIndex, showPrev, showNext]);
 
+  // Preload all 16 full-res gallery images into browser cache so lightbox navigation is instant
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      galleryImages.forEach((item) => {
+        const img = new window.Image();
+        img.src = item.src;
+      });
+    }
+  }, []);
+
+  // Prioritize adjacent images whenever lightbox index changes
+  useEffect(() => {
+    if (lightboxIndex !== null && typeof window !== 'undefined') {
+      const len = galleryImages.length;
+      [-2, -1, 1, 2].forEach((offset) => {
+        const targetIdx = (lightboxIndex + offset + len) % len;
+        const img = new window.Image();
+        img.src = galleryImages[targetIdx].src;
+      });
+    }
+  }, [lightboxIndex]);
+
   // Distribute into 4 balanced columns for Desktop (lg >= 1024px)
   const columnsDesktop = Array.from({ length: 4 }, () => []);
   galleryImages.forEach((item, index) => {
@@ -206,9 +228,11 @@ export default function GalleryPreview() {
             <div className="relative max-w-full max-h-[75vh] overflow-hidden rounded-md shadow-2xl bg-black flex items-center justify-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
+                key={galleryImages[lightboxIndex].src}
                 src={galleryImages[lightboxIndex].src}
                 alt={galleryImages[lightboxIndex].alt}
-                className="max-w-full max-h-[75vh] w-auto h-auto object-contain select-none"
+                decoding="async"
+                className="max-w-full max-h-[75vh] w-auto h-auto object-contain select-none animate-in fade-in duration-150"
               />
             </div>
             
@@ -233,6 +257,14 @@ export default function GalleryPreview() {
           </button>
         </div>
       )}
+
+      {/* Hidden preloaded image cache for instant zero-latency navigation */}
+      <div className="hidden pointer-events-none" aria-hidden="true">
+        {galleryImages.map((img) => (
+          <img key={`preload-${img.id}`} src={img.src} alt="" loading="eager" decoding="async" />
+        ))}
+      </div>
+
     </section>
   );
 }

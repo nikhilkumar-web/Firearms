@@ -24,7 +24,7 @@ export default function LiabilityWaiverReleaseOfIndemnityPage() {
           style={{ backgroundColor: '#000000', opacity: 0.80 }}
         />
 
-        <div className="relative z-10 max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 
             className="text-[26px] sm:text-[40px] font-bold uppercase text-white tracking-wide leading-tight"
             style={{ fontFamily: "'Gabarito', sans-serif" }}
@@ -36,7 +36,7 @@ export default function LiabilityWaiverReleaseOfIndemnityPage() {
 
       {/* 2. CLEAN READABLE DOCUMENT BODY */}
       <section className="py-[35px] sm:py-[55px] px-4 sm:px-6 lg:px-8">
-        <div className="max-w-[960px] mx-auto bg-white p-6 sm:p-12 md:p-14 rounded-xl border border-gray-200/90 shadow-sm text-[15.5px] sm:text-[16px] leading-[1.8] text-[#2b2b2b] space-y-6">
+        <div className="max-w-[1200px] mx-auto bg-white p-6 sm:p-12 md:p-14 rounded-xl border border-gray-200/90 shadow-sm text-[15.5px] sm:text-[16px] leading-[1.8] text-[#2b2b2b] space-y-6">
 
           {/* DATES META BAR */}
           <div className="flex flex-wrap items-center gap-3 sm:gap-5 pb-5 border-b border-gray-100">
