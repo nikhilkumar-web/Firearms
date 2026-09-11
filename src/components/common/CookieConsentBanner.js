@@ -1,16 +1,38 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function CookieConsentBanner() {
-  const [showBanner, setShowBanner] = useState(true);
+  const [showBanner, setShowBanner] = useState(false);
+
+  useEffect(() => {
+    try {
+      const consent = localStorage.getItem("cookie_consent");
+      if (consent !== "accepted") {
+        setShowBanner(true);
+      }
+    } catch {
+      setShowBanner(true);
+    }
+  }, []);
 
   const handleAcceptAll = () => {
+    try {
+      localStorage.setItem("cookie_consent", "accepted");
+    } catch (e) {
+      console.error("Failed to save cookie consent to localStorage:", e);
+    }
     setShowBanner(false);
   };
 
   const handleReject = () => {
+    // When rejected, do not save "accepted" to localStorage so it reappears on reload or next visit
+    try {
+      localStorage.removeItem("cookie_consent");
+    } catch {
+      // ignore
+    }
     setShowBanner(false);
   };
 
