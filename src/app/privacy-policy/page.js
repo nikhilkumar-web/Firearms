@@ -24,19 +24,19 @@ export default function PrivacyPolicyPage() {
           style={{ backgroundColor: '#000000', opacity: 0.80 }}
         />
 
-        <div className="relative z-10 max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 
-            className="text-[28px] sm:text-[42px] font-bold uppercase text-white tracking-wide leading-tight"
+            className="text-[28px] sm:text-[42px] font-bold text-white tracking-wide leading-tight"
             style={{ fontFamily: "'Gabarito', sans-serif" }}
           >
-            PRIVACY POLICY
+            Privacy Policy
           </h1>
         </div>
       </section>
 
       {/* 2. CLEAN READABLE DOCUMENT BODY */}
       <section className="py-[35px] sm:py-[55px] px-4 sm:px-6 lg:px-8">
-        <div className="max-w-[960px] mx-auto bg-white p-6 sm:p-12 md:p-14 rounded-xl border border-gray-200/90 shadow-sm text-[15.5px] sm:text-[16px] leading-[1.8] text-[#2b2b2b] space-y-6">
+        <div className="max-w-[1200px] mx-auto bg-white p-6 sm:p-12 md:p-14 rounded-xl border border-gray-200/90 shadow-sm text-[15.5px] sm:text-[16px] leading-[1.8] text-[#2b2b2b] space-y-6">
 
           {/* DATES META BAR */}
           <div className="flex flex-wrap items-center gap-3 sm:gap-5 pb-5 border-b border-gray-100">
@@ -85,7 +85,7 @@ export default function PrivacyPolicyPage() {
             <p className="font-bold text-black mb-2">
               <b>Personal Identifiable Information (PII):</b>
             </p>
-            <ul className="list-disc pl-6 space-y-2 mb-4 text-[#222222]">
+            <ul className="list-disc pl-6 space-y-2 text-[#222222]">
               <li>
                 <b>User-Provided Contact Details:</b>
                 <span style={{ fontWeight: 400 }}> We collect information you voluntarily provide when submitting inquiries via our contact forms, including your </span>
@@ -98,21 +98,20 @@ export default function PrivacyPolicyPage() {
               </li>
               <li>
                 <b>Training &amp; Eligibility Data:</b>
-                <span style={{ fontWeight: 400 }}> Information regarding your interest in specific courses, current firearm experience level, and age-verification data required for “Age-Gate” restricted events</span>
-              </li>
-            </ul>
-
-            <p className="font-bold text-black mb-2">
-              <b>Automatically Collected Technical Data:</b>
-            </p>
-            <ul className="list-disc pl-6 space-y-2 text-[#222222]">
-              <li>
-                <b>Usage and Device Information:</b>
-                <span style={{ fontWeight: 400 }}> We automatically collect data such as your IP address, browser type, operating system, access times, and referring website addresses to maintain the quality and security of our platform.</span>
+                <span style={{ fontWeight: 400 }}> Information regarding your interest in specific courses, current firearm experience level, and age-verification data required for “Age Gate” restricted events</span>
               </li>
               <li>
-                <b>Cookies and Tracking Technologies:</b>
-                <span style={{ fontWeight: 400 }}> We utilize cookies and third-party analytics (such as Google and Facebook) to monitor site performance, manage marketing campaigns, and deliver customized content.</span>
+                <b>Automatically Collected Technical Data:</b>
+                <ul className="list-circle pl-6 mt-2 space-y-2" style={{ listStyleType: 'circle' }}>
+                  <li>
+                    <b>Usage and Device Information:</b>
+                    <span style={{ fontWeight: 400 }}> We automatically collect data such as your IP address, browser type, operating system, access times, and referring website addresses to maintain the quality and security of our platform.</span>
+                  </li>
+                  <li>
+                    <b>Cookies and Tracking Technologies:</b>
+                    <span style={{ fontWeight: 400 }}> We utilize cookies and third-party analytics (such as Google and Facebook) to monitor site performance, manage marketing campaigns, and deliver customized content.</span>
+                  </li>
+                </ul>
               </li>
             </ul>
           </div>

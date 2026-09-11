@@ -65,8 +65,14 @@ function ContactContent() {
         state: value,
         cityLocation: '',
       }));
+    } else if (name === 'name') {
+      const cleaned = value.replace(/[^a-zA-Z\s]/g, '');
+      setFormData((prev) => ({
+        ...prev,
+        name: cleaned,
+      }));
     } else if (name === 'phone') {
-      const cleaned = value.replace(/[^\d\s\-\(\)\+]/g, '').slice(0, 16);
+      const cleaned = value.replace(/\D/g, '').slice(0, 10);
       setFormData((prev) => ({
         ...prev,
         phone: cleaned,
@@ -233,6 +239,8 @@ function ContactContent() {
                         type="text"
                         name="name"
                         required
+                        pattern="^[a-zA-Z\s]+$"
+                        title="Name should only contain letters"
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="Name"
@@ -245,6 +253,8 @@ function ContactContent() {
                         name="phone"
                         required
                         inputMode="numeric"
+                        maxLength={10}
+                        pattern="[0-9]{10}"
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="Phone Number (10 digits)"

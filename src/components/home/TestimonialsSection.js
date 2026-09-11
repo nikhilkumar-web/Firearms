@@ -6,12 +6,12 @@ import Link from 'next/link';
 const testimonials = [
   {
     name: 'Sarah M., Colorado',
-    rating: 5,
+    rating: 4.5,
     text: 'As a first-time gun owner, I was overwhelmed by the amount of conflicting information online. The American Firearms Network provided clear, concise, and—most importantly—safe guidance. Their commitment to responsible ownership is exactly what the community needs.'
   },
   {
     name: 'Renee Howard',
-    rating: 5,
+    rating: 4.5,
     text: '"I’ve been a member of several forums over the years, but the quality of discussion on AFN is unmatched. It’s a professional environment where experts and beginners can actually talk without the typical internet noise. It’s my go-to hub for staying informed."'
   }
 ];
@@ -60,9 +60,25 @@ export default function TestimonialsSection() {
           {/* Left Column: Testimonial Slider matching Elementor 645db449 */}
           <div className="space-y-6 flex flex-col justify-center text-center">
             <div className="min-h-[190px] flex flex-col justify-center items-center">
-              {/* 5 Gold Stars */}
-              <div className="flex text-[#FFD315] text-[22px] tracking-wider mb-3">
-                {'★'.repeat(testimonials[currentIndex].rating)}
+              {/* 4.5 Gold Stars (4 Full Stars + 1 Half Star) */}
+              <div className="flex items-center justify-center gap-1 text-[#FFD315] mb-3">
+                {[...Array(Math.floor(testimonials[currentIndex].rating))].map((_, i) => (
+                  <svg key={`full-${i}`} className="w-[22px] h-[22px] fill-[#FFD315]" viewBox="0 0 24 24">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                  </svg>
+                ))}
+                {testimonials[currentIndex].rating % 1 !== 0 && (
+                  <div className="relative w-[22px] h-[22px]">
+                    <svg className="absolute inset-0 w-[22px] h-[22px] fill-white/25" viewBox="0 0 24 24">
+                      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                    </svg>
+                    <div className="absolute inset-0 overflow-hidden w-[50%]">
+                      <svg className="w-[22px] h-[22px] fill-[#FFD315]" viewBox="0 0 24 24">
+                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Quote text */}

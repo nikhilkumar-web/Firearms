@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { subscribeVideos, galleryShorts, galleryImages } from '@/data/gallery';
-import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react';
 
 export default function GalleryPage() {
   const [lightboxIndex, setLightboxIndex] = useState(null);
@@ -39,19 +39,39 @@ export default function GalleryPage() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [lightboxIndex, showPrev, showNext]);
 
-  // Exact 3-column placement matching Elementor Isotope masonry for Desktop (>= 1024px)
-  // Col 1: items 1, 6, 8, 11, 14
-  // Col 2: items 2, 4, 9, 12, 15
-  // Col 3: items 3, 5, 7, 10, 13, 16
-  const colDesktop1 = [0, 5, 7, 10, 13].map((idx) => ({ item: galleryImages[idx], index: idx }));
-  const colDesktop2 = [1, 3, 8, 11, 14].map((idx) => ({ item: galleryImages[idx], index: idx }));
-  const colDesktop3 = [2, 4, 6, 9, 12, 15].map((idx) => ({ item: galleryImages[idx], index: idx }));
-  const columnsDesktop = [colDesktop1, colDesktop2, colDesktop3];
+  // Preload all 16 full-res gallery images into browser cache so lightbox navigation is instant
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      galleryImages.forEach((item) => {
+        const img = new window.Image();
+        img.src = item.src;
+      });
+    }
+  }, []);
 
-  // 2 Balanced Columns for Tablet (640px to 1023px)
-  const colTablet1 = [0, 2, 4, 6, 8, 10, 12, 14].map((idx) => ({ item: galleryImages[idx], index: idx }));
-  const colTablet2 = [1, 3, 5, 7, 9, 11, 13, 15].map((idx) => ({ item: galleryImages[idx], index: idx }));
-  const columnsTablet = [colTablet1, colTablet2];
+  // Prioritize adjacent images whenever lightbox index changes
+  useEffect(() => {
+    if (lightboxIndex !== null && typeof window !== 'undefined') {
+      const len = galleryImages.length;
+      [-2, -1, 1, 2].forEach((offset) => {
+        const targetIdx = (lightboxIndex + offset + len) % len;
+        const img = new window.Image();
+        img.src = galleryImages[targetIdx].src;
+      });
+    }
+  }, [lightboxIndex]);
+
+  // Distribute into 4 balanced columns for Desktop (lg >= 1024px)
+  const columnsDesktop = Array.from({ length: 4 }, () => []);
+  galleryImages.forEach((item, index) => {
+    columnsDesktop[index % 4].push({ item, index });
+  });
+
+  // Distribute into 2 balanced columns for Tablet (sm: 640px to 1023px)
+  const columnsTablet = Array.from({ length: 2 }, () => []);
+  galleryImages.forEach((item, index) => {
+    columnsTablet[index % 2].push({ item, index });
+  });
 
   return (
     <main className="bg-[#FFFFFF] text-[#000000] overflow-x-hidden font-roboto">
@@ -227,83 +247,106 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      {/* 4. OUR GALLERY SECTION (Elementor 40685c0 - Responsive Masonry Grid) */}
-      <section className="pt-[10px] pb-[50px] sm:pb-[60px] bg-[#FFFFFF]">
+      {/* 4. OUR GALLERY SECTION (Structured identically to home page GalleryPreview) */}
+      <section className="bg-[#E6E6E6] text-[#000000] py-[30px] sm:py-[50px] font-roboto">
         <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Section Heading: Gabarito 50px desktop / 38px tablet / 26px mobile, 600 weight, uppercase, centered */}
           <h2 
-            className="text-[24px] sm:text-[34px] lg:text-[50px] font-semibold uppercase text-[#000000] font-gabarito leading-[30px] sm:leading-[42px] lg:leading-[60px] text-center mb-6 sm:mb-8"
+            className="text-[26px] sm:text-[38px] lg:text-[50px] font-semibold uppercase text-[#000000] leading-[32px] sm:leading-[46px] lg:leading-[60px] text-center mb-6 sm:mb-10"
             style={{ fontFamily: "'Gabarito', sans-serif" }}
           >
-            Our Gallery
+            OUR GALLERY
           </h2>
 
-          {/* A. Desktop (>= 1024px): Exact 3-column Isotope distribution */}
-          <div className="hidden lg:grid grid-cols-3 gap-5 items-start">
+          {/* 1. Desktop: 4-column Masonry Layout */}
+          <div className="hidden lg:grid grid-cols-4 gap-5 items-start">
             {columnsDesktop.map((col, colIdx) => (
               <div key={colIdx} className="flex flex-col gap-5">
                 {col.map(({ item, index }) => (
                   <div
                     key={item.id}
                     onClick={() => openLightbox(index)}
-                    className="relative overflow-hidden cursor-pointer group shadow-sm hover:shadow-md transition-shadow bg-gray-100 rounded-[2px]"
+                    className="relative overflow-hidden rounded-[4px] cursor-pointer group shadow-sm hover:shadow-md transition-shadow bg-gray-200"
                   >
-                    <Image
-                      src={item.src}
-                      alt={item.alt}
-                      width={item.width}
-                      height={item.height}
-                      sizes="33vw"
-                      className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors pointer-events-none" />
+                    <div className="relative w-full overflow-hidden">
+                      <Image
+                        src={item.src}
+                        alt={item.alt || `AFN Gallery Image ${item.id}`}
+                        width={item.width || 800}
+                        height={item.height || 600}
+                        className="w-full h-auto object-cover transform transition-transform duration-300 group-hover:scale-105"
+                        sizes="25vw"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+                      <div className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center text-white">
+                        <ZoomIn className="w-5 h-5 text-white" />
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
             ))}
           </div>
 
-          {/* B. Tablet (640px to 1023px): 2 Balanced Columns (8 items each) */}
-          <div className="hidden sm:grid lg:hidden grid-cols-2 gap-5 items-start">
+          {/* 2. Tablet: 2-column Balanced Masonry Layout */}
+          <div className="hidden sm:grid lg:hidden grid-cols-2 gap-4 sm:gap-5 items-start">
             {columnsTablet.map((col, colIdx) => (
-              <div key={colIdx} className="flex flex-col gap-5">
+              <div key={colIdx} className="flex flex-col gap-4 sm:gap-5">
                 {col.map(({ item, index }) => (
                   <div
                     key={item.id}
                     onClick={() => openLightbox(index)}
-                    className="relative overflow-hidden cursor-pointer group shadow-sm hover:shadow-md transition-shadow bg-gray-100 rounded-[2px]"
+                    className="relative overflow-hidden rounded-[4px] cursor-pointer group shadow-sm hover:shadow-md transition-shadow bg-gray-200"
                   >
-                    <Image
-                      src={item.src}
-                      alt={item.alt}
-                      width={item.width}
-                      height={item.height}
-                      sizes="50vw"
-                      className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors pointer-events-none" />
+                    <div className="relative w-full overflow-hidden">
+                      <Image
+                        src={item.src}
+                        alt={item.alt || `AFN Gallery Image ${item.id}`}
+                        width={item.width || 800}
+                        height={item.height || 600}
+                        className="w-full h-auto object-cover transform transition-transform duration-300 group-hover:scale-105"
+                        sizes="50vw"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+                      <div className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center text-white">
+                        <ZoomIn className="w-5 h-5 text-white" />
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
             ))}
           </div>
 
-          {/* C. Mobile (< 640px): 1 Clean Column with full-width clarity */}
+          {/* 3. Mobile: 1-column Clean Layout */}
           <div className="grid sm:hidden grid-cols-1 gap-4 items-start max-w-[460px] mx-auto">
             {galleryImages.map((item, index) => (
               <div
                 key={item.id}
                 onClick={() => openLightbox(index)}
-                className="relative overflow-hidden cursor-pointer group shadow-sm hover:shadow-md transition-shadow bg-gray-100 rounded-[2px]"
+                className="relative overflow-hidden rounded-[4px] cursor-pointer group shadow-sm hover:shadow-md transition-shadow bg-gray-200"
               >
-                <Image
-                  src={item.src}
-                  alt={item.alt}
-                  width={item.width}
-                  height={item.height}
-                  sizes="100vw"
-                  className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors pointer-events-none" />
+                <div className="relative w-full overflow-hidden">
+                  <Image
+                    src={item.src}
+                    alt={item.alt || `AFN Gallery Image ${item.id}`}
+                    width={item.width || 800}
+                    height={item.height || 600}
+                    className="w-full h-auto object-cover transform transition-transform duration-300 group-hover:scale-105"
+                    sizes="100vw"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+                  <div className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center text-white">
+                    <ZoomIn className="w-5 h-5 text-white" />
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -311,52 +354,60 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      {/* 5. LIGHTBOX MODAL */}
+      {/* 5. LIGHTBOX MODAL (Magnific Popup Replica) */}
       {lightboxIndex !== null && (
         <div 
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-2 sm:p-4"
+          className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-2 sm:p-6 select-none animate-in fade-in duration-200"
           onClick={closeLightbox}
         >
-          {/* Close Button */}
-          <button
-            onClick={closeLightbox}
-            className="absolute top-3 right-3 sm:top-6 sm:right-6 text-white/90 hover:text-white bg-white/15 hover:bg-white/25 p-2 sm:p-2.5 rounded-full transition-colors z-50 cursor-pointer"
-            aria-label="Close Lightbox"
-          >
-            <X className="w-6 h-6 sm:w-7 sm:h-7" />
-          </button>
+          {/* Top Bar: Counter and Close */}
+          <div className="absolute top-4 left-4 right-4 flex items-center justify-between text-white z-10 px-2 sm:px-6">
+            <span className="text-sm font-medium tracking-wide text-gray-300 font-roboto">
+              {lightboxIndex + 1} of {galleryImages.length}
+            </span>
+            <button
+              onClick={closeLightbox}
+              className="p-2 text-white hover:text-[#B1800F] transition-colors rounded-full bg-black/40 hover:bg-black/80 cursor-pointer"
+              aria-label="Close image popup"
+            >
+              <X className="w-7 h-7" />
+            </button>
+          </div>
 
-          {/* Previous Button */}
+          {/* Prev Button */}
           <button
             onClick={(e) => {
               e.stopPropagation();
               showPrev();
             }}
-            className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 text-white/90 hover:text-white bg-black/60 sm:bg-white/10 hover:bg-white/20 p-2 sm:p-3 rounded-full transition-colors z-50 cursor-pointer"
+            className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 p-3 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-colors z-10 cursor-pointer"
             aria-label="Previous image"
           >
-            <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8" />
+            <ChevronLeft className="w-8 h-8 sm:w-10 sm:h-10" />
           </button>
 
-          {/* Image Container */}
+          {/* Current Active Image */}
           <div 
-            className="relative max-w-5xl max-h-[85vh] w-full h-full flex flex-col items-center justify-center p-1 sm:p-2"
+            className="relative max-w-5xl max-h-[85vh] w-full h-full flex flex-col items-center justify-center p-2"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={galleryImages[lightboxIndex].src}
-              alt={galleryImages[lightboxIndex].alt}
-              className="max-w-full max-h-[75vh] sm:max-h-[80vh] object-contain rounded-[4px] shadow-2xl"
-            />
-            {/* Caption & Counter */}
-            <div className="mt-3 text-center text-white/90 text-xs sm:text-sm font-roboto flex items-center justify-center gap-2 sm:gap-3 px-2">
-              <span className="line-clamp-1">{galleryImages[lightboxIndex].alt}</span>
-              <span className="text-white/40">•</span>
-              <span className="text-white/60 font-medium whitespace-nowrap">
-                {lightboxIndex + 1} / {galleryImages.length}
-              </span>
+            <div className="relative max-w-full max-h-[75vh] overflow-hidden rounded-md shadow-2xl bg-black flex items-center justify-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                key={galleryImages[lightboxIndex].src}
+                src={galleryImages[lightboxIndex].src}
+                alt={galleryImages[lightboxIndex].alt}
+                decoding="async"
+                className="max-w-full max-h-[75vh] w-auto h-auto object-contain select-none animate-in fade-in duration-150"
+              />
             </div>
+            
+            {/* Caption */}
+            {galleryImages[lightboxIndex].alt && (
+              <p className="mt-3 text-center text-xs sm:text-sm text-gray-300 font-roboto max-w-2xl px-4">
+                {galleryImages[lightboxIndex].alt}
+              </p>
+            )}
           </div>
 
           {/* Next Button */}
@@ -365,13 +416,20 @@ export default function GalleryPage() {
               e.stopPropagation();
               showNext();
             }}
-            className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 text-white/90 hover:text-white bg-black/60 sm:bg-white/10 hover:bg-white/20 p-2 sm:p-3 rounded-full transition-colors z-50 cursor-pointer"
+            className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 p-3 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-colors z-10 cursor-pointer"
             aria-label="Next image"
           >
-            <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8" />
+            <ChevronRight className="w-8 h-8 sm:w-10 sm:h-10" />
           </button>
         </div>
       )}
+
+      {/* Hidden preloaded image cache for instant zero-latency navigation */}
+      <div className="hidden pointer-events-none" aria-hidden="true">
+        {galleryImages.map((img) => (
+          <img key={`preload-${img.id}`} src={img.src} alt="" loading="eager" decoding="async" />
+        ))}
+      </div>
 
     </main>
   );
